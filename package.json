@@ -1,15 +1,21 @@
 {
   "name": "great-sushi",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Cooking Sushi Web Game",
+  "repository": "https://github.com/great-sushi/great-sushi",
+  "author": "Hansol Yun <solhanyun@gmail.com>",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
+    "immer": "^9.0.2",
     "react": "^17.0.2",
+    "react-dnd": "^14.0.2",
+    "react-dnd-html5-backend": "^14.0.0",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "redux-logger": "^3.0.6",
+    "styled-components": "^5.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
