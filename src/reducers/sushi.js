@@ -10,10 +10,18 @@ const initialState = {
   rice: {
     id: "",
     kind: "",
+    offset: {
+      x: 0,
+      y: 0,
+    }
   },
   sashimi: {
     id: "",
     kind: "",
+    offset: {
+      x: 0,
+      y: 0,
+    }
   },
   wasabis: [],
 };
