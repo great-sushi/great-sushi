@@ -1,5 +1,7 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import { PLUS_MONEY, MINUS_MONEY } from "../../constants";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -21,10 +23,33 @@ const Wrapper = styled.div`
 `;
 
 function Revenue() {
+  const dispatch = useDispatch();
+  const { sashimiOrder, wasabiOrder } = useSelector((state) => state.order);
+  const { rice, sashimi, wasabis } = useSelector((state) => state.sushi);
+  const { money } = useSelector((state) => state.revenue);
+
+  useEffect(() => {
+    if (rice.id.length !== 0 && sashimiOrder.name === sashimi.id && wasabiOrder === wasabis.length) {
+      dispatch({ type: PLUS_MONEY, money: 1000 });
+      return;
+    }
+
+    if (sashimi.id.length && sashimiOrder.name !== sashimi.id) {
+      dispatch({ type: MINUS_MONEY, money: 1000 });
+      return;
+    }
+    if (wasabiOrder < wasabis.length) {
+      dispatch({ type: MINUS_MONEY, money: 500 });
+    }
+    if (rice.id.length && wasabiOrder > wasabis.length) {
+      dispatch({ type: MINUS_MONEY, money: 500 });
+    }
+  }, [sashimi]);
+
   return (
     <Wrapper>
       <h1>수익금</h1>
-      <p>0</p>
+      <p>{money}</p>
     </Wrapper>
   );
 }
