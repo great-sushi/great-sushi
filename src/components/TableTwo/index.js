@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import plate from "../../asset/plate.png";
-import rice from "../../asset/rice.png";
-import salmon from "../../asset/salmon.png";
-import tuna from "../../asset/tuna.png";
-import wasabi from "../../asset/wasabi.png";
+import riceImage from "../../asset/rice.png";
+import salmonImage from "../../asset/salmon.png";
+import tunaImage from "../../asset/tuna.png";
+import wasabiImage from "../../asset/wasabi.png";
 import { useDrag, DragPreviewImage, useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -23,7 +23,8 @@ const CookingTable = styled.div`
 `;
 
 const Wrapper = styled.div`
-
+  width: 100%;
+  position: absolute;
 `;
 
 const IngredientsContainer = styled.div`
@@ -81,8 +82,8 @@ const SushiContainer = styled.div`
   height: 400px;
   position: absolute;
   transform: translateX(-50%);
-  bottom: 60%;
-  left: 50%;
+  left: 60%;
+  bottom: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,36 +126,33 @@ const ingredientList = [
   {
     id: "tuna",
     kind: "sashimi",
-    link: tuna,
+    link: tunaImage,
   },
   {
     id: "salmon",
     kind: "sashimi",
-    link: salmon,
+    link: salmonImage,
   },
   {
     id: "rice",
     kind: "rice",
-    link: rice,
+    link: riceImage,
   },
   {
     id: "wasabi",
     kind: "wasabi",
-    link: wasabi,
+    link: wasabiImage,
   },
 ];
 
 const Ingredients = ({ ingredient }) => {
-  const [{ isDragging }, drag, preview] = useDrag({
+  const [, drag, preview] = useDrag({
     type: "SushiIngredients",
     item: {
       id: ingredient.id,
       kind: ingredient.kind,
       link: ingredient.link,
     },
-    collect: monitor => ({
-      isDragging: monitor.isDragging()
-    }),
   });
 
   return (
@@ -182,49 +180,16 @@ const renderIngredientList = () => {
   ));
 };
 
-const StackedRice = ({ rice }) => {
-  return (
-    <img
-      key={rice.id}
-      className={rice.kind}
-      src={rice.link}
-      alt={rice.id}
-    />
-  );
-}
-
-const StackedSashimi = ({ sashimi }) => {
-  return (
-    <img
-      key={sashimi.id}
-      className={sashimi.kind}
-      src={sashimi.link}
-      alt={sashimi.id}
-    />
-  );
-};
-
-const StackedWasabi = ({ wasabis }) => {
-  return wasabis.map((wasabi) =>
-    <img
-      key={wasabi.count}
-      className={wasabi.id + "_" + wasabi.count}
-      src={wasabi.link}
-      alt={wasabi.id}
-    />
-  );
-};
-
 let count = 0;
 
 const SASHIMIS = [
   {
     name: "tuna",
-    link: tuna,
+    link: tunaImage,
   },
   {
     name: "salmon",
-    link: salmon,
+    link: salmonImage,
   },
 ];
 
@@ -237,45 +202,49 @@ const randomSashimi = () => {
   return SASHIMIS[randomIndex];
 };
 
+const platePosition = {
+  x: window.innerWidth,
+  y: window.innerHeight / 2,
+  speed: 1,
+  dx: 5,
+};
+
 function Table() {
   const dispatch = useDispatch();
-  const { rice, sashimi, wasabis } = useSelector(state => state.sushi);
-  const box = useRef(null);
+  const { rice, sashimi } = useSelector(state => state.sushi);
+  const ref = useRef(null);
 
   useEffect(() => {
-    const canvassss = box.current;
+    const canvassss = ref.current;
     const ctx = canvassss.getContext("2d");
     ctx.canvas.width = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
 
-    const platePosition = {
-      x: ctx.canvas.width / 2,
-      y: ctx.canvas.height / 2,
-      speed: 5,
-      dx: 5,
-    };
-
     const image = new Image();
-    const riceImage = new Image();
+    const riceImages = new Image();
+    const wasabiImages = new Image();
+    const salmonImages = new Image();
+
     image.src = plate;
-    riceImage.src = rice;
+    riceImages.src = riceImage;
+    wasabiImages.src = wasabiImage;
+    salmonImages.src = salmonImage;
+
+
     image.onload = () => {
-      ctx.drawImage(image, platePosition.x, platePosition.y, 400, 150);
-    };
-
-    // riceImage.onload = () => {
-    //   ctx.drawImage(riceImage, platePosition.x, platePosition.y + 200, 400, 150);
-    // };
-
-    const setNewPosition = () => {
-      platePosition.x -= platePosition.dx;
-    };
+      ctx.drawImage(image, platePosition.x + 20, platePosition.y - 90, 350, 150);
+    }
 
     const update = () => {
-      ctx.clearRect(platePosition.x, platePosition.y, canvassss.width, canvassss.height);
+      ctx.clearRect(0, 0, canvassss.width, canvassss.height);
+
       ctx.drawImage(image, platePosition.x, platePosition.y, 400, 150);
-      setNewPosition();
+      ctx.drawImage(riceImages, platePosition.x + 20, platePosition.y - 30, 350, 150);
+      ctx.drawImage(salmonImages, platePosition.x + 20, platePosition.y - 100, 350, 150);
+
       requestAnimationFrame(update);
+
+      platePosition.x -= platePosition.speed;
 
       if (platePosition.x + 400 === 0) {
         platePosition.x = ctx.canvas.width;
@@ -284,6 +253,7 @@ function Table() {
         const wasabi = randomWasabiCount(0, 3);
 
         dispatch({ type: "ADD_ORDER", sashimi, wasabi });
+        dispatch({ type: RESET_PLATE });
       }
     };
 
@@ -292,10 +262,12 @@ function Table() {
 
   const [, drop] = useDrop({
     accept: "SushiIngredients",
-    drop: (item) => {
+    drop: (item, monitor) => {
+      const offset = monitor.getClientOffset();
+
       if (!rice.id && item.id === "rice") {
         count = 0;
-        dispatch({ type: ADD_RICE, item });
+        dispatch({ type: ADD_RICE, item: { ...item, offset } });
       }
 
       if (rice.id && item.id !== "rice") {
@@ -303,35 +275,19 @@ function Table() {
           count++;
 
           if (count < 4) {
-            dispatch({ type: ADD_WASABI, item: { ...item, count } });
+            dispatch({ type: ADD_WASABI, item: { ...item, count, offset } });
           }
         } else {
           if (sashimi.id) return;
-          dispatch({ type: ADD_SASHIMI, item });
+          dispatch({ type: ADD_SASHIMI, item: { ...item, offset }  });
         }
       }
     }
   });
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      dispatch({ type: RESET_PLATE });
-    }, 1000);
-
-    return () => clearTimeout(timeout);
-  }, [sashimi.id]);
-
   return (
-    <Wrapper>
-      <canvas ref={box} />
-      <SushiContainer ref={drop} >
-        <StackedRice rice={rice} />
-        <StackedSashimi sashimi={sashimi} />
-        <StackedWasabi wasabis={wasabis} />
-        {/* <Plate>
-            <img src={plate} alt="plate" />
-        </Plate> */}
-      </SushiContainer>
+    <Wrapper ref={drop}>
+      <canvas ref={ref}></canvas>
       <IngredientsContainer>
         {renderIngredientList()}
       </IngredientsContainer>
