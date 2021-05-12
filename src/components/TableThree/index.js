@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import plate from "../../asset/plate.png";
-import riceImage from "../../asset/rice.png";
 import salmonImage from "../../asset/salmon.png";
 import tunaImage from "../../asset/tuna.png";
 import wasabiImage from "../../asset/wasabi.png";
+import riceImage from "../../asset/rice.png";
 import { useDrag, DragPreviewImage, useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,11 +20,6 @@ const CookingTable = styled.div`
   position: absolute;
   bottom: 0;
   background-color: #af8264;
-`;
-
-const Wrapper = styled.div`
-  width: 100%;
-  position: absolute;
 `;
 
 const IngredientsContainer = styled.div`
@@ -82,12 +77,15 @@ const SushiContainer = styled.div`
   height: 400px;
   position: absolute;
   transform: translateX(-50%);
-  left: 60%;
-  bottom: 50%;
+  left: 50%;
+  bottom: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+
+  animation-name: slidein;
+  animation-duration: 5s;
 
   .rice {
     z-index: 3;
@@ -120,6 +118,31 @@ const SushiContainer = styled.div`
     position: absolute;
     bottom: 140px;
   }
+
+  .slidein {
+    -moz-animation-duration: 3s;
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -moz-animation-name: slidein;
+    -webkit-animation-name: slidein;
+    animation-name: slidein;
+    -moz-animation-iteration-count: 3;
+    -webkit-animation-iteration-count: 3;
+    animation-iteration-count: 3;
+    -moz-animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+  }
+
+  @keyframes slidein {
+    from {
+      margin-left: 100%;
+    }
+
+    to {
+      margin-left: 0%;
+    }
+  }
 `;
 
 const ingredientList = [
@@ -146,26 +169,25 @@ const ingredientList = [
 ];
 
 const Ingredients = ({ ingredient }) => {
-  const [, drag, preview] = useDrag({
-    type: "SushiIngredients",
-    item: {
-      id: ingredient.id,
-      kind: ingredient.kind,
-      link: ingredient.link,
-    },
-  });
+  const handleDragStart = (e) => {
+    e.dataTransfer.setData("drag_start", e.target.id);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    console.log("over");
+  };
 
   return (
     <Item key={ingredient.id}>
-      <DragPreviewImage
-        connect={preview}
-        src={ingredient.link}
-      />
       <img
+        id={ingredient.id}
         className={ingredient.kind || ingredient.id}
-        ref={drag}
         src={ingredient.link}
         alt={ingredient.id}
+        onDragStart={handleDragStart}
+        onDragOver={handleDragOver}
+        draggable="true"
       />
     </Item>
   );
@@ -193,6 +215,13 @@ const SASHIMIS = [
   },
 ];
 
+const platePosition = {
+  x: window.innerWidth,
+  y: window.innerHeight / 2,
+  speed: 1,
+  dx: 5,
+};
+
 const randomWasabiCount = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1));
 };
@@ -202,16 +231,12 @@ const randomSashimi = () => {
   return SASHIMIS[randomIndex];
 };
 
-const platePosition = {
-  x: window.innerWidth,
-  y: window.innerHeight / 2,
-  speed: 1,
-  dx: 5,
-};
 
 function Table() {
   const dispatch = useDispatch();
-  const { rice, sashimi } = useSelector(state => state.sushi);
+  const { rice, sashimi, wasabis } = useSelector(state => state.sushi);
+  const [ dropZone, setDropZone ] = useState(window.innerWidth);
+
   const ref = useRef(null);
 
   useEffect(() => {
@@ -227,9 +252,9 @@ function Table() {
 
     image.src = plate;
     riceImages.src = riceImage;
-    wasabiImages.src = wasabiImage;
-    salmonImages.src = salmonImage;
-
+    // wasabiImages.src = wasabiImage;
+    // salmonImages.src = salmonImage;
+    setDropZone(platePosition.x);
 
     image.onload = () => {
       ctx.drawImage(image, platePosition.x + 20, platePosition.y - 90, 350, 150);
@@ -239,11 +264,17 @@ function Table() {
       ctx.clearRect(0, 0, canvassss.width, canvassss.height);
 
       ctx.drawImage(image, platePosition.x, platePosition.y, 400, 150);
-      ctx.drawImage(riceImages, platePosition.x + 20, platePosition.y - 30, 350, 150);
-      ctx.drawImage(salmonImages, platePosition.x + 20, platePosition.y - 100, 350, 150);
 
-      requestAnimationFrame(update);
+      if (rice.offset.x > platePosition.x) {
+        ctx.drawImage(riceImages, platePosition.x + 20, platePosition.y - 30, 350, 150);
+        platePosition.x += platePosition.speed;
+      }
 
+      if (sashimi.id) {
+        ctx.drawImage(salmonImages, platePosition.x + 20, platePosition.y - 30, 350, 150);
+      }
+
+      const rf = requestAnimationFrame(update);
       platePosition.x -= platePosition.speed;
 
       if (platePosition.x + 400 === 0) {
@@ -258,40 +289,35 @@ function Table() {
     };
 
     update();
-  }, []);
+  }, [rice.id, sashimi.id]);
 
-  const [, drop] = useDrop({
-    accept: "SushiIngredients",
-    drop: (item, monitor) => {
-      const offset = monitor.getClientOffset();
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      dispatch({ type: RESET_PLATE });
+    }, 1000);
 
-      if (!rice.id && item.id === "rice") {
-        count = 0;
-        dispatch({ type: ADD_RICE, item: { ...item, offset } });
-      }
+    return () => clearTimeout(timeout);
+  }, [sashimi.id]);
 
-      if (rice.id && item.id !== "rice") {
-        if (item.id === "wasabi") {
-          count++;
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
 
-          if (count < 4) {
-            dispatch({ type: ADD_WASABI, item: { ...item, count, offset } });
-          }
-        } else {
-          if (sashimi.id) return;
-          dispatch({ type: ADD_SASHIMI, item: { ...item, offset }  });
-        }
-      }
+  const handleDrop = (e) => {
+    const dragStart = e.dataTransfer.getData("drag_start");
+    console.log(dropZone);
+    if (dropZone - e.clientX > 200 && e.clientX - dropZone < 200) {
+      dispatch({ type: ADD_RICE, item: { id: dragStart, kind: dragStart, offset: {x: e.clientX, y: e.clientY}}});
     }
-  });
+  };
 
   return (
-    <Wrapper ref={drop}>
-      <canvas ref={ref}></canvas>
+    <div>
+      <canvas id="canvas" ref={ref} onDragOver={handleDragOver} onDrop={handleDrop}></canvas>
       <IngredientsContainer>
         {renderIngredientList()}
       </IngredientsContainer>
-    </Wrapper>
+    </div>
   );
 }
 

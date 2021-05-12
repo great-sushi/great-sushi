@@ -243,7 +243,7 @@ function Table() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       dispatch({ type: RESET_PLATE });
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(timeout);
   }, [sashimi.id]);
@@ -255,7 +255,7 @@ function Table() {
         <StackedSashimi sashimi={sashimi} />
         <StackedWasabi wasabis={wasabis} />
         <Plate>
-            <img src={plate} alt="plate" />
+          <img src={plate} alt="plate" />
         </Plate>
       </SushiContainer>
       <IngredientsContainer>
