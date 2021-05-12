@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom"
 
 const Wrapper = styled.div`
   position: absolute;
@@ -22,6 +23,7 @@ const Wrapper = styled.div`
 
 function Timer() {
   const [seconds, setSeconds] = useState(60);
+  const history = useHistory();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -31,6 +33,10 @@ function Timer() {
         setSeconds(seconds - 1);
       }
     }, 1000);
+
+    if (seconds === 0) {
+      history.push("/result");
+    }
 
     return () => clearInterval(intervalId);
   }, [seconds]);
