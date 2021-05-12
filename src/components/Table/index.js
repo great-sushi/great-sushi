@@ -13,6 +13,7 @@ import {
   ADD_WASABI,
   RESET_PLATE,
 } from "../../constants";
+import RailZone from "../RailZone";
 
 const CookingTable = styled.div`
   width: 100%;
@@ -250,6 +251,7 @@ function Table() {
 
   return (
     <CookingTable>
+      <RailZone />
       <SushiContainer ref={drop} >
         <StackedRice rice={rice} />
         <StackedSashimi sashimi={sashimi} />
