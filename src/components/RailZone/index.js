@@ -1,8 +1,14 @@
 import React, { useEffect, useRef } from "react";
-import Rectangle from "./Rail";
+import Rail from "./Rail";
+
+let startPoint = 0;
+let lowPoint= 100;
+let controlPoint = 50;
+let controlPointIn = -50;
 
 function RailZone() {
   const canvasRef = useRef(null);
+  const animationRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -12,14 +18,14 @@ function RailZone() {
 
     const update = () => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      const rectangle = new Rectangle();
-      rectangle.draw(ctx, 700, 200);
-      requestAnimationFrame(update);
+      const rail = new Rail(startPoint, lowPoint, controlPoint, controlPointIn);
+      rail.draw(ctx);
+      animationRef.current = requestAnimationFrame(update);
     }
 
     update();
 
-    return () => cancelAnimationFrame(update);
+    return () => cancelAnimationFrame(animationRef.current);
   }, []);
 
   return (
