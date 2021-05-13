@@ -1,31 +1,34 @@
-let startPoint = 50;
-let lowPoint= 150;
-let controlPoint = 100;
 let x = 0;
 
 class Rail {
-  constructor() {
-    this.speed = 0.5;
+  constructor(startPoint, lowPoint, controlPoint, controlPointIn, x) {
+    this.startPoint = startPoint;
+    this.lowPoint = lowPoint;
+    this.controlPoint = controlPoint;
+    this.controlPointIn = controlPointIn;
+    this.speed = 1.5;
   }
 
   draw(ctx) {
+    x -= this.speed;
     ctx.setTransform(1, 0, 0, 1, x, 0);
 
-
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 20; i++) {
       ctx.fillStyle = "#c0ab5f";
       ctx.beginPath();
-      ctx.moveTo(startPoint + 100 * i, 0);
-      ctx.lineTo(lowPoint + 100 * i, 0);
-      ctx.quadraticCurveTo(controlPoint + 100 * i, 40, lowPoint + 100 * i, 120);
-      ctx.lineTo(startPoint + 100 * i, 120);
+      ctx.moveTo(this.startPoint + 100 * i, 0);
+      ctx.lineTo(this.lowPoint + 100 * i, 0);
+      ctx.quadraticCurveTo(this.controlPoint + 100 * i, 40, this.lowPoint + 100 * i, 120);
+      ctx.lineTo(this.startPoint + 100 * i, 120);
       ctx.stroke();
-      ctx.quadraticCurveTo(controlPoint * i, 40, startPoint + 100 * i, 0);
+      ctx.quadraticCurveTo(this.controlPointIn + 100 * i, 40, this.startPoint + 100 * i, 0);
       ctx.stroke();
       ctx.fill();
     }
 
-    x -= this.speed;
+    if (x <= -499) {
+      x = 0;
+    }
   }
 }
 
