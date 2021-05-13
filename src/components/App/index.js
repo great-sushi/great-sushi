@@ -8,6 +8,7 @@ import Welcome from "../Welcome";
 import Game from "../Game";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import Result from "../Result";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/" component={Welcome} />
           <DndProvider backend={HTML5Backend}>
             <Route path="/game" component={Game} />
+            <Route path="/result" component={Result} />
           </DndProvider>
         </Switch>
       </ThemeProvider>
