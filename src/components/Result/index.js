@@ -89,7 +89,7 @@ function Result() {
             <p>{money}</p>
           </Revenue>
         </Content>
-        <Button to="/game">
+        <Button to="/fishing">
           다시하기
         </Button>
       </Container>

@@ -47,7 +47,7 @@ function Welcome() {
         <Button to="/guide">
           게임방법
         </Button>
-        <Button to="/game">
+        <Button to="/fishing">
           게임시작
         </Button>
       </ButtonWrapper>
