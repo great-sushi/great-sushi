@@ -10,10 +10,10 @@ const getRandomInt = (min, max) => {
 const fishes = [];
 
 const createFish = (ctx) => {
-  fishes.push(new Fish(getRandomInt(100, 200), getRandomInt(50, 100), "red", 30, 30));
+  fishes.push(new Fish(getRandomInt(100, 200), getRandomInt(50, 100), "red", 150, 30));
 
   for (let i = 0; i < 20; i++) {
-    fishes.push(new Fish(getRandomInt(-10, 1200), getRandomInt(100, 390), "blue", 30, 30));
+    fishes.push(new Fish(getRandomInt(-10, 1200), getRandomInt(100, 390), "blue", 150, 30));
   }
 
   for (let i = 0; i < fishes.length; i++) {
@@ -64,7 +64,11 @@ const decreaseHookPosition = (currentX, currentY, endX, endY, ctx) => {
 
   if (currentY < 20) {
     isHookCreated = false;
-    fishes.splice(caughtFishIndex, 1);
+    if (caughtFish) {
+      fishes.splice(caughtFishIndex, 1);
+      caughtFish = null;
+      caughtFishIndex = null;
+    }
   } else {
     if (currentX === endX) {
       fishingLine.endY -= yDecrement;
@@ -81,8 +85,8 @@ const decreaseHookPosition = (currentX, currentY, endX, endY, ctx) => {
 };
 
 const catchFish = (ctx) => {
-  caughtFish.y = fishingLine.endY - 4;
-  caughtFish.x = fishingLine.endX - 4;
+  caughtFish.y = fishingLine.endY - 10;
+  caughtFish.x = fishingLine.endX - 10;
   caughtFish.render(ctx);
 };
 
@@ -92,6 +96,7 @@ const detectClick = () => {
       && fishingLine.endX < fishes[i].x + fishes[i].width
       && fishingLine.endY > fishes[i].y - fishes[i].height
       && fishingLine.endY < fishes[i].y
+      && !caughtFish
     ) {
       caughtFish = fishes[i];
       caughtFishIndex = i;
@@ -128,9 +133,6 @@ function Box() {
         detectClick();
         if (caughtFish) {
           catchFish(ctx);
-        } else {
-          caughtFish = null;
-          caughtFishIndex = null;
         }
       }
 
