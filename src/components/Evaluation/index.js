@@ -23,7 +23,6 @@ const Wrapper = styled.div`
   width: 400px;
   height: 100px;
   background-color: white;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 
   p {
     font-size: 20px;
