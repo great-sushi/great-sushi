@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState} from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import Fish from "./Fish";
 import tuna from "../../asset/tuna_fishing.png";
@@ -98,6 +99,7 @@ function Box() {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
   const [caughtFishes, setCaughtFishes] = useState([]);
+  const dispatch = useDispatch();
   fishes = [];
 
   const decreaseHookPosition = (currentX, currentY, endX, endY, ctx) => {
@@ -147,6 +149,17 @@ function Box() {
     ctx.canvas.height = window.innerHeight * 0.7;
 
     createFish(ctx);
+
+    dispatch({
+      type: "UPDATE_REQUEST",
+      request: {
+        tuna: getRandomInt(1, 5),
+        salmon: getRandomInt(1, 5),
+        eel: getRandomInt(1, 5),
+        shrimp: getRandomInt(1, 5),
+        octopus: getRandomInt(1, 3),
+      }
+    });
 
     const update = () => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
