@@ -25,7 +25,6 @@ const getRandomInt = (min, max) => {
 };
 
 let fishes;
-// let caughtFishes = [];
 
 const createFish = (ctx) => {
   for (let i = 0; i < 6; i++) {
@@ -98,7 +97,6 @@ const detectClick = () => {
 function Box() {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
-  const [caughtFishes, setCaughtFishes] = useState([]);
   const dispatch = useDispatch();
   fishes = [];
 
@@ -110,7 +108,8 @@ function Box() {
       isHookCreated = false;
       if (caughtFish) {
         fishes.splice(caughtFishIndex, 1);
-        setCaughtFishes((prev) => [...prev, caughtFish]);
+        // setCaughtFishes((prev) => [...prev, caughtFish]);
+        dispatch({ type: "CATCH_FISH", fish: caughtFish });
         caughtFish = null;
         caughtFishIndex = null;
       }
@@ -130,17 +129,18 @@ function Box() {
   };
 
   const createHookStartPosition = (e) => {
+    if (isHookCreated) {
+      return;
+    }
+
     isHookCreated = true;
+
     fishingLine.endX = e.nativeEvent.offsetX;
     fishingLine.endY = e.nativeEvent.offsetY;
     intervalId = setInterval(() => {
       decreaseHookPosition(fishingLine.endX, fishingLine.endY, fishingLine.startX, fishingLine.startY);
     }, 100);
   }
-
-  useEffect(() => {
-
-  }, [caughtFishes]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
