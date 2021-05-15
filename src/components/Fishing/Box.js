@@ -1,5 +1,21 @@
-import React, { useEffect, useRef} from "react";
+import React, { useEffect, useRef, useState} from "react";
+import styled from "styled-components";
 import Fish from "./Fish";
+import tuna from "../../asset/tuna_fishing.png";
+import salmon from "../../asset/salmon_fishing.png";
+import ocean from "../../asset/ocean.jpg";
+import eel from "../../asset/eel_fishing.png";
+import octopus from "../../asset/octopus_fishing.png";
+import shrimp from "../../asset/shrimp_fishing.png";
+
+const Wrapper = styled.div`
+  canvas {
+    border-radius: 10px;
+    background-image: url(${ocean});
+    background-size: cover;
+    background-position: bottom;
+  }
+`;
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -7,13 +23,22 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
-const fishes = [];
+let fishes;
+// let caughtFishes = [];
 
 const createFish = (ctx) => {
-  fishes.push(new Fish(getRandomInt(100, 200), getRandomInt(50, 100), "red", 150, 30));
+  for (let i = 0; i < 6; i++) {
+    fishes.push(new Fish(getRandomInt(-10, 1000), getRandomInt(100, 450), 100, 30, tuna));
+    fishes.push(new Fish(getRandomInt(-10, 1000), getRandomInt(100, 450), 120, 30, salmon));
+    fishes.push(new Fish(getRandomInt(-10, 1000), getRandomInt(300, 450), 90, 30, eel));
+  }
 
-  for (let i = 0; i < 20; i++) {
-    fishes.push(new Fish(getRandomInt(-10, 1200), getRandomInt(100, 390), "blue", 150, 30));
+  for (let i = 0; i < 4; i++) {
+    fishes.push(new Fish(getRandomInt(-10, 1000), 500, 80, 40, octopus));
+  }
+
+  for (let i = 0; i < 10; i++) {
+    fishes.push(new Fish(getRandomInt(-10, 1000), getRandomInt(100, 450), 50, 30, shrimp));
   }
 
   for (let i = 0; i < fishes.length; i++) {
@@ -49,41 +74,6 @@ const drawFishingLine = (ctx) => {
   ctx.beginPath();
 };
 
-const createHookStartPosition = (e) => {
-  isHookCreated = true;
-  fishingLine.endX = e.nativeEvent.offsetX;
-  fishingLine.endY = e.nativeEvent.offsetY;
-  intervalId = setInterval(() => {
-    decreaseHookPosition(fishingLine.endX, fishingLine.endY, fishingLine.startX, fishingLine.startY);
-  }, 100);
-}
-
-const decreaseHookPosition = (currentX, currentY, endX, endY, ctx) => {
-  const xDecrement = 10;
-  const yDecrement = 10;
-
-  if (currentY < 20) {
-    isHookCreated = false;
-    if (caughtFish) {
-      fishes.splice(caughtFishIndex, 1);
-      caughtFish = null;
-      caughtFishIndex = null;
-    }
-  } else {
-    if (currentX === endX) {
-      fishingLine.endY -= yDecrement;
-    }
-
-    if (currentX > endX) {
-      fishingLine.endX -= xDecrement;
-      fishingLine.endY -= yDecrement;
-    } else {
-      fishingLine.endX += xDecrement;
-      fishingLine.endY -= yDecrement;
-    }
-  }
-};
-
 const catchFish = (ctx) => {
   caughtFish.y = fishingLine.endY - 10;
   caughtFish.x = fishingLine.endX - 10;
@@ -107,19 +97,59 @@ const detectClick = () => {
 function Box() {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
+  const [caughtFishes, setCaughtFishes] = useState([]);
+  fishes = [];
+
+  const decreaseHookPosition = (currentX, currentY, endX, endY, ctx) => {
+    const xDecrement = 10;
+    const yDecrement = 10;
+
+    if (currentY < 20) {
+      isHookCreated = false;
+      if (caughtFish) {
+        fishes.splice(caughtFishIndex, 1);
+        setCaughtFishes((prev) => [...prev, caughtFish]);
+        caughtFish = null;
+        caughtFishIndex = null;
+      }
+    } else {
+      if (currentX === endX) {
+        fishingLine.endY -= yDecrement;
+      }
+
+      if (currentX > endX) {
+        fishingLine.endX -= xDecrement;
+        fishingLine.endY -= yDecrement;
+      } else {
+        fishingLine.endX += xDecrement;
+        fishingLine.endY -= yDecrement;
+      }
+    }
+  };
+
+  const createHookStartPosition = (e) => {
+    isHookCreated = true;
+    fishingLine.endX = e.nativeEvent.offsetX;
+    fishingLine.endY = e.nativeEvent.offsetY;
+    intervalId = setInterval(() => {
+      decreaseHookPosition(fishingLine.endX, fishingLine.endY, fishingLine.startX, fishingLine.startY);
+    }, 100);
+  }
+
+  useEffect(() => {
+
+  }, [caughtFishes]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    ctx.canvas.width = window.innerWidth * 0.8;
-    ctx.canvas.height = window.innerHeight * 0.75;
+    ctx.canvas.width = window.innerWidth * 0.7;
+    ctx.canvas.height = window.innerHeight * 0.7;
 
     createFish(ctx);
 
     const update = () => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      ctx.fillStyle = "skyblue";
-      ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
       if (fishingLine && fishingLine.endY > 20) {
         drawFishingLine(ctx);
@@ -151,12 +181,14 @@ function Box() {
   }, []);
 
   return (
-    <canvas
-      id="canvas"
-      ref={canvasRef}
-      onMouseMove={createFishingLine}
-      onClick={createHookStartPosition}
-    />
+    <Wrapper>
+      <canvas
+        id="canvas"
+        ref={canvasRef}
+        onMouseMove={createFishingLine}
+        onClick={createHookStartPosition}
+      />
+    </Wrapper>
   );
 }
 
