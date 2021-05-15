@@ -12,12 +12,11 @@ const Wrapper = styled.div`
   justify-content: space-evenly;
   flex-direction: column;
   border-radius: 8px;
-  left: 30px;
+  left: 130px;
   top: 40px;
   width: 200px;
   height: 100px;
   background-color: white;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 
   p {
     font-size: 20px;
