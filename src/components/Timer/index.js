@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom"
 
 const Wrapper = styled.div`
   position: absolute;
@@ -22,9 +22,16 @@ const Wrapper = styled.div`
 
 function Timer() {
   const [seconds, setSeconds] = useState(60);
-  const history = useHistory();
+  const dispatch = useDispatch();
+  const modal = useSelector((state) => state.modal);
+  const isCompleted = useSelector((state) => state.fishing.isCompleted);
 
   useEffect(() => {
+    if (modal.isVisible) {
+      setSeconds(60);
+      return;
+    };
+
     const intervalId = setInterval(() => {
       if (seconds === 0) {
         clearInterval(intervalId);
@@ -34,11 +41,40 @@ function Timer() {
     }, 1000);
 
     if (seconds === 0) {
-      history.push("/result");
+      if (isCompleted) {
+        dispatch({ type: "SHOW_MODAL", content: {
+          isVisible: true,
+          contentText: "성공하셨습니다! 그럼 개점해볼까요?",
+          firstPath: "/",
+          secondPath: "/game",
+          firstLinkButtonText: "나가기",
+          secondLinkButtonText: "개점",
+        }});
+      } else {
+        dispatch({ type: "SHOW_MODAL", content: {
+          isVisible: true,
+          contentText: "실패",
+          firstPath: "/",
+          secondPath: "/fishing",
+          firstLinkButtonText: "나가기",
+          secondLinkButtonText: "재도전",
+        }});
+      }
+    } else {
+      if (isCompleted) {
+        dispatch({ type: "SHOW_MODAL", content: {
+          isVisible: true,
+          contentText: "성공하셨습니다! 그럼 개점해볼까요?",
+          firstPath: "/",
+          secondPath: "/game",
+          firstLinkButtonText: "나가기",
+          secondLinkButtonText: "개점",
+        }});
+      }
     }
 
     return () => clearInterval(intervalId);
-  }, [seconds]);
+  }, [modal.isVisible, seconds]);
 
   return (
     <Wrapper>
