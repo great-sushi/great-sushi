@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -19,6 +19,8 @@ function Net() {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
   const fish = useSelector((state) => state.fishing.fish);
+  const modal = useSelector((state) => state.modal);
+  const dispatch = useDispatch();
 
   const changeFishCoordinate = () => {
     for (let i = 0; i < fish.length; i++) {
@@ -32,6 +34,12 @@ function Net() {
       fish[i].render(ctx);
     }
   };
+
+  useEffect(() => {
+    if (modal.isVisible) {
+      dispatch({ type: "CLEAR_FISH" });
+    }
+  }, [modal.isVisible]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
