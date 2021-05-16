@@ -28,17 +28,17 @@ let fishes;
 
 const createFish = (ctx) => {
   for (let i = 0; i < 6; i++) {
-    fishes.push(new Fish(getRandomInt(-10, 1000), getRandomInt(100, 450), 100, 30, tuna));
-    fishes.push(new Fish(getRandomInt(-10, 1000), getRandomInt(100, 450), 120, 30, salmon));
-    fishes.push(new Fish(getRandomInt(-10, 1000), getRandomInt(300, 450), 90, 30, eel));
+    fishes.push("tuna", new Fish(getRandomInt(-10, 1000), getRandomInt(100, 450), 100, 30, tuna));
+    fishes.push("salmon", new Fish(getRandomInt(-10, 1000), getRandomInt(100, 450), 120, 30, salmon));
+    fishes.push("eel", new Fish(getRandomInt(-10, 1000), getRandomInt(300, 450), 90, 30, eel));
   }
 
   for (let i = 0; i < 4; i++) {
-    fishes.push(new Fish(getRandomInt(-10, 1000), 500, 80, 40, octopus));
+    fishes.push("octopus", new Fish(getRandomInt(-10, 1000), 500, 80, 40, octopus));
   }
 
   for (let i = 0; i < 10; i++) {
-    fishes.push(new Fish(getRandomInt(-10, 1000), getRandomInt(100, 450), 50, 30, shrimp));
+    fishes.push("shrimp", new Fish(getRandomInt(-10, 1000), getRandomInt(100, 450), 50, 30, shrimp));
   }
 
   for (let i = 0; i < fishes.length; i++) {

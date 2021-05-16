@@ -15,7 +15,8 @@ const getRandomInt = (min, max) => {
 };
 
 class Fish {
-  constructor(x, y, width, height, src) {
+  constructor(name, x, y, width, height, src) {
+    this.name = name;
     this.x = x;
     this.y = y;
     this.width = width;
