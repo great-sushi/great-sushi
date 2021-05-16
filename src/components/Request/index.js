@@ -29,7 +29,14 @@ function Request() {
   const [shrimpCount, setShrimpCount] = useState(0);
 
   useEffect(() => {
-    if (fish.length === 0) return;
+    if (fish.length === 0) {
+      setOctopusCount(0);
+      setSalmonCount(0);
+      setTunaCount(0);
+      setEelCount(0);
+      setShrimpCount(0);
+      return;
+    };
 
     switch (fish[fish.length -1].name) {
       case "octopus":
@@ -59,7 +66,7 @@ function Request() {
       && eelCount >= request.eel
       && shrimpCount >= request.shrimp
     ) {
-      dispatch({ type: "COMPLET_REQUEST" });
+      dispatch({ type: "COMPLETE_REQUEST" });
     }
   }, [octopusCount, salmonCount, tunaCount, eelCount, shrimpCount]);
 
