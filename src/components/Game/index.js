@@ -6,7 +6,6 @@ import Order from "../Order";
 import Evaluation from "../Evaluation";
 import Revenue from "../Revenue";
 import { useSelector } from "react-redux";
-import TableTwo from "../TableTwo";
 
 const Wrapper = styled.div`
   width: 100%;
