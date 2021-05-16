@@ -1,8 +1,15 @@
 import produce from "immer";
 
 const initialState = {
-  request: {},
+  request: {
+    tuna: 1,
+    salmon: 1,
+    eel: 1,
+    shrimp: 1,
+    octopus: 1,
+  },
   fish: [],
+  isCompleted: false,
 };
 
 const fishing = (state = initialState, action) => {
@@ -15,6 +22,12 @@ const fishing = (state = initialState, action) => {
       return produce(state, (draft) => {
         draft.fish.push(action.fish);
       });
+    case "COMPLETE_REQUEST":
+      return produce(state, (draft) => {
+        draft.isCompleted = true;
+      });
+    case "CLEAR_FISH":
+      return initialState;
     default:
       return state;
   }
