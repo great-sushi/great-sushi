@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState} from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Fish from "./Fish";
 import tuna from "../../asset/tuna_fishing.png";
@@ -98,6 +98,7 @@ function Box() {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
   const dispatch = useDispatch();
+  const modal = useSelector((state) => state.modal);
   fishes = [];
 
   const decreaseHookPosition = (currentX, currentY, endX, endY, ctx) => {
@@ -108,7 +109,6 @@ function Box() {
       isHookCreated = false;
       if (caughtFish) {
         fishes.splice(caughtFishIndex, 1);
-        // setCaughtFishes((prev) => [...prev, caughtFish]);
         dispatch({ type: "CATCH_FISH", fish: caughtFish });
         caughtFish = null;
         caughtFishIndex = null;
@@ -191,7 +191,7 @@ function Box() {
     return () => {
       cancelAnimationFrame(animationRef.current);
     };
-  }, []);
+  }, [modal.isVisible]);
 
   return (
     <Wrapper>
