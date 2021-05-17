@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import plate from "../../asset/plate.png";
 import rice from "../../asset/rice.png";
 import salmon from "../../asset/salmon.png";
 import tuna from "../../asset/tuna.png";
-import wasabi from "../../asset/wasabi.png";
+import wasabiImage from "../../asset/wasabi.png";
 import { useDrag, DragPreviewImage, useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -14,6 +14,7 @@ import {
   RESET_PLATE,
 } from "../../constants";
 import RailZone from "../RailZone";
+import Guage from "../Guage";
 
 const CookingTable = styled.div`
   width: 100%;
@@ -91,24 +92,11 @@ const SushiContainer = styled.div`
     bottom: 60px;
   }
 
-  .wasabi_1 {
+  .wasabi {
     z-index: 3;
     position: absolute;
     bottom: 150px;
-  }
-
-  .wasabi_2 {
-    z-index: 3;
-    position: absolute;
-    bottom: 150px;
-    left: 70px;
-  }
-
-  .wasabi_3 {
-    z-index: 3;
-    position: absolute;
-    bottom: 150px;
-    right: 70px;
+    width: ${(props) => props.percentage * 1.5}px;
   }
 
   .sashimi {
@@ -134,11 +122,6 @@ const ingredientList = [
     kind: "rice",
     link: rice,
   },
-  {
-    id: "wasabi",
-    kind: "wasabi",
-    link: wasabi,
-  },
 ];
 
 const Ingredients = ({ ingredient }) => {
@@ -161,7 +144,7 @@ const Ingredients = ({ ingredient }) => {
         src={ingredient.link}
       />
       <img
-        className={ingredient.kind || ingredient.id}
+        className={ingredient.kind}
         ref={drag}
         src={ingredient.link}
         alt={ingredient.id}
@@ -201,42 +184,32 @@ const StackedSashimi = ({ sashimi }) => {
   );
 };
 
-const StackedWasabi = ({ wasabis }) => {
-  return wasabis.map((wasabi) =>
+const StackedWasabi = ({ wasabi }) => {
+  return (
     <img
       key={wasabi.count}
-      className={wasabi.id + "_" + wasabi.count}
+      className={wasabi.id}
       src={wasabi.link}
       alt={wasabi.id}
     />
   );
 };
 
-let count = 0;
-
 function Table() {
   const dispatch = useDispatch();
-  const { rice, sashimi, wasabis } = useSelector(state => state.sushi);
+  const { rice, sashimi, wasabi } = useSelector(state => state.sushi);
+  const [percentage, setPercentage] = useState(0);
 
   const [, drop] = useDrop({
     accept: "SushiIngredients",
     drop: (item) => {
       if (!rice.id && item.id === "rice") {
-        count = 0;
         dispatch({ type: ADD_RICE, item });
       }
 
       if (rice.id && item.id !== "rice") {
-        if (item.id === "wasabi") {
-          count++;
-
-          if (count < 4) {
-            dispatch({ type: ADD_WASABI, item: { ...item, count } });
-          }
-        } else {
-          if (sashimi.id) return;
-          dispatch({ type: ADD_SASHIMI, item });
-        }
+        if (sashimi.id) return;
+        dispatch({ type: ADD_SASHIMI, item });
       }
     }
   });
@@ -244,24 +217,53 @@ function Table() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       dispatch({ type: RESET_PLATE });
+      setPercentage(0);
     }, 500);
 
     return () => clearTimeout(timeout);
   }, [sashimi.id]);
 
+  const updatePercentage = () => {
+    if (!rice.id) return;
+
+    if (percentage < 100) {
+      if (percentage === 0) {
+        dispatch({
+          type: ADD_WASABI,
+          item: { id: "wasabi", kink: "wasabi", link: wasabiImage }
+        });
+      }
+
+      setPercentage((prev) => prev + 10);
+    }
+  }
+
+  useEffect(() => {
+    dispatch({ type: "ADD_WASABI_SIZE", size: percentage });
+  }, [percentage]);
+
   return (
     <CookingTable>
       <RailZone />
-      <SushiContainer ref={drop} >
+      <Guage percentage={percentage} />
+      <SushiContainer ref={drop} percentage={percentage} >
         <StackedRice rice={rice} />
         <StackedSashimi sashimi={sashimi} />
-        <StackedWasabi wasabis={wasabis} />
+        <StackedWasabi wasabi={wasabi} />
         <Plate>
           <img src={plate} alt="plate" />
         </Plate>
       </SushiContainer>
       <IngredientsContainer>
         {renderIngredientList()}
+        <Item>
+          <img
+            className="wasabi"
+            src={wasabiImage}
+            alt="wasabi"
+            onClick={updatePercentage}
+          />
+        </Item>
       </IngredientsContainer>
     </CookingTable>
   );
