@@ -7,6 +7,7 @@ import Evaluation from "../Evaluation";
 import Revenue from "../Revenue";
 import Modal from "../Modal";
 import { useSelector, useDispatch } from "react-redux";
+import Customer from "../Customer";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -15,7 +16,6 @@ const Wrapper = styled.div`
 
 function Game() {
   const dispatch = useDispatch();
-  const { sashimiOrder } = useSelector((state) => state.order);
   const modal = useSelector((state) => state.modal);
 
   useEffect(() => {
@@ -31,12 +31,11 @@ function Game() {
 
   return (
     <Wrapper>
+      <Customer />
       {modal.isVisible
       && <Modal />}
       <Timer />
       <Revenue />
-      <Order />
-      {sashimiOrder.name.length && <Evaluation />}
       <Table />
     </Wrapper>
   );
