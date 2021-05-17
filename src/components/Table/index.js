@@ -245,7 +245,7 @@ function Table() {
   return (
     <CookingTable>
       <RailZone />
-      <Guage percentage={percentage} />
+      <Guage />
       <SushiContainer ref={drop} percentage={percentage} >
         <StackedRice rice={rice} />
         <StackedSashimi sashimi={sashimi} />
