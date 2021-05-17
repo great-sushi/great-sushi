@@ -14,7 +14,7 @@ function RailZone() {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     ctx.canvas.width = window.innerWidth;
-    ctx.canvas.height = window.innerHeight * 0.45;
+    ctx.canvas.height = window.innerHeight * 0.2;
 
     const update = () => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
