@@ -14,9 +14,11 @@ const Wrapper = styled.div`
   width: 200px;
   height: 100px;
   background-color: white;
+  border: 5px solid black;
 
   p {
     font-size: 40px;
+    font-family: RixYeoljeongdo_Regular;
   }
 `;
 
