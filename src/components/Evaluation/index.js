@@ -31,7 +31,7 @@ const Wrapper = styled.div`
 
 function Evaluation() {
   const { sashimiOrder, wasabiOrder } = useSelector((state) => state.order);
-  const { rice, sashimi, wasabis } = useSelector((state) => state.sushi);
+  const { rice, sashimi, wasabi } = useSelector((state) => state.sushi);
 
   const [evaluation, setEvaluation] = useState("");
 
@@ -40,7 +40,7 @@ function Evaluation() {
       setEvaluation("");
     }
 
-    if (sashimiOrder.name === sashimi.id && wasabiOrder === wasabis.length) {
+    if (sashimiOrder.name === sashimi.id && wasabiOrder === wasabi.size) {
       setEvaluation(GOOD);
       return;
     }
@@ -49,10 +49,10 @@ function Evaluation() {
       setEvaluation(WRONG_SUHSI);
       return;
     }
-    if (wasabiOrder < wasabis.length) {
+    if (wasabiOrder < wasabi.size) {
       setEvaluation(SPICY);
     }
-    if (rice.id.length && wasabiOrder > wasabis.length) {
+    if (rice.id.length && wasabiOrder > wasabi.size) {
       setEvaluation(BLAND);
     }
   }, [sashimi]);
