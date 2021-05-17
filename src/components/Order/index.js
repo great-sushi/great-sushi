@@ -38,8 +38,8 @@ const SASHIMIS = [
   },
 ];
 
-const randomWasabiCount = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1));
+const randomWasabiSize = () => {
+  return Math.floor(Math.random() * 11) * 10;
 };
 
 const randomSashimi = () => {
@@ -55,7 +55,7 @@ function Order() {
   useEffect(() => {
     if (sashimi.id.length === 0) {
       const sashimi = randomSashimi();
-      const wasabi = randomWasabiCount(0, 3);
+      const wasabi = randomWasabiSize();
 
       dispatch({ type: ADD_ORDER, sashimi, wasabi });
     }
@@ -67,7 +67,7 @@ function Order() {
         src={sashimiOrder.link}
         alt={sashimiOrder.name}
       />
-      <p>{`와사비 ${wasabiOrder}`}</p>
+      <p>{`와사비 ${wasabiOrder}%`}</p>
     </Wrapper>
   );
 }
