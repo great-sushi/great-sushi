@@ -1,7 +1,7 @@
 let x = 0;
 
 class Rail {
-  constructor(startPoint, lowPoint, controlPoint, controlPointIn, x) {
+  constructor(startPoint, lowPoint, controlPoint, controlPointIn) {
     this.startPoint = startPoint;
     this.lowPoint = lowPoint;
     this.controlPoint = controlPoint;
