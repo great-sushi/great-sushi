@@ -3,6 +3,7 @@ import { ADD_ORDER } from "../constants";
 
 const initialState = {
   sashimiOrder: {
+    id: "",
     name: "",
     link: "",
   },
