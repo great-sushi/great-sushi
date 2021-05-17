@@ -36,4 +36,4 @@ function RailZone() {
   );
 }
 
-export default RailZone;
+export default React.memo(RailZone);
