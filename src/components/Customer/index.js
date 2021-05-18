@@ -11,8 +11,6 @@ import {
   SPICY,
   BLAND,
 } from "../../constants";
-import salmon from "../../asset/salmon.png";
-import tuna from "../../asset/tuna.png";
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -27,12 +25,26 @@ const SASHIMIS = [
   {
     id: "tuna",
     name: "참치",
-    link: tuna,
   },
   {
     id: "salmon",
     name: "연어",
-    link: salmon,
+  },
+  {
+    id: "octopus",
+    name: "문어",
+  },
+  {
+    id: "eel",
+    name: "장어",
+  },
+  {
+    id: "shrimp",
+    name: "새우",
+  },
+  {
+    id: "egg",
+    name: "계란",
   },
 ];
 
