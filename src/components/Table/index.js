@@ -32,7 +32,7 @@ const IngredientsContainer = styled.div`
   width: 100%;
   position: absolute;
   left: 50%;
-  bottom: 15px;
+  bottom: 10%;
   border-radius: 8px;
   background-color: grey;
   display: flex;
@@ -115,36 +115,43 @@ const ingredientList = [
     id: "tuna",
     kind: "sashimi",
     link: tuna,
+    price: 2000,
   },
   {
     id: "salmon",
     kind: "sashimi",
     link: salmon,
+    price: 1600,
   },
   {
     id: "octopus",
     kind: "sashimi",
     link: octopus,
+    price: 1200,
   },
   {
     id: "shrimp",
     kind: "sashimi",
     link: shrimp,
+    price: 1400,
   },
   {
     id: "eel",
     kind: "sashimi",
     link: eel,
+    price: 2500,
   },
   {
     id: "egg",
     kind: "sashimi",
     link: egg,
+    price: 1000,
   },
   {
     id: "rice",
     kind: "rice",
     link: rice,
+    price: null,
   },
 ];
 
@@ -155,6 +162,7 @@ const Ingredients = ({ ingredient }) => {
       id: ingredient.id,
       kind: ingredient.kind,
       link: ingredient.link,
+      price: ingredient.price,
     },
     collect: monitor => ({
       isDragging: monitor.isDragging()
