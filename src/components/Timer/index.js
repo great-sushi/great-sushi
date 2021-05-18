@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const pulse = keyframes`
+  from {
+    transform: scale(2);
+  }
+  to {
+    transform: scale(1);
+  }
+`;
 
 const Wrapper = styled.div`
   position: absolute;
@@ -16,9 +25,21 @@ const Wrapper = styled.div`
   background-color: white;
   border: 5px solid black;
 
+  &.danger {
+    background-color: pink;
+  }
+
+  h1 {
+    font-family: RixYeoljeongdo_Regular;
+  }
+
   p {
     font-size: 40px;
     font-family: RixYeoljeongdo_Regular;
+  }
+
+  .pulse {
+    animation: ${pulse} 1s ease-out infinite;
   }
 `;
 
@@ -79,9 +100,9 @@ function Timer() {
   }, [modal.isVisible, seconds]);
 
   return (
-    <Wrapper>
+    <Wrapper className={seconds < 7 ? "danger" : ""}>
       <h1>남은 시간</h1>
-      <p>{seconds === 60 ? "1:00" : seconds < 10 ? `0:0${seconds}` : `0:${seconds}`}</p>
+      <p className={seconds < 7 ? "pulse" : ""}>{seconds === 60 ? "1:00" : seconds < 10 ? `0:0${seconds}` : `0:${seconds}`}</p>
     </Wrapper>
   );
 }
