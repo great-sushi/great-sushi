@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { PLUS_MONEY, MINUS_MONEY } from "../../constants";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -15,42 +14,49 @@ const Wrapper = styled.div`
   width: 200px;
   height: 100px;
   background-color: white;
+  border: 5px solid black;
+
+  h1 {
+    font-family: RixYeoljeongdo_Regular;
+  }
 
   p {
     font-size: 40px;
+    font-family: RixYeoljeongdo_Regular;
   }
 `;
 
 function Revenue() {
   const dispatch = useDispatch();
   const { sashimiOrder, wasabiOrder } = useSelector((state) => state.order);
-  const { rice, sashimi, wasabis } = useSelector((state) => state.sushi);
+  const { rice, sashimi, wasabi } = useSelector((state) => state.sushi);
   const { money } = useSelector((state) => state.revenue);
+  const [revenue, setRevenue] = useState(0);
 
   useEffect(() => {
-    if (rice.id.length !== 0 && sashimiOrder.name === sashimi.id && wasabiOrder === wasabis.length) {
-      dispatch({ type: PLUS_MONEY, money: 1000 });
+    if (rice.id.length !== 0 && sashimiOrder.id === sashimi.id && wasabiOrder === wasabi.size) {
+      setRevenue((prev) => prev + 1000);
       return;
     }
 
-    if (sashimi.id.length && sashimiOrder.name !== sashimi.id) {
-      dispatch({ type: MINUS_MONEY, money: 1000 });
+    if (sashimi.id.length && sashimiOrder.id !== sashimi.id) {
+      setRevenue((prev) => prev - 1000);
       return;
     }
-    if (wasabiOrder < wasabis.length) {
-      dispatch({ type: MINUS_MONEY, money: 500 });
+    if (wasabiOrder < wasabi.size) {
+      setRevenue((prev) => prev - 500);
     }
-    if (rice.id.length && wasabiOrder > wasabis.length) {
-      dispatch({ type: MINUS_MONEY, money: 500 });
+    if (rice.id.length && wasabiOrder > wasabi.size) {
+      setRevenue((prev) => prev - 500);
     }
   }, [sashimi]);
 
   return (
     <Wrapper>
       <h1>수익금</h1>
-      <p>{money}</p>
+      <p>{revenue}</p>
     </Wrapper>
   );
 }
 
-export default Revenue;
+export default React.memo(Revenue);
