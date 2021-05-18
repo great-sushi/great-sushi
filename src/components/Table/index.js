@@ -4,6 +4,10 @@ import plate from "../../asset/plate.png";
 import rice from "../../asset/rice.png";
 import salmon from "../../asset/salmon.png";
 import tuna from "../../asset/tuna.png";
+import octopus from "../../asset/octopus.png";
+import eel from "../../asset/eel.png";
+import egg from "../../asset/egg.png";
+import shrimp from "../../asset/shrimp.png";
 import wasabiImage from "../../asset/wasabi.png";
 import { useDrag, DragPreviewImage, useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
@@ -118,6 +122,26 @@ const ingredientList = [
     link: salmon,
   },
   {
+    id: "octopus",
+    kind: "sashimi",
+    link: octopus,
+  },
+  {
+    id: "shrimp",
+    kind: "sashimi",
+    link: shrimp,
+  },
+  {
+    id: "eel",
+    kind: "sashimi",
+    link: eel,
+  },
+  {
+    id: "egg",
+    kind: "sashimi",
+    link: egg,
+  },
+  {
     id: "rice",
     kind: "rice",
     link: rice,
@@ -216,8 +240,10 @@ function Table() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      dispatch({ type: RESET_PLATE });
-      setPercentage(0);
+      if (sashimi.id) {
+        dispatch({ type: RESET_PLATE });
+        setPercentage(0);
+      }
     }, 500);
 
     return () => clearTimeout(timeout);
