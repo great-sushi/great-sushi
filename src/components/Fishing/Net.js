@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import netImage from "../../asset/net.png";
 
 const Wrapper = styled.div`
   canvas {
@@ -24,8 +25,8 @@ function Net() {
 
   const changeFishCoordinate = () => {
     for (let i = 0; i < fish.length; i++) {
-      fish[fish.length -1].x = getRandomInt(0, 200);
-      fish[fish.length -1].y = getRandomInt(0, 100);
+      fish[fish.length -1].x = getRandomInt(50, 120);
+      fish[fish.length -1].y = getRandomInt(100, 120);
     }
   }
 
@@ -51,10 +52,12 @@ function Net() {
       changeFishCoordinate();
     }
 
+    const net = new Image();
+    net.src = netImage;
+
     const update = () => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      ctx.fillStyle = "grey";
-      ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      ctx.drawImage(net, 0, 0, ctx.canvas.width, ctx.canvas.height);
       drawFish(ctx);
       animationRef.current = requestAnimationFrame(update);
     };
