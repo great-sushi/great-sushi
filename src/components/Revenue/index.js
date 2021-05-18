@@ -30,12 +30,11 @@ function Revenue() {
   const dispatch = useDispatch();
   const { sashimiOrder, wasabiOrder } = useSelector((state) => state.order);
   const { rice, sashimi, wasabi } = useSelector((state) => state.sushi);
-  const { money } = useSelector((state) => state.revenue);
   const [revenue, setRevenue] = useState(0);
 
   useEffect(() => {
     if (rice.id.length !== 0 && sashimiOrder.id === sashimi.id && wasabiOrder === wasabi.size) {
-      setRevenue((prev) => prev + 1000);
+      setRevenue((prev) => prev + sashimi.price);
       return;
     }
 
@@ -44,10 +43,10 @@ function Revenue() {
       return;
     }
     if (wasabiOrder < wasabi.size) {
-      setRevenue((prev) => prev - 500);
+      setRevenue((prev) => prev - sashimi.price / 2);
     }
     if (rice.id.length && wasabiOrder > wasabi.size) {
-      setRevenue((prev) => prev - 500);
+      setRevenue((prev) => prev - sashimi.price / 2);
     }
   }, [sashimi]);
 
