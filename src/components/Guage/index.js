@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
-const cx = 1050;
-const cy = 80;
+const cx = 1040;
+const cy = 23;
 
 function drawGuage(ctx, percentage ){
   ctx.fillStyle = "lightgrey";
