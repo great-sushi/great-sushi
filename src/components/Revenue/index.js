@@ -51,6 +51,19 @@ function Revenue() {
     }
   }, [sashimi]);
 
+  useEffect(() => {
+    if (revenue >= 10000) {
+      dispatch({ type: "SHOW_MODAL", content: {
+        isVisible: true,
+        contentText: "성공하셨습니다!",
+        firstPath: "/",
+        secondPath: "/fishing",
+        firstLinkButtonText: "나가기",
+        secondLinkButtonText: "다시하기",
+      }});
+    }
+  }, [revenue]);
+
   return (
     <Wrapper>
       <h1>수익금</h1>
