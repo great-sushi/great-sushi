@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import customerImage from "../../asset/customer.png";
 import backgroundImage from "../../asset/background.jpg";
 import Background from "./Background";
+import Customer from "./Customer";
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -52,27 +53,13 @@ function Restaurant() {
     ctx.canvas.width = window.innerWidth;
     ctx.canvas.height = window.innerHeight * 0.55;
 
-    const image = new Image();
-
-    image.src = customerImage;
-
     const background = new Background(backgroundImage, ctx.canvas.width, ctx.canvas.height * 2);
-
-    const frameWidth = 159;
-    const frameHeight = 269;
-
-    const additoryWidth = 400;
-    const additoryHeight = 400;
+    const customer = new Customer(customerImage, column, row);
 
     const update = () => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       background.draw(ctx);
-
-      if (ctx.canvas.width > 1440) {
-        ctx.drawImage(image, column * frameWidth, row * frameHeight, frameWidth, frameHeight, ctx.canvas.width / 2 - frameWidth / 2 - additoryHeight / 2, ctx.canvas.height - frameHeight - additoryHeight, frameWidth + additoryWidth, frameHeight + additoryHeight);
-      } else {
-        ctx.drawImage(image, column * frameWidth, row * frameHeight, frameWidth, frameHeight, ctx.canvas.width / 2 - frameWidth / 2, ctx.canvas.height - frameHeight, frameWidth, frameHeight);
-      }
+      customer.draw(ctx);
 
       animationRef.current = requestAnimationFrame(update);
     }
