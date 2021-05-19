@@ -11,11 +11,12 @@ class Rail {
 
   draw(ctx) {
     x -= this.speed;
+
     ctx.setTransform(1, 0, 0, 1, x, 0);
+    ctx.beginPath();
 
     for (let i = 0; i < 40; i++) {
       ctx.fillStyle = "#c0ab5f";
-      ctx.beginPath();
       ctx.moveTo(this.startPoint + 100 * i, 0);
       ctx.lineTo(this.lowPoint + 100 * i, 0);
       ctx.quadraticCurveTo(this.controlPoint + 100 * i, 40, this.lowPoint + 100 * i, ctx.canvas.height * 0.8);
