@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import customerImage from "../../asset/customer.png";
 import backgroundImage from "../../asset/background.jpg";
+import Background from "./Background";
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -52,10 +53,10 @@ function Restaurant() {
     ctx.canvas.height = window.innerHeight * 0.55;
 
     const image = new Image();
-    const background = new Image();
 
     image.src = customerImage;
-    background.src = backgroundImage;
+
+    const background = new Background(backgroundImage, ctx.canvas.width, ctx.canvas.height * 2);
 
     const frameWidth = 159;
     const frameHeight = 269;
@@ -65,7 +66,7 @@ function Restaurant() {
 
     const update = () => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      ctx.drawImage(background, 0, 0, ctx.canvas.width, ctx.canvas.height * 2);
+      background.draw(ctx);
 
       if (ctx.canvas.width > 1440) {
         ctx.drawImage(image, column * frameWidth, row * frameHeight, frameWidth, frameHeight, ctx.canvas.width / 2 - frameWidth / 2 - additoryHeight / 2, ctx.canvas.height - frameHeight - additoryHeight, frameWidth + additoryWidth, frameHeight + additoryHeight);
