@@ -35,7 +35,7 @@ class Fish {
 
   update(ctx) {
     if (this.initDirection === 0) {
-      if (this.x < 1000) {
+      if (this.x < ctx.canvas.width) {
         if (this.width !== 80) {
           this.x++;
         }
@@ -68,15 +68,15 @@ class Fish {
         this.initDirection = 1;
 
         if (this.width === 80) {
-          this.y = 500;
+          this.y = ctx.canvas.height * 0.9;
         } else if (this.width === 90) {
-          this.y = getRandomInt(300, 450);
+          this.y = getRandomInt(ctx.canvas.height * 0.4, ctx.canvas.height * 0.7);
         } else {
-          this.y = getRandomInt(100, 450);
+          this.y = getRandomInt(ctx.canvas.height * 0.2, ctx.canvas.height * 0.7);
         }
       }
     } else {
-      if (this.x > -50) {
+      if (this.x > -ctx.canvas.width * 0.1) {
         if (this.x !== 80) {
           this.x--;
         }
@@ -108,11 +108,11 @@ class Fish {
         this.initDirection = 0;
 
         if (this.width === 80) {
-          this.y = 500;
+          this.y = ctx.canvas.height * 0.9;
         } else if (this.width === 90) {
-          this.y = getRandomInt(300, 450);
+          this.y = getRandomInt(ctx.canvas.height * 0.4, ctx.canvas.height * 0.7);
         } else {
-          this.y = getRandomInt(100, 450);
+          this.y = getRandomInt(ctx.canvas.height * 0.2, ctx.canvas.height * 0.7);
         }
       }
     }
