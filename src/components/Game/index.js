@@ -17,6 +17,7 @@ const Wrapper = styled.div`
 function Game() {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
+  const { sashimi } = useSelector((state) => state.sushi);
 
   useEffect(() => {
     dispatch({ type: "SHOW_MODAL", content: {
@@ -35,7 +36,9 @@ function Game() {
       <Customer />
       {modal.isVisible
       && <Modal />}
-      <Timer />
+      {/* <Timer /> */}
+      {!sashimi.id && <Order />}
+      {sashimi.id && <Evaluation />}
       <Revenue />
       <Table />
     </Wrapper>
