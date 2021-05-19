@@ -12,7 +12,7 @@ const getRandomInt = (min, max) => {
 const rows = [0, 1];
 const columns = [0, 3, 6, 9];
 
-function Customer() {
+function Restaurant() {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
   const { sashimiOrder, wasabiOrder } = useSelector((state) => state.order);
@@ -100,4 +100,4 @@ function Customer() {
   );
 }
 
-export default Customer;
+export default Restaurant;
