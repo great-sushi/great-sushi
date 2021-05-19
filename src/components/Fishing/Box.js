@@ -156,8 +156,6 @@ function Box() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    // ctx.canvas.width = window.innerWidth * 0.7;
-    // ctx.canvas.height = window.innerHeight * 0.7;
     ctx.canvas.width = document.body.clientWidth * 0.7;
     ctx.canvas.height = document.body.clientHeight * 0.7;
 
@@ -200,10 +198,21 @@ function Box() {
       animationRef.current = requestAnimationFrame(update);
     }
 
+    const resize = () => {
+      const x = document.body.clientWidth;
+      const y = document.body.clientHeight;
+      ctx.canvas.width = x * 0.7;
+      ctx.canvas.height = y * 0.7;
+
+      window.addEventListener("resize", resize);
+    };
+
     update();
+    resize();
 
     return () => {
       cancelAnimationFrame(animationRef.current);
+      window.removeEventListener("resize", resize);
     };
   }, [modal.isVisible]);
 
