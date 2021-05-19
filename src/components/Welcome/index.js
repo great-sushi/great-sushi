@@ -12,10 +12,6 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const ButtonWrapper = styled.div`
-  padding: 1.5rem;
-`;
-
 const Title = styled.div`
   font-size: 100px;
   font-family: "RixYeoljeongdo_Regular";
@@ -43,14 +39,9 @@ function Welcome() {
     <Wrapper>
       <Image src={sushi} alt="sushi" />
       <Title>위대한 초밥</Title>
-      <ButtonWrapper>
-        <Button to="/guide">
-          게임방법
-        </Button>
-        <Button to="/fishing">
-          게임시작
-        </Button>
-      </ButtonWrapper>
+      <Button to="/fishing">
+        게임시작
+      </Button>
     </Wrapper>
   );
 }
