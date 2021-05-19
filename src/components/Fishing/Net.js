@@ -62,10 +62,19 @@ function Net() {
       animationRef.current = requestAnimationFrame(update);
     };
 
+    const resize = () => {
+      ctx.canvas.width = window.innerWidth * 0.2;
+      ctx.canvas.height = window.innerHeight * 0.2;
+
+      window.addEventListener("resize", resize);
+    };
+
     update();
+    resize();
 
     return () => {
       cancelAnimationFrame(animationRef.current);
+      window.removeEventListener("resize", resize);
     };
   }, [fish.length]);
 
