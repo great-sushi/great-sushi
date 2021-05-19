@@ -58,7 +58,6 @@ const randomSashimi = () => {
 };
 
 function Customer() {
-  const dispatch = useDispatch();
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
   const { sashimiOrder, wasabiOrder } = useSelector((state) => state.order);
@@ -67,14 +66,6 @@ function Customer() {
   const [row, setRow] = useState(0);
   const [column, setColumn] = useState(0);
   const [evaluation, setEvaluation] = useState("");
-
-  useEffect(() => {
-    if (sashimi.id.length === 0) {
-      const sashimi = randomSashimi();
-      const wasabi = randomWasabiSize();
-      dispatch({ type: ADD_ORDER, sashimi, wasabi });
-    }
-  }, [sashimi.id]);
 
   useEffect(() => {
     if (rice.id.length === 0) {
@@ -132,13 +123,8 @@ function Customer() {
 
     const update = () => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      ctx.drawImage(background, 0, 0, ctx.canvas.width, 600);
-      ctx.drawImage(image, column * frameWidth, row * frameHeight, frameWidth, frameHeight, ctx.canvas.width * 0.44, ctx.canvas.height * 0.39, frameWidth, frameHeight);
-
-      if (sashimiOrder.name) {
-        ctx.drawImage(leftSheet, ctx.canvas.width * 0.2, ctx.canvas.height * 0.2, 350, 150);
-        ctx.fillText(`${sashimiOrder.name}초밥 와사비 ${wasabiOrder}% 로요`, ctx.canvas.width * 0.32, ctx.canvas.height * 0.35);
-      }
+      ctx.drawImage(background, 0, 0, ctx.canvas.width, ctx.canvas.height * 2);
+      ctx.drawImage(image, column * frameWidth, row * frameHeight, frameWidth, frameHeight, ctx.canvas.width / 2 - frameWidth / 2, ctx.canvas.height - frameHeight, frameWidth, frameHeight);
 
       if (evaluation) {
         ctx.drawImage(sheet, ctx.canvas.width * 0.55, ctx.canvas.height * 0.2, 300, 150);
@@ -150,8 +136,10 @@ function Customer() {
 
     update();
 
-    return () => cancelAnimationFrame(animationRef.current);
-  }, [column, evaluation, row, sashimiOrder.name, wasabiOrder]);
+    return () => {
+      cancelAnimationFrame(animationRef.current);
+    };
+  }, [column, evaluation, row]);
 
   return (
     <canvas ref={canvasRef} />
