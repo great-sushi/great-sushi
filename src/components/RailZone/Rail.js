@@ -25,7 +25,7 @@ class Rail {
       ctx.stroke();
     }
 
-    if (x <= - 499) {
+    if (x <= - 99) {
       x = 0;
     }
   }
