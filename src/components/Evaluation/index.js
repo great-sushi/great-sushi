@@ -7,6 +7,7 @@ import {
   SPICY,
   BLAND,
 } from "../../constants";
+import sheet from "../../asset/sheet.png";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -15,17 +16,21 @@ const Wrapper = styled.div`
   justify-content: space-evenly;
   flex-direction: column;
   border-radius: 8px;
-  left: 0;
-  right: 0;
-  top: 40px;
+  right: 25%;
+  top: 5%;
   margin-left: auto;
   margin-right: auto;
-  width: 400px;
-  height: 100px;
-  background-color: white;
+  width: 300px;
+  height: 200px;
+  background-image: url(${sheet});
+  background-size: cover;
 
   p {
-    font-size: 20px;
+    font-size: 30px;
+    font-family: RixYeoljeongdo_Regular;
+    padding: 20px;
+    text-align: center;
+    line-height: 1.3;
   }
 `;
 
@@ -38,14 +43,15 @@ function Evaluation() {
   useEffect(() => {
     if (rice.id.length === 0) {
       setEvaluation("");
+      return;
     }
 
-    if (sashimiOrder.name === sashimi.id && wasabiOrder === wasabi.size) {
+    if (sashimiOrder.id === sashimi.id && wasabiOrder === wasabi.size) {
       setEvaluation(GOOD);
       return;
     }
 
-    if (sashimi.id.length && sashimiOrder.name !== sashimi.id) {
+    if (sashimi.id.length && sashimiOrder.id !== sashimi.id) {
       setEvaluation(WRONG_SUHSI);
       return;
     }
