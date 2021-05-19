@@ -21,11 +21,12 @@ function Game() {
   useEffect(() => {
     dispatch({ type: "SHOW_MODAL", content: {
       isVisible: true,
-      contentText: "1분 안에 10,000원을 벌어야 합니다. 주문대로 만들지 않으면 큰일이 날 수도 있어요. 마우스로 재료를 드래그 해서 접시에 올려주세요. 초밥 만들기 순서를 지키셔야합니다. 밥, (와사비), 회. 그럼 개점해볼까요?",
+      contentText: "1분 안에 10,000원 이상을 벌어야 합니다. 마우스로 재료를 순서대로 드래그 해서 접시에 올려주세요. 주문대로 만들지 않으면 돈을 잃게 됩니다. 그럼 개점해볼까요?",
       firstPath: "/",
       secondPath: "/game",
       firstLinkButtonText: "나가기",
       secondLinkButtonText: "시작",
+      game: "sushi",
     }});
   }, []);
 

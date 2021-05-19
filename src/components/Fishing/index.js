@@ -20,7 +20,6 @@ const Menu = styled.div`
   width: 20%;
   height: 70%;
   display: flex;
-  align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
 `;
@@ -38,6 +37,7 @@ function Fishing() {
         secondPath: "/fishing",
         firstLinkButtonText: "나가기",
         secondLinkButtonText: "시작",
+        game: "fishing",
       }});
     }
   }, []);

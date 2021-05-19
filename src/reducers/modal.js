@@ -7,6 +7,7 @@ const initialState = {
   secondPath: "",
   firstLinkButtonText: "",
   secondLinkButtonText: "",
+  game: "",
 }
 
 const modal = (state = initialState, action) => {
