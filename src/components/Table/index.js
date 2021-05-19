@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import plate from "../../asset/plate.png";
 import rice from "../../asset/rice.png";
 import salmon from "../../asset/salmon.png";
@@ -23,7 +23,7 @@ import Guage from "../Guage";
 const CookingTable = styled.div`
   width: 100%;
   height: 45%;
-  position: absolute;
+  position: relative;
   bottom: 0;
   background-color: #af8264;
 `;
@@ -41,6 +41,10 @@ const IngredientsContainer = styled.div`
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   transform: translateX(-50%);
   max-width: max-content;
+
+  .wasabi-item {
+    background-color: pink;
+  }
 `;
 
 const Item = styled.div`
@@ -84,7 +88,7 @@ const SushiContainer = styled.div`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 60%;
+  bottom: 29vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -107,6 +111,31 @@ const SushiContainer = styled.div`
     z-index: 4;
     position: absolute;
     bottom: 140px;
+  }
+`;
+
+const pulse = keyframes`
+  from {
+    transform: scale(1.5);
+  }
+  to {
+    transform: scale(1);
+  }
+`;
+
+const Guide = styled.div`
+  position: absolute;
+  right: 4%;
+  bottom: 15%;
+
+  p {
+    font-family: "RixYeoljeongdo_Regular";
+    font-size: 30px;
+    padding: 10px;
+  }
+
+  .pulse {
+    animation: ${pulse} 0.5s ease-out infinite;
   }
 `;
 
@@ -230,6 +259,7 @@ const StackedWasabi = ({ wasabi }) => {
 function Table() {
   const dispatch = useDispatch();
   const { rice, sashimi, wasabi } = useSelector(state => state.sushi);
+  const wasabiOrder = useSelector(state => state.order.wasabiOrder);
   const [percentage, setPercentage] = useState(0);
 
   const [, drop] = useDrop({
@@ -252,7 +282,7 @@ function Table() {
         dispatch({ type: RESET_PLATE });
         setPercentage(0);
       }
-    }, 500);
+    }, 800);
 
     return () => clearTimeout(timeout);
   }, [sashimi.id]);
@@ -290,7 +320,7 @@ function Table() {
       </SushiContainer>
       <IngredientsContainer>
         {renderIngredientList()}
-        <Item>
+        <Item className="wasabi-item">
           <img
             className="wasabi"
             src={wasabiImage}
@@ -299,6 +329,12 @@ function Table() {
           />
         </Item>
       </IngredientsContainer>
+      {rice.id && wasabiOrder !== 0
+      && (
+        <Guide>
+          <p className="pulse">←클릭!</p>
+        </Guide>
+      )}
     </CookingTable>
   );
 }
