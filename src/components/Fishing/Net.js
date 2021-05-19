@@ -23,10 +23,10 @@ function Net() {
   const modal = useSelector((state) => state.modal);
   const dispatch = useDispatch();
 
-  const changeFishCoordinate = () => {
+  const changeFishCoordinate = (ctx) => {
     for (let i = 0; i < fish.length; i++) {
-      fish[fish.length -1].x = getRandomInt(50, 120);
-      fish[fish.length -1].y = getRandomInt(100, 120);
+      fish[fish.length -1].x = getRandomInt(ctx.canvas.width * 0.2, ctx.canvas.width / 2);
+      fish[fish.length -1].y = getRandomInt(ctx.canvas.height / 2, ctx.canvas.height * 0.8);
     }
   }
 
@@ -45,11 +45,11 @@ function Net() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    ctx.canvas.width = window.innerWidth * 0.2;
-    ctx.canvas.height = window.innerHeight * 0.2;
+    ctx.canvas.width = document.body.clientWidth * 0.2;
+    ctx.canvas.height = document.body.clientHeight * 0.2;
 
     if (fish.length !== 0) {
-      changeFishCoordinate();
+      changeFishCoordinate(ctx);
     }
 
     const net = new Image();
