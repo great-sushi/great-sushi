@@ -13,20 +13,19 @@ class Rail {
     x -= this.speed;
     ctx.setTransform(1, 0, 0, 1, x, 0);
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 40; i++) {
       ctx.fillStyle = "#c0ab5f";
       ctx.beginPath();
       ctx.moveTo(this.startPoint + 100 * i, 0);
       ctx.lineTo(this.lowPoint + 100 * i, 0);
-      ctx.quadraticCurveTo(this.controlPoint + 100 * i, 40, this.lowPoint + 100 * i, 120);
-      ctx.lineTo(this.startPoint + 100 * i, 120);
-      ctx.stroke();
+      ctx.quadraticCurveTo(this.controlPoint + 100 * i, 40, this.lowPoint + 100 * i, ctx.canvas.height * 0.8);
+      ctx.lineTo(this.startPoint + 100 * i, ctx.canvas.height * 0.8);
       ctx.quadraticCurveTo(this.controlPointIn + 100 * i, 40, this.startPoint + 100 * i, 0);
-      ctx.stroke();
       ctx.fill();
+      ctx.stroke();
     }
 
-    if (x <= -499) {
+    if (x <= - 499) {
       x = 0;
     }
   }
