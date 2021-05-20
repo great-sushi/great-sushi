@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   justify-content: space-evenly;
   flex-direction: column;
   border-radius: 8px;
-  right: 25%;
+  right: 24%;
   top: 5%;
   margin-left: auto;
   margin-right: auto;
@@ -29,7 +29,7 @@ const Wrapper = styled.div`
   p {
     font-size: 30px;
     font-family: RixYeoljeongdo_Regular;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
     text-align: center;
     line-height: 1.3;
   }
