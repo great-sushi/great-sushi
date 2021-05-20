@@ -50,7 +50,7 @@ const Content = styled.div`
   height: 400px;
   border: 5px solid black;
   border-radius: 8px;
-  background-color: skyblue;
+  background-color: #74b9ff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,15 +71,15 @@ const LinkButton = styled(Link)`
   padding: ${({ theme }) => theme.padding.small};
   border: 3px solid ${({ theme }) => theme.color.white};
   display: inline-block;
-  font-size: 0.8rem;
+  font-size: 20px;
   text-align: center;
   color: ${({ theme }) => theme.color.white};
   border-radius: 8px;
   margin: 5px;
 
   &:hover {
-    background: red;
-    border-color: red;
+    background: #3742fa;
+    border-color: #3742fa;
     transition: 0.3s all;
   }
 `;
