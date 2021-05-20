@@ -13,7 +13,6 @@ import hookImage from "../../asset/hook.png";
 
 const Wrapper = styled.div`
   canvas {
-    border-radius: 10px;
     background-image: url(${ocean});
     background-size: cover;
     background-position: bottom;
