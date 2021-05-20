@@ -8,6 +8,7 @@ import {
   BLAND,
 } from "../../constants";
 import sheet from "../../asset/sheet.png";
+import useAudio from "../../hook/useAudio";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -39,10 +40,12 @@ function Evaluation() {
   const { rice, sashimi, wasabi } = useSelector((state) => state.sushi);
 
   const [evaluation, setEvaluation] = useState("");
+  const [, { playAudio, toggleAudio }] = useAudio("coughing");
 
   useEffect(() => {
     if (rice.id.length === 0) {
       setEvaluation("");
+      toggleAudio();
       return;
     }
 
@@ -57,6 +60,7 @@ function Evaluation() {
     }
     if (wasabiOrder < wasabi.size) {
       setEvaluation(SPICY);
+      playAudio();
     }
     if (rice.id.length && wasabiOrder > wasabi.size) {
       setEvaluation(BLAND);
