@@ -15,6 +15,15 @@ const Wrapper = styled.div`
   height: 100%;
 `;
 
+const Side = styled.div`
+  width: auto;
+  height: auto;
+  border: 1px solid black;
+  position: absolute;
+  right: 130px;
+  top: 40px;
+`;
+
 function Game() {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
@@ -25,7 +34,7 @@ function Game() {
       isVisible: true,
       contentText: "1분 안에 10,000원 이상을 벌어야 합니다. 마우스로 재료를 순서대로 드래그 해서 접시에 올려주세요. 주문대로 만들지 않으면 돈을 잃게 됩니다. 그럼 개점해볼까요?",
       firstPath: "/",
-      secondPath: "/game",
+      secondPath: "/sushi",
       firstLinkButtonText: "나가기",
       secondLinkButtonText: "시작",
       game: "sushi",
@@ -33,19 +42,19 @@ function Game() {
   }, []);
 
   return (
-    <>
+    <Wrapper>
       <Option />
-      <Wrapper>
-        <Restaurant />
-        {modal.isVisible
-        && <Modal />}
+      <Restaurant />
+      {modal.isVisible
+      && <Modal />}
+      {!sashimi.id && <Order />}
+      {sashimi.id && <Evaluation />}
+      <Side>
         <Timer />
-        {!sashimi.id && <Order />}
-        {sashimi.id && <Evaluation />}
         <Revenue />
-        <Table />
-      </Wrapper>
-    </>
+      </Side>
+      <Table />
+    </Wrapper>
   );
 }
 
