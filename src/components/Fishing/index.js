@@ -15,12 +15,12 @@ const Wrapper = styled.div`
   justify-content: space-evenly;
   width: 100%;
   height: 100%;
-  background-color: skyblue;
+  background-color: #c8d6e5;
 `;
 
 const Menu = styled.div`
-  width: 20%;
-  height: 70%;
+  width: auto;
+  height: auto;
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
