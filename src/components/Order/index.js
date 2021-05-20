@@ -7,7 +7,7 @@ import leftSheet from "../../asset/sheet_left.png";
 const Wrapper = styled.div`
   position: absolute;
   border-radius: 8px;
-  left: 25%;
+  left: 24%;
   top: 5%;
   width: 300px;
   height: 200px;
@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   p {
     font-size: 30px;
     font-family: RixYeoljeongdo_Regular;
-    padding: 20px;
+    padding: 0 20px 20px 20px;
     text-align: center;
     line-height: 1.3;
   }
