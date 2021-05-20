@@ -16,9 +16,10 @@ function RailZone() {
     ctx.canvas.width = window.innerWidth;
     ctx.canvas.height = window.innerHeight * 0.2;
 
+    const rail = new Rail(startPoint, lowPoint, controlPoint, controlPointIn);
+
     const update = () => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      const rail = new Rail(startPoint, lowPoint, controlPoint, controlPointIn);
       rail.draw(ctx);
       animationRef.current = requestAnimationFrame(update);
     }
