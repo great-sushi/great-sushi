@@ -18,33 +18,30 @@ import {
   RESET_PLATE,
 } from "../../constants";
 import RailZone from "../RailZone";
-import Guage from "../Guage";
+import Gauge from "../Gauge";
+import useAudio from "../../hook/useAudio";
 
 const CookingTable = styled.div`
   width: 100%;
   height: 45%;
-  position: relative;
+  position: absolute;
   bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
   background-color: #af8264;
 `;
 
 const IngredientsContainer = styled.div`
   width: 100%;
-  position: absolute;
-  left: 50%;
-  bottom: 10%;
   border-radius: 8px;
-  background-color: grey;
+  background-color: #576574;
   display: flex;
   justify-content: center;
   padding: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  transform: translateX(-50%);
   max-width: max-content;
-
-  .wasabi-item {
-    background-color: pink;
-  }
 `;
 
 const Item = styled.div`
@@ -67,7 +64,7 @@ const Item = styled.div`
   }
 
   .wasabi {
-    width: 60%;
+    width: 80%;
   }
 `;
 
@@ -79,6 +76,7 @@ const Plate = styled.div`
   img {
     width: 400px;
     height: 200px;
+    filter: brightness(0.8);
   }
 `;
 
@@ -124,9 +122,8 @@ const pulse = keyframes`
 `;
 
 const Guide = styled.div`
-  position: absolute;
-  right: 4%;
-  bottom: 15%;
+  width: 50%;
+  height: 100%;
 
   p {
     font-family: "RixYeoljeongdo_Regular";
@@ -137,6 +134,28 @@ const Guide = styled.div`
   .pulse {
     animation: ${pulse} 0.5s ease-out infinite;
   }
+`;
+
+const IngredientsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;;
+  flex-direction: column;
+`;
+
+const GaugeContainer = styled.div`
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+`;
+
+const WasabiContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 30%;
+  height: auto;
 `;
 
 const ingredientList = [
@@ -261,10 +280,13 @@ function Table() {
   const { rice, sashimi, wasabi } = useSelector(state => state.sushi);
   const wasabiOrder = useSelector(state => state.order.wasabiOrder);
   const [percentage, setPercentage] = useState(0);
+  const [, { playAudio }] = useAudio("drop");
 
   const [, drop] = useDrop({
     accept: "SushiIngredients",
     drop: (item) => {
+      playAudio();
+
       if (!rice.id && item.id === "rice") {
         dispatch({ type: ADD_RICE, item });
       }
@@ -309,7 +331,6 @@ function Table() {
   return (
     <CookingTable>
       <RailZone />
-      <Guage />
       <SushiContainer ref={drop} percentage={percentage} >
         <StackedRice rice={rice} />
         <StackedSashimi sashimi={sashimi} />
@@ -318,23 +339,30 @@ function Table() {
           <img src={plate} alt="plate" />
         </Plate>
       </SushiContainer>
-      <IngredientsContainer>
-        {renderIngredientList()}
-        <Item className="wasabi-item">
-          <img
-            className="wasabi"
-            src={wasabiImage}
-            alt="wasabi"
-            onClick={updatePercentage}
-          />
-        </Item>
-      </IngredientsContainer>
-      {rice.id && wasabiOrder !== 0
-      && (
-        <Guide>
-          <p className="pulse">←클릭!</p>
-        </Guide>
-      )}
+      <IngredientsWrapper>
+        <GaugeContainer>
+          <Gauge percentage={percentage} />
+          <WasabiContainer>
+            <Item className="wasabi-item">
+              <img
+                className="wasabi"
+                src={wasabiImage}
+                alt="wasabi"
+                onClick={updatePercentage}
+              />
+            </Item>
+            {rice.id && wasabiOrder !== 0
+            && (
+              <Guide>
+                <p className="pulse">←클릭!</p>
+              </Guide>
+            )}
+          </WasabiContainer>
+        </GaugeContainer>
+        <IngredientsContainer>
+          {renderIngredientList()}
+        </IngredientsContainer>
+      </IngredientsWrapper>
     </CookingTable>
   );
 }
