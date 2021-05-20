@@ -18,9 +18,10 @@ class Customer {
         this.row * this.frameHeight,
         this.frameWidth,
         this.frameHeight,
-        ctx.canvas.width / 2 - this.frameWidth / 2 - this.additoryHeight / 2,
+        ctx.canvas.width / 2 - this.frameWidth / 2 - this.additoryWidth / 2,
         ctx.canvas.height - this.frameHeight - this.additoryHeight,
-        this.frameWidth + this.additoryWidth, this.frameHeight + this.additoryHeight
+        this.frameWidth + this.additoryWidth,
+        this.frameHeight + this.additoryHeight
       );
     } else {
       ctx.drawImage(
@@ -29,10 +30,10 @@ class Customer {
         this.row * this.frameHeight,
         this.frameWidth,
         this.frameHeight,
-        ctx.canvas.width / 2 - this.frameWidth / 2,
-        ctx.canvas.height - this.frameHeight,
-        this.frameWidth,
-        this.frameHeight
+        ctx.canvas.width / 2 - this.frameWidth / 2 - this.additoryWidth / 16,
+        ctx.canvas.height - this.frameHeight - this.additoryHeight / 8,
+        this.frameWidth + this.additoryWidth / 8,
+        this.frameHeight + this.additoryHeight / 8
       );
     }
   }
