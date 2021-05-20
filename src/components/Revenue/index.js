@@ -3,14 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
   border-radius: 8px;
-  right: 130px;
-  top: 160px;
   width: 200px;
   height: 100px;
   background-color: white;
