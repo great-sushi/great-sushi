@@ -6,22 +6,43 @@ import salmon from "../../asset/salmon_fishing.png";
 import tuna from "../../asset/tuna_fishing.png";
 import eel from "../../asset/eel_fishing.png";
 import shrimp from "../../asset/shrimp_fishing.png";
+import useAudio from "../../hook/useAudio";
 
 const Wrapper = styled.div`
-  border: 1px solid lightgrey;
-  width: 100%;
-  height: 60%;
-  background-color: lightgrey;
+  border: 5px solid black;
+  width: 200px;
+  height: auto;
+  background-color: white;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  h1 {
+    font-family: "RixYeoljeongdo_Regular";
+    font-size: 30px;
+    padding: 10px;
+  }
+`;
+
+const Content = styled.div`
+  div {
+    padding: 8px;
+    display: flex;
+    align-items: center;
+  }
 
   img {
-    width: 80px;
+    width: 70px;
     height: 40px;
   }
 
   p {
     display: inline-block;
     font-family: "RixYeoljeongdo_Regular";
+    font-size: 15px;
+    padding: 5px;
   }
 `;
 
@@ -34,6 +55,7 @@ function Request() {
   const [tunaCount, setTunaCount] = useState(0);
   const [eelCount, setEelCount] = useState(0);
   const [shrimpCount, setShrimpCount] = useState(0);
+  const [, { playAudio }] = useAudio("splash");
 
   useEffect(() => {
     if (fish.length === 0) {
@@ -64,6 +86,8 @@ function Request() {
       default:
         break;
     }
+
+    playAudio();
   }, [fish]);
 
   useEffect(() => {
@@ -79,26 +103,29 @@ function Request() {
 
   return (
     <Wrapper>
-      <div>
-        <img src={octopus} alt="octopus" />
-        <p>{`문어 ${octopusCount} / ${request.octopus} 개`}</p>
-      </div>
-      <div>
-        <img src={salmon} alt="salmon" />
-        <p>{`연어 ${salmonCount} / ${request.salmon} 개`}</p>
-      </div>
-      <div>
-        <img src={tuna} alt="tuna" />
-        <p>{`참치 ${tunaCount} / ${request.tuna} 개`}</p>
-      </div>
-      <div>
-        <img src={eel} alt="eel" />
-        <p>{`장어 ${eelCount} / ${request.eel} 개`}</p>
-      </div>
-      <div>
-        <img src={shrimp} alt="shrimp" />
-        <p>{`새우 ${shrimpCount} / ${request.shrimp} 개`}</p>
-      </div>
+      <h1>요청서</h1>
+      <Content>
+        <div>
+          <img src={octopus} alt="octopus" />
+          <p>{`문어 ${octopusCount} / ${request.octopus} 개`}</p>
+        </div>
+        <div>
+          <img src={salmon} alt="salmon" />
+          <p>{`연어 ${salmonCount} / ${request.salmon} 개`}</p>
+        </div>
+        <div>
+          <img src={tuna} alt="tuna" />
+          <p>{`참치 ${tunaCount} / ${request.tuna} 개`}</p>
+        </div>
+        <div>
+          <img src={eel} alt="eel" />
+          <p>{`장어 ${eelCount} / ${request.eel} 개`}</p>
+        </div>
+        <div>
+          <img src={shrimp} alt="shrimp" />
+          <p>{`새우 ${shrimpCount} / ${request.shrimp} 개`}</p>
+        </div>
+      </Content>
     </Wrapper>
   );
 }
