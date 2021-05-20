@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useLocation } from "react-router";
 import styled, { keyframes } from "styled-components";
+import useAudio from "../../hook/useAudio";
 
 const pulse = keyframes`
   from {
@@ -12,21 +14,18 @@ const pulse = keyframes`
 `;
 
 const Wrapper = styled.div`
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
   border-radius: 8px;
-  right: 130px;
-  top: 40px;
   width: 200px;
   height: 100px;
   background-color: white;
   border: 5px solid black;
 
   &.danger {
-    background-color: pink;
+    background-color: #e84118;
   }
 
   h1 {
@@ -48,6 +47,8 @@ function Timer() {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
   const isCompleted = useSelector((state) => state.fishing.isCompleted);
+  const [, { playAudio, toggleAudio }] = useAudio("countdown");
+  const location = useLocation();
 
   useEffect(() => {
     if (modal.isVisible) {
@@ -63,33 +64,39 @@ function Timer() {
       }
     }, 1000);
 
+    if (seconds < 6) {
+      playAudio();
+    }
+
     if (seconds === 0) {
       if (isCompleted) {
         dispatch({ type: "SHOW_MODAL", content: {
           isVisible: true,
           contentText: "성공하셨습니다! 그럼 개점해볼까요?",
           firstPath: "/",
-          secondPath: "/game",
+          secondPath: "/sushi",
           firstLinkButtonText: "나가기",
           secondLinkButtonText: "개점",
         }});
       } else {
         dispatch({ type: "SHOW_MODAL", content: {
           isVisible: true,
-          contentText: "실패",
+          contentText: "실패하셨습니다!",
           firstPath: "/",
-          secondPath: "/fishing",
+          secondPath: location.pathname,
           firstLinkButtonText: "나가기",
           secondLinkButtonText: "재도전",
         }});
       }
+
+      toggleAudio();
     } else {
       if (isCompleted) {
         dispatch({ type: "SHOW_MODAL", content: {
           isVisible: true,
           contentText: "성공하셨습니다! 그럼 개점해볼까요?",
           firstPath: "/",
-          secondPath: "/game",
+          secondPath: "/sushi",
           firstLinkButtonText: "나가기",
           secondLinkButtonText: "개점",
         }});
@@ -100,9 +107,9 @@ function Timer() {
   }, [modal.isVisible, seconds]);
 
   return (
-    <Wrapper className={seconds < 7 ? "danger" : ""}>
+    <Wrapper className={seconds < 6 ? "danger" : ""}>
       <h1>남은 시간</h1>
-      <p className={seconds < 7 ? "pulse" : ""}>{seconds === 60 ? "1:00" : seconds < 10 ? `0:0${seconds}` : `0:${seconds}`}</p>
+      <p className={seconds < 6 ? "pulse" : ""}>{seconds === 60 ? "1:00" : seconds < 10 ? `0:0${seconds}` : `0:${seconds}`}</p>
     </Wrapper>
   );
 }
