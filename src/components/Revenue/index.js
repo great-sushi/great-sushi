@@ -31,6 +31,7 @@ function Revenue() {
   const { sashimiOrder, wasabiOrder } = useSelector((state) => state.order);
   const { rice, sashimi, wasabi } = useSelector((state) => state.sushi);
   const [revenue, setRevenue] = useState(0);
+  const modal = useSelector((state) => state.modal);
 
   useEffect(() => {
     if (rice.id.length !== 0 && sashimiOrder.id === sashimi.id && wasabiOrder === wasabi.size) {
@@ -61,7 +62,11 @@ function Revenue() {
         secondLinkButtonText: "다시하기",
       }});
     }
-  }, [revenue]);
+
+    if (modal.isVisible) {
+      setRevenue(0);
+    }
+  }, [revenue, modal.isVisible]);
 
   return (
     <Wrapper>
