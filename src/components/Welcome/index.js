@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import sushi from "../../asset/sushi.png";
+import useAudio from "../../hook/useAudio";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -35,6 +36,16 @@ const Button = styled(Link)`
 `;
 
 function Welcome() {
+  const [isPlaying, { toggleAudio, restartAudio }] = useAudio("bgm");
+
+  useEffect(() => {
+    if (isPlaying) {
+      toggleAudio();
+    }
+
+    restartAudio();
+  }, []);
+
   return (
     <Wrapper>
       <Image src={sushi} alt="sushi" />
