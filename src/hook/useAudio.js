@@ -1,21 +1,18 @@
-import React, { useEffect, useState } from "react";
-import FishingGameBgm from "../asset/fishingGameBgm.mp3";
-import SushiGameBgm from "../asset/sushiGameBgm.mp3";
+import { useEffect, useState } from "react";
+import Bgm from "../asset/bgm.mp3";
 import Countdown from "../asset/countdown.mp3"
 import Drop from "../asset/drop.mp3";
 import Splash from "../asset/splash.mp3";
 import Coughing from "../asset/coughing.mp3";
 
-const fishingGameBgm = new Audio(FishingGameBgm);
-const sushiGameBgm = new Audio(SushiGameBgm);
+const bgm = new Audio(Bgm);
 const countdown = new Audio(Countdown);
 const drop = new Audio(Drop);
 const splash = new Audio(Splash);
 const coughing = new Audio(Coughing);
 
 const gameAudio = {
-  fishingGameBgm,
-  sushiGameBgm,
+  bgm,
   countdown,
   drop,
   splash,
@@ -30,23 +27,33 @@ function useAudio(name, option) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [audio] = useState(gameAudio[name]);
 
+  if (option) {
+    Object.keys(option).forEach(i => {
+      audio[i] = option[i];
+    });
+  }
+
   useEffect(() => {
     if (isPlaying) {
       audio.play();
     } else {
       audio.pause();
     }
-  }, [isPlaying]);
+  }, [isPlaying, audio]);
 
-  const playAudio = (name) => {
-    setIsPlaying(true);
+  const playAudio = () => {
+    audio.play();
   };
 
   const toggleAudio = () => {
     setIsPlaying(prev => !prev);
   }
 
-  return [isPlaying, { playAudio, toggleAudio }];
+  const restartAudio = () => {
+    audio.currentTime = 0;
+  }
+
+  return [isPlaying, { playAudio, toggleAudio, restartAudio }];
 }
 
 export default useAudio;
