@@ -6,6 +6,8 @@ import Timer from "../Timer";
 import Net from "./Net";
 import Request from "../Request";
 import Modal from "../Modal";
+import useAudio from "../../hook/useAudio";
+import Option from "../Option";
 
 const Wrapper = styled.div`
   display: flex;
@@ -27,6 +29,7 @@ const Menu = styled.div`
 function Fishing() {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
+  const [, { playAudio }] = useAudio("bgm", { loop: true });
 
   useEffect(() => {
     if (!modal.isVisible) {
@@ -39,21 +42,24 @@ function Fishing() {
         secondLinkButtonText: "시작",
         game: "fishing",
       }});
+
+      playAudio("bgm");
     }
   }, []);
 
   return (
     <>
-    <Wrapper>
-      {modal.isVisible
-      && <Modal />}
-      <Timer />
-      <Box />
-      <Menu>
-        <Request />
-        <Net />
-      </Menu>
-    </Wrapper>
+    <Option />
+      <Wrapper>
+        {modal.isVisible
+        && <Modal />}
+        <Box />
+        <Menu>
+          <Timer />
+          <Request />
+          <Net />
+        </Menu>
+      </Wrapper>
     </>
   );
 }
