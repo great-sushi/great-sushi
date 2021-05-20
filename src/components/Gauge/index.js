@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+const Wrapper = styled.div``;
+
 const Bar = styled.div`
   width: 400px;
   height: 20px;
@@ -8,12 +10,17 @@ const Bar = styled.div`
   border-radius: 80px;
 `;
 
+const Percentage = styled.h1`
+  font-size: 20px;
+  font-family: RixYeoljeongdo_Regular;
+`;
+
 function Gauge({ percentage }) {
   return (
-    <>
-      <h1>{`${percentage}%`}</h1>
+    <Wrapper>
+      <Percentage>{`${percentage}%`}</Percentage>
       <Bar percentage={percentage} />
-    </>
+    </Wrapper>
   );
 }
 
