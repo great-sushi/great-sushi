@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import audioOffImage from "../../asset/audio_off.png";
-import audioOnImage from "../../asset/audio_on.png";
+import audioOffImage from "../../assets/image/audio_off.png";
+import audioOnImage from "../../assets/image/audio_on.png";
 import useAudio from "../../hook/useAudio";
 
 const Wrapper = styled.div`

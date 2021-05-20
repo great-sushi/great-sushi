@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import octopus from "../../asset/octopus_fishing.png";
-import salmon from "../../asset/salmon_fishing.png";
-import tuna from "../../asset/tuna_fishing.png";
-import eel from "../../asset/eel_fishing.png";
-import shrimp from "../../asset/shrimp_fishing.png";
+import octopus from "../../assets/image/octopus_fishing.png";
+import salmon from "../../assets/image/salmon_fishing.png";
+import tuna from "../../assets/image/tuna_fishing.png";
+import eel from "../../assets/image/eel_fishing.png";
+import shrimp from "../../assets/image/shrimp_fishing.png";
 import useAudio from "../../hook/useAudio";
 
 const Wrapper = styled.div`

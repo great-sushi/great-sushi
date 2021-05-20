@@ -3,17 +3,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import octopus from "../../asset/octopus_fishing.png";
-import salmon from "../../asset/salmon_fishing.png";
-import tuna from "../../asset/tuna_fishing.png";
-import eel from "../../asset/eel_fishing.png";
-import shrimp from "../../asset/shrimp_fishing.png";
-import octopusSashimi from "../../asset/octopus.png";
-import salmonSashimi from "../../asset/salmon.png";
-import tunaSashimi from "../../asset/tuna.png";
-import eelSashimi from "../../asset/eel.png";
-import shrimpSashimi from "../../asset/shrimp.png";
-import egg from "../../asset/egg.png";
+import octopus from "../../assets/image/octopus_fishing.png";
+import salmon from "../../assets/image/salmon_fishing.png";
+import tuna from "../../assets/image/tuna_fishing.png";
+import eel from "../../assets/image/eel_fishing.png";
+import shrimp from "../../assets/image/shrimp_fishing.png";
+import octopusSashimi from "../../assets/image/octopus.png";
+import salmonSashimi from "../../assets/image/salmon.png";
+import tunaSashimi from "../../assets/image/tuna.png";
+import eelSashimi from "../../assets/image/eel.png";
+import shrimpSashimi from "../../assets/image/shrimp.png";
+import egg from "../../assets/image/egg.png";
+import { RESET_PLATE } from "../../constants";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -134,6 +135,7 @@ function Modal() {
 
   const closeModal = () => {
     dispatch({ type: "HIDE_MODAL"});
+    dispatch({ type: RESET_PLATE });
   };
 
   return createPortal(

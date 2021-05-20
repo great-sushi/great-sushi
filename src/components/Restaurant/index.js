@@ -1,9 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import customerImage from "../../asset/customer.png";
-import backgroundImage from "../../asset/background.jpg";
+import customerImage from "../../assets/image/customer.png";
+import backgroundImage from "../../assets/image/background.jpg";
 import Background from "./Background";
 import Customer from "./Customer";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  canvas {
+    background-image: url(${backgroundImage});
+    background-size: ${(props) => props.width}px ${(props) => props.height}px;
+  }
+`;
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -58,7 +66,7 @@ function Restaurant() {
 
     const update = () => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      background.draw(ctx);
+      // background.draw(ctx);
       customer.draw(ctx);
 
       animationRef.current = requestAnimationFrame(update);
@@ -67,12 +75,13 @@ function Restaurant() {
     const resize = () => {
       ctx.canvas.width = window.innerWidth;
       ctx.canvas.height = window.innerHeight * 0.55;
+      // ctx.scale(2, 2);
 
-      window.addEventListener("resize", resize);
     };
-
+    
+    window.addEventListener("resize", resize);
     update();
-    resize();
+    // resize();
 
     return () => {
       cancelAnimationFrame(animationRef.current);
@@ -81,10 +90,12 @@ function Restaurant() {
   }, [column, row]);
 
   return (
-    <canvas
-      id="canvas"
-      ref={canvasRef}
-    />
+    <Wrapper width={window.innerWidth} height={window.innerHeight * 1.1}>
+      <canvas
+        id="canvas"
+        ref={canvasRef}
+      />
+    </Wrapper>
   );
 }
 

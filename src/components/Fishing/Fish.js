@@ -1,12 +1,12 @@
-import tunaLeft from "../../asset/tuna_fishing_left.png";
-import tunaRight from "../../asset/tuna_fishing.png";
-import salmonLeft from "../../asset/salmon_fishing_left.png";
-import salmonRight from "../../asset/salmon_fishing.png";
-import eelLeft from "../../asset/eel_fishing_left.png";
-import eelRight from "../../asset/eel_fishing.png";
-import octopus from "../../asset/octopus_fishing.png";
-import shrimpLeft from "../../asset/shrimp_fishing_left.png";
-import shrimpRight from "../../asset/shrimp_fishing.png";
+import tunaLeft from "../../assets/image/tuna_fishing_left.png";
+import tunaRight from "../../assets/image/tuna_fishing.png";
+import salmonLeft from "../../assets/image/salmon_fishing_left.png";
+import salmonRight from "../../assets/image/salmon_fishing.png";
+import eelLeft from "../../assets/image/eel_fishing_left.png";
+import eelRight from "../../assets/image/eel_fishing.png";
+import octopus from "../../assets/image/octopus_fishing.png";
+import shrimpLeft from "../../assets/image/shrimp_fishing_left.png";
+import shrimpRight from "../../assets/image/shrimp_fishing.png";
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);

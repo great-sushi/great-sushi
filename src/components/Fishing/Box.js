@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Fish from "./Fish";
 import Hook from "./Hook";
-import tuna from "../../asset/tuna_fishing.png";
-import salmon from "../../asset/salmon_fishing.png";
-import ocean from "../../asset/ocean.jpg";
-import eel from "../../asset/eel_fishing.png";
-import octopus from "../../asset/octopus_fishing.png";
-import shrimp from "../../asset/shrimp_fishing.png";
-import hookImage from "../../asset/hook.png";
+import tuna from "../../assets/image/tuna_fishing.png";
+import salmon from "../../assets/image/salmon_fishing.png";
+import ocean from "../../assets/image/ocean.jpg";
+import eel from "../../assets/image/eel_fishing.png";
+import octopus from "../../assets/image/octopus_fishing.png";
+import shrimp from "../../assets/image/shrimp_fishing.png";
+import hookImage from "../../assets/image/hook.png";
 
 const Wrapper = styled.div`
   canvas {
@@ -198,14 +198,10 @@ function Box() {
     }
 
     const resize = () => {
-      const x = document.body.clientWidth;
-      const y = document.body.clientHeight;
-      ctx.canvas.width = x * 0.7;
-      ctx.canvas.height = y * 0.7;
-
+      ctx.canvas.width = document.body.clientWidth * 0.7;
+      ctx.canvas.height = document.body.clientHeight * 0.7;
       window.addEventListener("resize", resize);
     };
-
     update();
     resize();
 

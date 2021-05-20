@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { ADD_ORDER } from "../../constants";
-import leftSheet from "../../asset/sheet_left.png";
+import leftSheet from "../../assets/image/sheet_left.png";
 
 const Wrapper = styled.div`
   position: absolute;

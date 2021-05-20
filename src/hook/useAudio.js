@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Bgm from "../asset/bgm.mp3";
-import Countdown from "../asset/countdown.mp3"
-import Drop from "../asset/drop.mp3";
-import Splash from "../asset/splash.mp3";
-import Coughing from "../asset/coughing.mp3";
+import Bgm from "../assets/audio/bgm.mp3";
+import Countdown from "../assets/audio/countdown.mp3"
+import Drop from "../assets/audio/drop.mp3";
+import Splash from "../assets/audio/splash.mp3";
+import Coughing from "../assets/audio/coughing.mp3";
 
 const bgm = new Audio(Bgm);
 const countdown = new Audio(Countdown);
@@ -39,7 +39,7 @@ function useAudio(name, option) {
     } else {
       audio.pause();
     }
-  }, [isPlaying, audio]);
+  }, [isPlaying]);
 
   const playAudio = () => {
     audio.play();

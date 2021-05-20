@@ -7,7 +7,7 @@ import {
   SPICY,
   BLAND,
 } from "../../constants";
-import sheet from "../../asset/sheet.png";
+import sheet from "../../assets/image/sheet.png";
 import useAudio from "../../hook/useAudio";
 
 const Wrapper = styled.div`

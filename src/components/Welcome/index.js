@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import sushi from "../../asset/sushi.png";
+import sushi from "../../assets/image/sushi.png";
 import useAudio from "../../hook/useAudio";
 
 const Wrapper = styled.div`

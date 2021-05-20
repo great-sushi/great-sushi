@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import netImage from "../../asset/net.png";
+import netImage from "../../assets/image/net.png";
 
 const Wrapper = styled.div`
   canvas {
