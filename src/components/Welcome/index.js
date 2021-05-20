@@ -33,6 +33,7 @@ const Button = styled(Link)`
   border-radius: 0.5rem;
   color: black;
   text-decoration: none;
+  font-family: RixYeoljeongdo_Regular;
 `;
 
 function Welcome() {
