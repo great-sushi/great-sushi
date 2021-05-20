@@ -47,7 +47,7 @@ function Timer() {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
   const isCompleted = useSelector((state) => state.fishing.isCompleted);
-  const [, { playAudio, toggleAudio }] = useAudio("countdown");
+  const [, { playAudio, toggleAudio, restartAudio }] = useAudio("countdown");
   const location = useLocation();
 
   useEffect(() => {
@@ -58,6 +58,7 @@ function Timer() {
 
     const intervalId = setInterval(() => {
       if (seconds === 0) {
+        restartAudio();
         clearInterval(intervalId);
       } else {
         setSeconds(seconds - 1);
@@ -78,6 +79,7 @@ function Timer() {
           firstLinkButtonText: "나가기",
           secondLinkButtonText: "개점",
         }});
+        toggleAudio();
       } else {
         dispatch({ type: "SHOW_MODAL", content: {
           isVisible: true,
@@ -87,9 +89,8 @@ function Timer() {
           firstLinkButtonText: "나가기",
           secondLinkButtonText: "재도전",
         }});
+        toggleAudio();
       }
-
-      toggleAudio();
     } else {
       if (isCompleted) {
         dispatch({ type: "SHOW_MODAL", content: {
@@ -100,6 +101,7 @@ function Timer() {
           firstLinkButtonText: "나가기",
           secondLinkButtonText: "개점",
         }});
+        toggleAudio();
       }
     }
 
