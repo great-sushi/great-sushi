@@ -7,7 +7,8 @@ import Evaluation from "../Evaluation";
 import Revenue from "../Revenue";
 import Modal from "../Modal";
 import { useSelector, useDispatch } from "react-redux";
-import Customer from "../Customer";
+import Restaurant from "../Restaurant";
+import Option from "../Option";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -32,16 +33,19 @@ function Game() {
   }, []);
 
   return (
-    <Wrapper>
-      <Customer />
-      {modal.isVisible
-      && <Modal />}
-      {/* <Timer /> */}
-      {!sashimi.id && <Order />}
-      {sashimi.id && <Evaluation />}
-      <Revenue />
-      <Table />
-    </Wrapper>
+    <>
+      <Option />
+      <Wrapper>
+        <Restaurant />
+        {modal.isVisible
+        && <Modal />}
+        <Timer />
+        {!sashimi.id && <Order />}
+        {sashimi.id && <Evaluation />}
+        <Revenue />
+        <Table />
+      </Wrapper>
+    </>
   );
 }
 
