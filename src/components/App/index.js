@@ -25,7 +25,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Welcome} />
           <DndProvider backend={HTML5Backend}>
-            <Route path="/game" component={Game} />
+            <Route path="/sushi" component={Game} />
             <Route path="/result" component={Result} />
             <Route path="/fishing" component={Fishing} />
           </DndProvider>
