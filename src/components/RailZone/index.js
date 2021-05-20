@@ -23,9 +23,20 @@ function RailZone() {
       animationRef.current = requestAnimationFrame(update);
     }
 
-    update();
+    const resize = () => {
+      ctx.canvas.width = window.innerWidth;
+      ctx.canvas.height = window.innerHeight * 0.2;
 
-    return () => cancelAnimationFrame(animationRef.current);
+      window.addEventListener("resize", resize);
+    };
+
+    update();
+    resize();
+
+    return () => {
+      cancelAnimationFrame(animationRef.current);
+      window.removeEventListener("resize", resize);
+    };
   }, []);
 
   return (
