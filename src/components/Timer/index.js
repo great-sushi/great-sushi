@@ -75,7 +75,7 @@ function Timer() {
           isVisible: true,
           contentText: "성공하셨습니다! 그럼 개점해볼까요?",
           firstPath: "/",
-          secondPath: "/sushi",
+          secondPath: "/cooking",
           firstLinkButtonText: "나가기",
           secondLinkButtonText: "개점",
         }});
@@ -97,7 +97,7 @@ function Timer() {
           isVisible: true,
           contentText: "성공하셨습니다! 그럼 개점해볼까요?",
           firstPath: "/",
-          secondPath: "/sushi",
+          secondPath: "/cooking",
           firstLinkButtonText: "나가기",
           secondLinkButtonText: "개점",
         }});
