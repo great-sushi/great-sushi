@@ -27,6 +27,12 @@ const Wrapper = styled.div`
   top: 0;
   left: 0;
 
+  *, *::after, *::before {
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-app-region: no-drag;
+  }
+
   img {
     width: 80px;
     height: 40px;

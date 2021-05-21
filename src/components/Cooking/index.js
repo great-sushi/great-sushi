@@ -24,7 +24,7 @@ const Side = styled.div`
   top: 40px;
 `;
 
-function Game() {
+function Cooking() {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
   const { sashimi } = useSelector((state) => state.sushi);
@@ -35,7 +35,7 @@ function Game() {
       isVisible: true,
       contentText: "1분 안에 10,000원 이상을 벌어야 합니다. 마우스로 재료를 순서대로 드래그 해서 접시에 올려주세요. 주문대로 만들지 않으면 돈을 잃게 됩니다. 그럼 개점해볼까요?",
       firstPath: "/",
-      secondPath: "/sushi",
+      secondPath: "/cooking",
       firstLinkButtonText: "나가기",
       secondLinkButtonText: "시작",
       game: "sushi",
@@ -61,4 +61,4 @@ function Game() {
   );
 }
 
-export default Game;
+export default Cooking;

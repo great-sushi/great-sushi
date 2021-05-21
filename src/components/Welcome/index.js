@@ -11,6 +11,13 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  *, *::after, *::before {
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-app-region: no-drag;
+    cursor: default;
+  }
 `;
 
 const Title = styled.div`
@@ -34,6 +41,8 @@ const Button = styled(Link)`
   color: black;
   text-decoration: none;
   font-family: RixYeoljeongdo_Regular;
+
+  cursor: pointer;
 `;
 
 function Welcome() {

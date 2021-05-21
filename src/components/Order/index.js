@@ -17,6 +17,13 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 
+  *, *::after, *::before {
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-app-region: no-drag;
+    cursor: default;
+  }
+
   p {
     font-size: 30px;
     font-family: RixYeoljeongdo_Regular;

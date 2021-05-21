@@ -24,6 +24,13 @@ const Wrapper = styled.div`
   background-color: white;
   border: 5px solid black;
 
+  *, *::after, *::before {
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-app-region: no-drag;
+    cursor: default;
+  }
+
   &.danger {
     background-color: #e84118;
   }
@@ -75,7 +82,7 @@ function Timer() {
           isVisible: true,
           contentText: "성공하셨습니다! 그럼 개점해볼까요?",
           firstPath: "/",
-          secondPath: "/sushi",
+          secondPath: "/cooking",
           firstLinkButtonText: "나가기",
           secondLinkButtonText: "개점",
         }});
@@ -97,7 +104,7 @@ function Timer() {
           isVisible: true,
           contentText: "성공하셨습니다! 그럼 개점해볼까요?",
           firstPath: "/",
-          secondPath: "/sushi",
+          secondPath: "/cooking",
           firstLinkButtonText: "나가기",
           secondLinkButtonText: "개점",
         }});

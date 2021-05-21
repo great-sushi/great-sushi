@@ -5,7 +5,7 @@ import GlobalFonts from "../../styles/fonts";
 import GlobalStyles from "../../styles";
 import theme from "../../styles/theme";
 import Welcome from "../Welcome";
-import Game from "../Game";
+import Cooking from "../Cooking";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Result from "../Result";
@@ -25,7 +25,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Welcome} />
           <DndProvider backend={HTML5Backend}>
-            <Route path="/sushi" component={Game} />
+            <Route path="/cooking" component={Cooking} />
             <Route path="/result" component={Result} />
             <Route path="/fishing" component={Fishing} />
           </DndProvider>
