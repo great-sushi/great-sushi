@@ -65,6 +65,7 @@ const Item = styled.div`
 
   .wasabi {
     width: 80%;
+    cursor: pointer;
   }
 `;
 
@@ -91,6 +92,13 @@ const SushiContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+
+  *, *::after, *::before {
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-app-region: no-drag;
+    cursor: default;
+  }
 
   .rice {
     z-index: 3;
@@ -125,6 +133,13 @@ const Guide = styled.div`
   width: 50%;
   height: 100%;
 
+  *, *::after, *::before {
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-app-region: no-drag;
+    cursor: default;
+  }
+
   p {
     font-family: "RixYeoljeongdo_Regular";
     font-size: 30px;
@@ -149,6 +164,12 @@ const GaugeContainer = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-evenly;
+
+  *, *::after, *::before {
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-app-region: no-drag;
+  }
 `;
 
 const WasabiContainer = styled.div`
@@ -336,7 +357,7 @@ function Table() {
         <StackedSashimi sashimi={sashimi} />
         <StackedWasabi wasabi={wasabi} />
         <Plate>
-          <img src={plate} alt="plate" />
+          <img src={plate} alt="plate" draggable="false" />
         </Plate>
       </SushiContainer>
       <IngredientsWrapper>
@@ -349,6 +370,7 @@ function Table() {
                 src={wasabiImage}
                 alt="wasabi"
                 onClick={updatePercentage}
+                draggable="false"
               />
             </Item>
             {rice.id && wasabiOrder !== 0

@@ -24,6 +24,13 @@ const Wrapper = styled.div`
   background-color: white;
   border: 5px solid black;
 
+  *, *::after, *::before {
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-app-region: no-drag;
+    cursor: default;
+  }
+
   &.danger {
     background-color: #e84118;
   }
