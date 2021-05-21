@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import customerImage from "../../assets/image/customer.png";
 import backgroundImage from "../../assets/image/background.jpg";
-import Background from "./Background";
 import Customer from "./Customer";
 import styled from "styled-components";
 
@@ -61,12 +60,10 @@ function Restaurant() {
     ctx.canvas.width = window.innerWidth;
     ctx.canvas.height = window.innerHeight * 0.55;
 
-    const background = new Background(backgroundImage, ctx.canvas.width, ctx.canvas.height * 2);
     const customer = new Customer(customerImage, column, row);
 
     const update = () => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      // background.draw(ctx);
       customer.draw(ctx);
 
       animationRef.current = requestAnimationFrame(update);
@@ -75,13 +72,12 @@ function Restaurant() {
     const resize = () => {
       ctx.canvas.width = window.innerWidth;
       ctx.canvas.height = window.innerHeight * 0.55;
-      // ctx.scale(2, 2);
 
+      window.addEventListener("resize", resize);
     };
-    
-    window.addEventListener("resize", resize);
+
     update();
-    // resize();
+    resize();
 
     return () => {
       cancelAnimationFrame(animationRef.current);

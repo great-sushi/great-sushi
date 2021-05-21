@@ -19,7 +19,6 @@ const Wrapper = styled.div`
 const Side = styled.div`
   width: auto;
   height: auto;
-  border: 1px solid black;
   position: absolute;
   right: 130px;
   top: 40px;
