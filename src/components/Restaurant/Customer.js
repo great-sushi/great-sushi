@@ -6,8 +6,8 @@ class Customer {
     this.row = row;
     this.frameWidth = 159;
     this.frameHeight = 269;
-    this.additoryWidth = 400;
-    this.additoryHeight = 400;
+    this.additoryWidth = 200;
+    this.additoryHeight = 200;
   }
 
   draw(ctx) {
@@ -30,10 +30,10 @@ class Customer {
         this.row * this.frameHeight,
         this.frameWidth,
         this.frameHeight,
-        ctx.canvas.width / 2 - this.frameWidth / 2 - this.additoryWidth / 16,
-        ctx.canvas.height - this.frameHeight - this.additoryHeight / 8,
-        this.frameWidth + this.additoryWidth / 8,
-        this.frameHeight + this.additoryHeight / 8
+        ctx.canvas.width / 2 - this.frameWidth / 2 - this.additoryWidth / 8,
+        ctx.canvas.height - this.frameHeight - this.additoryHeight / 4,
+        this.frameWidth + this.additoryWidth / 4,
+        this.frameHeight + this.additoryHeight / 4
       );
     }
   }
