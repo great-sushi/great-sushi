@@ -67,7 +67,7 @@ const Content = styled.div`
 `;
 
 const LinkButton = styled(Link)`
-  width: 90px;
+  width: 110px;
   height: auto;
   padding: ${({ theme }) => theme.padding.small};
   border: 3px solid ${({ theme }) => theme.color.white};
