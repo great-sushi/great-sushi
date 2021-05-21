@@ -1,25 +1,43 @@
 import React, { useEffect, useRef } from "react";
-import Rectangle from "./Rail";
+import Rail from "./Rail";
+
+let startPoint = 0;
+let lowPoint= 100;
+let controlPoint = 50;
+let controlPointIn = -50;
 
 function RailZone() {
   const canvasRef = useRef(null);
+  const animationRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     ctx.canvas.width = window.innerWidth;
-    ctx.canvas.height = window.innerHeight * 0.45;
+    ctx.canvas.height = window.innerHeight * 0.2;
+
+    const rail = new Rail(startPoint, lowPoint, controlPoint, controlPointIn);
 
     const update = () => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      const rectangle = new Rectangle();
-      rectangle.draw(ctx, 700, 200);
-      requestAnimationFrame(update);
+      rail.draw(ctx);
+      animationRef.current = requestAnimationFrame(update);
     }
 
-    update();
+    const resize = () => {
+      ctx.canvas.width = window.innerWidth;
+      ctx.canvas.height = window.innerHeight * 0.2;
 
-    return () => cancelAnimationFrame(update);
+      window.addEventListener("resize", resize);
+    };
+
+    update();
+    resize();
+
+    return () => {
+      cancelAnimationFrame(animationRef.current);
+      window.removeEventListener("resize", resize);
+    };
   }, []);
 
   return (
@@ -30,4 +48,4 @@ function RailZone() {
   );
 }
 
-export default RailZone;
+export default React.memo(RailZone);

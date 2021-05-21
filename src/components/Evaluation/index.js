@@ -7,6 +7,8 @@ import {
   SPICY,
   BLAND,
 } from "../../constants";
+import sheet from "../../assets/image/sheet.png";
+import useAudio from "../../hook/useAudio";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -15,45 +17,52 @@ const Wrapper = styled.div`
   justify-content: space-evenly;
   flex-direction: column;
   border-radius: 8px;
-  left: 0;
-  right: 0;
-  top: 40px;
+  right: 24%;
+  top: 5%;
   margin-left: auto;
   margin-right: auto;
-  width: 400px;
-  height: 100px;
-  background-color: white;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  height: 200px;
+  background-image: url(${sheet});
+  background-size: cover;
 
   p {
-    font-size: 20px;
+    font-size: 30px;
+    font-family: RixYeoljeongdo_Regular;
+    padding: 0 20px 20px 20px;
+    text-align: center;
+    line-height: 1.3;
   }
 `;
 
 function Evaluation() {
   const { sashimiOrder, wasabiOrder } = useSelector((state) => state.order);
-  const { rice, sashimi, wasabis } = useSelector((state) => state.sushi);
+  const { rice, sashimi, wasabi } = useSelector((state) => state.sushi);
 
   const [evaluation, setEvaluation] = useState("");
+  const [, { playAudio, toggleAudio }] = useAudio("coughing");
 
   useEffect(() => {
     if (rice.id.length === 0) {
       setEvaluation("");
+      toggleAudio();
+      return;
     }
 
-    if (sashimiOrder.name === sashimi.id && wasabiOrder === wasabis.length) {
+    if (sashimiOrder.id === sashimi.id && wasabiOrder === wasabi.size) {
       setEvaluation(GOOD);
       return;
     }
 
-    if (sashimi.id.length && sashimiOrder.name !== sashimi.id) {
+    if (sashimi.id.length && sashimiOrder.id !== sashimi.id) {
       setEvaluation(WRONG_SUHSI);
       return;
     }
-    if (wasabiOrder < wasabis.length) {
+    if (wasabiOrder < wasabi.size) {
       setEvaluation(SPICY);
+      playAudio();
     }
-    if (rice.id.length && wasabiOrder > wasabis.length) {
+    if (rice.id.length && wasabiOrder > wasabi.size) {
       setEvaluation(BLAND);
     }
   }, [sashimi]);

@@ -1,57 +1,76 @@
 import React, {useState, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { PLUS_MONEY, MINUS_MONEY } from "../../constants";
 
 const Wrapper = styled.div`
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
   border-radius: 8px;
-  right: 30px;
-  top: 160px;
   width: 200px;
   height: 100px;
   background-color: white;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  border: 5px solid black;
+
+  h1 {
+    font-family: RixYeoljeongdo_Regular;
+  }
 
   p {
     font-size: 40px;
+    font-family: RixYeoljeongdo_Regular;
   }
 `;
 
 function Revenue() {
   const dispatch = useDispatch();
   const { sashimiOrder, wasabiOrder } = useSelector((state) => state.order);
-  const { rice, sashimi, wasabis } = useSelector((state) => state.sushi);
-  const { money } = useSelector((state) => state.revenue);
+  const { rice, sashimi, wasabi } = useSelector((state) => state.sushi);
+  const [revenue, setRevenue] = useState(0);
+  const modal = useSelector((state) => state.modal);
 
   useEffect(() => {
-    if (rice.id.length !== 0 && sashimiOrder.name === sashimi.id && wasabiOrder === wasabis.length) {
-      dispatch({ type: PLUS_MONEY, money: 1000 });
+    if (rice.id.length !== 0 && sashimiOrder.id === sashimi.id && wasabiOrder === wasabi.size) {
+      setRevenue((prev) => prev + sashimi.price);
       return;
     }
 
-    if (sashimi.id.length && sashimiOrder.name !== sashimi.id) {
-      dispatch({ type: MINUS_MONEY, money: 1000 });
+    if (sashimi.id.length && sashimiOrder.id !== sashimi.id) {
+      setRevenue((prev) => prev - 1000);
       return;
     }
-    if (wasabiOrder < wasabis.length) {
-      dispatch({ type: MINUS_MONEY, money: 500 });
+    if (wasabiOrder < wasabi.size) {
+      setRevenue((prev) => prev - sashimi.price / 2);
     }
-    if (rice.id.length && wasabiOrder > wasabis.length) {
-      dispatch({ type: MINUS_MONEY, money: 500 });
+    if (rice.id.length && wasabiOrder > wasabi.size) {
+      setRevenue((prev) => prev - sashimi.price / 2);
     }
   }, [sashimi]);
+
+  useEffect(() => {
+    if (revenue >= 10000) {
+      dispatch({ type: "SHOW_MODAL", content: {
+        isVisible: true,
+        contentText: "성공하셨습니다!",
+        firstPath: "/",
+        secondPath: "/fishing",
+        firstLinkButtonText: "나가기",
+        secondLinkButtonText: "다시하기",
+      }});
+    }
+
+    if (modal.isVisible) {
+      setRevenue(0);
+    }
+  }, [revenue, modal.isVisible]);
 
   return (
     <Wrapper>
       <h1>수익금</h1>
-      <p>{money}</p>
+      <p>{revenue}</p>
     </Wrapper>
   );
 }
 
-export default Revenue;
+export default React.memo(Revenue);

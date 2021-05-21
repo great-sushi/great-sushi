@@ -2,25 +2,27 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { ADD_ORDER } from "../../constants";
-import salmon from "../../asset/salmon.png";
-import tuna from "../../asset/tuna.png";
+import leftSheet from "../../assets/image/sheet_left.png";
 
 const Wrapper = styled.div`
   position: absolute;
+  border-radius: 8px;
+  left: 24%;
+  top: 5%;
+  width: 300px;
+  height: 200px;
+  background-image: url(${leftSheet});
+  background-size: cover;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  flex-direction: column;
-  border-radius: 8px;
-  left: 30px;
-  top: 40px;
-  width: 200px;
-  height: 100px;
-  background-color: white;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  justify-content: center;
 
   p {
-    font-size: 20px;
+    font-size: 30px;
+    font-family: RixYeoljeongdo_Regular;
+    padding: 0 20px 20px 20px;
+    text-align: center;
+    line-height: 1.3;
   }
 
   img {
@@ -30,17 +32,33 @@ const Wrapper = styled.div`
 
 const SASHIMIS = [
   {
-    name: "tuna",
-    link: tuna,
+    id: "tuna",
+    name: "참치",
   },
   {
-    name: "salmon",
-    link: salmon,
+    id: "salmon",
+    name: "연어",
+  },
+  {
+    id: "octopus",
+    name: "문어",
+  },
+  {
+    id: "eel",
+    name: "장어",
+  },
+  {
+    id: "shrimp",
+    name: "새우",
+  },
+  {
+    id: "egg",
+    name: "계란",
   },
 ];
 
-const randomWasabiCount = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1));
+const randomWasabiSize = () => {
+  return Math.floor(Math.random() * 11) * 10;
 };
 
 const randomSashimi = () => {
@@ -56,7 +74,7 @@ function Order() {
   useEffect(() => {
     if (sashimi.id.length === 0) {
       const sashimi = randomSashimi();
-      const wasabi = randomWasabiCount(0, 3);
+      const wasabi = randomWasabiSize();
 
       dispatch({ type: ADD_ORDER, sashimi, wasabi });
     }
@@ -64,11 +82,7 @@ function Order() {
 
   return (
     <Wrapper>
-      <img
-        src={sashimiOrder.link}
-        alt={sashimiOrder.name}
-      />
-      <p>{`와사비 ${wasabiOrder}`}</p>
+      <p>{`${sashimiOrder.name} 초밥 와사비 ${wasabiOrder}% 로 주세요`}</p>
     </Wrapper>
   );
 }

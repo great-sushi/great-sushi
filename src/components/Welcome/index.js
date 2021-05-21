@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import sushi from "../../asset/sushi.png";
+import sushi from "../../assets/image/sushi.png";
+import useAudio from "../../hook/useAudio";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -10,10 +11,6 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-`;
-
-const ButtonWrapper = styled.div`
-  padding: 1.5rem;
 `;
 
 const Title = styled.div`
@@ -36,21 +33,27 @@ const Button = styled(Link)`
   border-radius: 0.5rem;
   color: black;
   text-decoration: none;
+  font-family: RixYeoljeongdo_Regular;
 `;
 
 function Welcome() {
+  const [isPlaying, { toggleAudio, restartAudio }] = useAudio("bgm");
+
+  useEffect(() => {
+    if (isPlaying) {
+      toggleAudio();
+    }
+
+    restartAudio();
+  }, []);
+
   return (
     <Wrapper>
       <Image src={sushi} alt="sushi" />
       <Title>위대한 초밥</Title>
-      <ButtonWrapper>
-        <Button to="/guide">
-          게임방법
-        </Button>
-        <Button to="/game">
-          게임시작
-        </Button>
-      </ButtonWrapper>
+      <Button to="/fishing">
+        게임시작
+      </Button>
     </Wrapper>
   );
 }

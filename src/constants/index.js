@@ -5,10 +5,10 @@ export const RESET_PLATE = "RESET_PLATE";
 
 export const ADD_ORDER = "ADD_ORDER";
 
-export const GOOD = "딱 좋아";
-export const WRONG_SUHSI = "내가 주문한 게 아니야..";
-export const SPICY = "매워";
-export const BLAND = "싱겁";
+export const GOOD = "너무 맛있어요";
+export const WRONG_SUHSI = "제가 주문한 게 아닌 것 같은데요?";
+export const SPICY = "매워요!";
+export const BLAND = "싱거워요!";
 
 export const PLUS_MONEY = "PLUS_MONEY";
 export const MINUS_MONEY = "MINUS_MONEY";

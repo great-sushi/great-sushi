@@ -23,7 +23,12 @@ const initialState = {
       y: 0,
     }
   },
-  wasabis: [],
+  wasabi : {
+    id: "",
+    kind: "",
+    link: "",
+    size: 0,
+  }
 };
 
 const sushi = (state = initialState, action) => {
@@ -38,7 +43,11 @@ const sushi = (state = initialState, action) => {
       });
     case ADD_WASABI:
       return produce(state, (draft) => {
-        draft.wasabis.push(action.item);
+        draft.wasabi = action.item;
+      });
+    case "ADD_WASABI_SIZE":
+      return produce(state, (draft) => {
+        draft.wasabi.size = action.size;
       });
     case RESET_PLATE:
       return initialState;
