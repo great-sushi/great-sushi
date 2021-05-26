@@ -301,12 +301,12 @@ function Table() {
   const { rice, sashimi, wasabi } = useSelector(state => state.sushi);
   const wasabiOrder = useSelector(state => state.order.wasabiOrder);
   const [percentage, setPercentage] = useState(0);
-  const [, { playAudio }] = useAudio("drop");
+  const [, { repeatAudio }] = useAudio("drop");
 
   const [, drop] = useDrop({
     accept: "SushiIngredients",
     drop: (item) => {
-      playAudio();
+      repeatAudio();
 
       if (!rice.id && item.id === "rice") {
         dispatch({ type: ADD_RICE, item });
