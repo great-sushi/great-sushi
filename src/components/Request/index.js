@@ -62,7 +62,7 @@ function Request() {
   const [tunaCount, setTunaCount] = useState(0);
   const [eelCount, setEelCount] = useState(0);
   const [shrimpCount, setShrimpCount] = useState(0);
-  const [, { playAudio }] = useAudio("splash");
+  const [, { repeatAudio }] = useAudio("splash");
 
   useEffect(() => {
     if (fish.length === 0) {
@@ -94,7 +94,7 @@ function Request() {
         break;
     }
 
-    playAudio();
+    repeatAudio();
   }, [fish]);
 
   useEffect(() => {
