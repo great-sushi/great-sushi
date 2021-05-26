@@ -8,7 +8,7 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   canvas {
     background-image: url(${backgroundImage});
-    background-size: ${(props) => props.width}px ${(props) => props.height}px;
+    background-size: cover;
   }
 `;
 
@@ -86,7 +86,7 @@ function Restaurant() {
   }, [column, row]);
 
   return (
-    <Wrapper width={window.innerWidth} height={window.innerHeight * 1.1}>
+    <Wrapper>
       <canvas
         id="canvas"
         ref={canvasRef}
