@@ -45,7 +45,7 @@ function Fishing() {
 
   return (
     <>
-    <Option />
+      <Option />
       <Wrapper>
         {modal.isVisible
         && <Modal />}
