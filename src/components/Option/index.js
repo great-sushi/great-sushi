@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import audioOffImage from "../../assets/image/audio_off.png";
 import audioOnImage from "../../assets/image/audio_on.png";
 import useAudio from "../../hook/useAudio";
+import bgm from "../../assets/audio/bgm.mp3";
 
 const Wrapper = styled.div`
   width: auto;
@@ -12,19 +13,25 @@ const Wrapper = styled.div`
 `;
 
 function Option() {
-  const [isPlaying, { toggleAudio }] = useAudio("bgm");
-
-  const handleClick = () => {
-    toggleAudio();
-  };
+  const [isMuted, setIsMuted] = useState(false);
+  const toggleBgm = useCallback(() => {
+    setIsMuted(!isMuted);
+  }, [isMuted]);
 
   return (
     <Wrapper>
-      <img
-        src={isPlaying ? audioOnImage : audioOffImage}
-        alt="audio"
-        onClick={handleClick}
-      />
+      {bgm &&
+      <>
+        <audio loop autoPlay={true} muted={isMuted}>
+          <source src={bgm} type="audio/mpeg" />
+        </audio>
+        <img
+          src={isMuted ? audioOnImage : audioOffImage}
+          alt="audio"
+          onClick={toggleBgm}
+        />
+      </>
+      }
     </Wrapper>
   );
 }
