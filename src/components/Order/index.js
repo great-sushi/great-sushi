@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   height: 200px;
   background-image: url(${leftSheet});
   background-size: cover;
+  filter: sepia(100%) hue-rotate(30deg) saturate(700%);
   display: flex;
   align-items: center;
   justify-content: center;
