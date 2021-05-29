@@ -4,6 +4,7 @@ import {
   ADD_SASHIMI,
   ADD_WASABI,
   RESET_PLATE,
+  ADD_WASABI_SIZE,
 } from "../constants";
 
 const initialState = {
@@ -45,7 +46,7 @@ const sushi = (state = initialState, action) => {
       return produce(state, (draft) => {
         draft.wasabi = action.item;
       });
-    case "ADD_WASABI_SIZE":
+    case ADD_WASABI_SIZE:
       return produce(state, (draft) => {
         draft.wasabi.size = action.size;
       });
