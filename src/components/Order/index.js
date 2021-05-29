@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { ADD_ORDER } from "../../constants";
 import leftSheet from "../../assets/image/sheet_left.png";
+import { updateOrder } from "../../actions/cooking";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -84,7 +84,7 @@ function Order() {
       const sashimi = randomSashimi();
       const wasabi = randomWasabiSize();
 
-      dispatch({ type: ADD_ORDER, sashimi, wasabi });
+      dispatch(updateOrder({ sashimi, wasabi }));
     }
   }, [sashimi.id]);
 

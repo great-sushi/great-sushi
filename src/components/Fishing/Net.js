@@ -2,13 +2,13 @@ import React, { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import netImage from "../../assets/image/net.png";
+import { clearNet } from "../../actions/fishing";
 
 const Wrapper = styled.div`
   canvas {
     border-radius: 10px;
   }
 `;
-
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -38,7 +38,7 @@ function Net() {
 
   useEffect(() => {
     if (modal.isVisible) {
-      dispatch({ type: "CLEAR_FISH" });
+      dispatch(clearNet());
     }
   }, [modal.isVisible]);
 

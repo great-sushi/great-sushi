@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import { showModal } from "../../actions/modal";
 
 const Wrapper = styled.div`
   display: flex;
@@ -57,14 +58,14 @@ function Revenue() {
 
   useEffect(() => {
     if (revenue >= 10000) {
-      dispatch({ type: "SHOW_MODAL", content: {
+      dispatch(showModal({
         isVisible: true,
         contentText: "성공하셨습니다!",
         firstPath: "/",
         secondPath: "/fishing",
         firstLinkButtonText: "나가기",
         secondLinkButtonText: "다시하기",
-      }});
+      }));
     }
 
     if (modal.isVisible) {

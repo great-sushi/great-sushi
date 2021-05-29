@@ -11,15 +11,16 @@ import shrimp from "../../assets/image/shrimp.png";
 import wasabiImage from "../../assets/image/wasabi.png";
 import { useDrag, DragPreviewImage, useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  ADD_RICE,
-  ADD_SASHIMI,
-  ADD_WASABI,
-  RESET_PLATE,
-} from "../../constants";
 import RailZone from "../RailZone";
 import Gauge from "../Gauge";
 import useAudio from "../../hook/useAudio";
+import {
+  clearPlate,
+  updateRice,
+  updateSashimi,
+  updateWasabi,
+  updateWasabiSize,
+} from "../../actions/cooking";
 
 const CookingTable = styled.div`
   width: 100%;
@@ -309,12 +310,12 @@ function Table() {
       repeatAudio();
 
       if (!rice.id && item.id === "rice") {
-        dispatch({ type: ADD_RICE, item });
+        dispatch(updateRice(item));
       }
 
       if (rice.id && item.id !== "rice") {
         if (sashimi.id) return;
-        dispatch({ type: ADD_SASHIMI, item });
+        dispatch(updateSashimi(item));
       }
     }
   });
@@ -322,7 +323,7 @@ function Table() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (sashimi.id) {
-        dispatch({ type: RESET_PLATE });
+        dispatch(clearPlate());
         setPercentage(0);
       }
     }, 800);
@@ -335,10 +336,11 @@ function Table() {
 
     if (percentage < 100) {
       if (percentage === 0) {
-        dispatch({
-          type: ADD_WASABI,
-          item: { id: "wasabi", kink: "wasabi", link: wasabiImage }
-        });
+        dispatch(updateWasabi({
+          id: "wasabi",
+          kind: "wasabi",
+          link: wasabiImage,
+        }));
       }
 
       setPercentage((prev) => prev + 10);
@@ -346,7 +348,7 @@ function Table() {
   }
 
   useEffect(() => {
-    dispatch({ type: "ADD_WASABI_SIZE", size: percentage });
+    dispatch(updateWasabiSize(percentage));
   }, [percentage]);
 
   return (

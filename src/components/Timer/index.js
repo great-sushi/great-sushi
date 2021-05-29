@@ -4,6 +4,7 @@ import { useLocation } from "react-router";
 import styled, { keyframes } from "styled-components";
 import useAudio from "../../hook/useAudio";
 import { showModal } from "../../actions/modal";
+import { updateWasabiSize } from "../../actions/cooking";
 
 const pulse = keyframes`
   from {
@@ -102,7 +103,7 @@ function Timer() {
         }));
 
         if (location.pathname === "/cooking") {
-          dispatch({ type: "ADD_WASABI_SIZE", size: 0 });
+          dispatch(updateWasabiSize(0));
         }
       }
     } else {

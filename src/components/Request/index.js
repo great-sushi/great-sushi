@@ -7,6 +7,7 @@ import tuna from "../../assets/image/tuna_fishing.png";
 import eel from "../../assets/image/eel_fishing.png";
 import shrimp from "../../assets/image/shrimp_fishing.png";
 import useAudio from "../../hook/useAudio";
+import { completeRequest } from "../../actions/fishing";
 
 const Wrapper = styled.div`
   border: 5px solid black;
@@ -104,7 +105,7 @@ function Request() {
       && eelCount >= request.eel
       && shrimpCount >= request.shrimp
     ) {
-      dispatch({ type: "COMPLETE_REQUEST" });
+      dispatch(completeRequest());
     }
   }, [octopusCount, salmonCount, tunaCount, eelCount, shrimpCount]);
 

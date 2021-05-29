@@ -14,7 +14,8 @@ import tunaSashimi from "../../assets/image/tuna.png";
 import eelSashimi from "../../assets/image/eel.png";
 import shrimpSashimi from "../../assets/image/shrimp.png";
 import egg from "../../assets/image/egg.png";
-import { RESET_PLATE } from "../../constants";
+import { hideModal } from "../../actions/modal";
+import { clearPlate } from "../../actions/cooking";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -140,8 +141,8 @@ function Modal() {
   const modal = useSelector((state) => state.modal);
 
   const closeModal = () => {
-    dispatch({ type: "HIDE_MODAL"});
-    dispatch({ type: RESET_PLATE });
+    dispatch(hideModal());
+    dispatch(clearPlate());
   };
 
   return createPortal(
