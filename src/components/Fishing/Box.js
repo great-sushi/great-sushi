@@ -10,6 +10,7 @@ import eel from "../../assets/image/eel_fishing.png";
 import octopus from "../../assets/image/octopus_fishing.png";
 import shrimp from "../../assets/image/shrimp_fishing.png";
 import hookImage from "../../assets/image/hook.png";
+import { updateCaughtFish, updateRequest } from "../../actions/fishing";
 
 const Wrapper = styled.div`
   canvas {
@@ -115,7 +116,7 @@ function Box() {
       isHookCreated = false;
       if (caughtFish) {
         fishes.splice(caughtFishIndex, 1);
-        dispatch({ type: "CATCH_FISH", fish: caughtFish });
+        dispatch(updateCaughtFish(caughtFish));
         caughtFish = null;
         caughtFishIndex = null;
       }
@@ -160,16 +161,13 @@ function Box() {
 
     createFish(ctx);
 
-    dispatch({
-      type: "UPDATE_REQUEST",
-      request: {
-        tuna: getRandomInt(1, 5),
-        salmon: getRandomInt(1, 5),
-        eel: getRandomInt(1, 5),
-        shrimp: getRandomInt(1, 5),
-        octopus: getRandomInt(1, 3),
-      }
-    });
+    dispatch(updateRequest({
+      tuna: getRandomInt(1, 5),
+      salmon: getRandomInt(1, 5),
+      eel: getRandomInt(1, 5),
+      shrimp: getRandomInt(1, 5),
+      octopus: getRandomInt(1, 3),
+    }));
 
     const update = () => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);

@@ -15,3 +15,6 @@ export const MINUS_MONEY = "MINUS_MONEY";
 
 export const SHOW_MODAL = "SHOW_MODAL";
 export const HIDE_MODAL = "HIDE_MODAL";
+
+export const CATCH_FISH = "CATCH_FISH";
+export const UPDATE_REQUEST = "UPDATE_REQUEST";
