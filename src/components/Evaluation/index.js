@@ -25,14 +25,14 @@ const Wrapper = styled.div`
   height: 200px;
   background-image: url(${sheet});
   background-size: cover;
+`;
 
-  p {
-    font-size: 30px;
-    font-family: RixYeoljeongdo_Regular;
-    padding: 0 20px 20px 20px;
-    text-align: center;
-    line-height: 1.3;
-  }
+const Content = styled.p`
+  font-size: 30px;
+  font-family: RixYeoljeongdo_Regular;
+  padding: 0 20px 20px 20px;
+  text-align: center;
+  line-height: 1.3;
 `;
 
 function Evaluation() {
@@ -49,27 +49,33 @@ function Evaluation() {
       return;
     }
 
-    if (sashimiOrder.id === sashimi.id && wasabiOrder === wasabi.size) {
+    if (sashimiOrder.id === sashimi.id
+        && wasabiOrder === wasabi.size
+      ) {
       setEvaluation(GOOD);
       return;
     }
 
-    if (sashimi.id.length && sashimiOrder.id !== sashimi.id) {
+    if (sashimiOrder.id !== sashimi.id) {
       setEvaluation(WRONG_SUHSI);
       return;
     }
+
     if (wasabiOrder < wasabi.size) {
       setEvaluation(SPICY);
       playAudio();
     }
-    if (rice.id.length && wasabiOrder > wasabi.size) {
+
+    if (wasabiOrder > wasabi.size) {
       setEvaluation(BLAND);
     }
-  }, [sashimi]);
+  }, []);
 
   return (
     <Wrapper>
-      <p>{evaluation}</p>
+      <Content>
+        {evaluation}
+      </Content>
     </Wrapper>
   );
 }
