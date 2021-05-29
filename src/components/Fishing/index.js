@@ -7,6 +7,7 @@ import Net from "./Net";
 import Request from "../Request";
 import Modal from "../Modal";
 import Option from "../Option";
+import { showModal } from "../../actions/modal";
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,7 +32,7 @@ function Fishing() {
 
   useEffect(() => {
     if (!modal.isVisible) {
-      dispatch({ type: "SHOW_MODAL", content: {
+      dispatch(showModal({
         isVisible: true,
         contentText: "1분 안에 요청서에 맞게 마우스로 클릭하여 문어, 참치, 연어, 장어, 새우를 잡아주세요. 실패하면 가게 영업을 할 수 없습니다.",
         firstPath: "/",
@@ -39,7 +40,7 @@ function Fishing() {
         firstLinkButtonText: "나가기",
         secondLinkButtonText: "시작",
         game: "fishing",
-      }});
+      }));
     }
   }, []);
 

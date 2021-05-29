@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router";
 import styled, { keyframes } from "styled-components";
 import useAudio from "../../hook/useAudio";
+import { showModal } from "../../actions/modal";
 
 const pulse = keyframes`
   from {
@@ -54,18 +55,21 @@ function Timer() {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
   const isCompleted = useSelector((state) => state.fishing.isCompleted);
-  const [, { playAudio, toggleAudio, restartAudio }] = useAudio("countdown");
+  const [isPlaying, { playAudio, toggleAudio, restartAudio }] = useAudio("countdown");
   const location = useLocation();
 
   useEffect(() => {
     if (modal.isVisible) {
+      if (isPlaying) {
+        toggleAudio();
+      }
+      restartAudio();
       setSeconds(60);
       return;
     };
 
     const intervalId = setInterval(() => {
       if (seconds === 0) {
-        restartAudio();
         clearInterval(intervalId);
       } else {
         setSeconds(seconds - 1);
@@ -77,38 +81,44 @@ function Timer() {
     }
 
     if (seconds === 0) {
+      toggleAudio();
       if (isCompleted) {
-        dispatch({ type: "SHOW_MODAL", content: {
+        dispatch(showModal({
           isVisible: true,
           contentText: "성공하셨습니다! 그럼 개점해볼까요?",
           firstPath: "/",
           secondPath: "/cooking",
           firstLinkButtonText: "나가기",
           secondLinkButtonText: "개점",
-        }});
-        toggleAudio();
+        }));
       } else {
-        dispatch({ type: "SHOW_MODAL", content: {
+        dispatch(showModal({
           isVisible: true,
           contentText: "실패하셨습니다!",
           firstPath: "/",
           secondPath: location.pathname,
           firstLinkButtonText: "나가기",
           secondLinkButtonText: "재도전",
-        }});
-        toggleAudio();
+        }));
+
+        if (location.pathname === "/cooking") {
+          dispatch({ type: "ADD_WASABI_SIZE", size: 0 });
+        }
       }
     } else {
       if (isCompleted) {
-        dispatch({ type: "SHOW_MODAL", content: {
+        if (seconds < 6) {
+          toggleAudio();
+        }
+
+        dispatch(showModal({
           isVisible: true,
           contentText: "성공하셨습니다! 그럼 개점해볼까요?",
           firstPath: "/",
           secondPath: "/cooking",
           firstLinkButtonText: "나가기",
           secondLinkButtonText: "개점",
-        }});
-        toggleAudio();
+        }));
       }
     }
 
