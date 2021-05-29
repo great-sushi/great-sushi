@@ -9,7 +9,6 @@ import Modal from "../Modal";
 import { useSelector, useDispatch } from "react-redux";
 import Restaurant from "../Restaurant";
 import Option from "../Option";
-import useAudio from "../../hook/useAudio";
 import { showModal } from "../../actions/modal";
 
 const Wrapper = styled.div`
@@ -29,7 +28,6 @@ function Cooking() {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
   const { sashimi } = useSelector((state) => state.sushi);
-  const [, { playAudio }] = useAudio("bgm");
 
   useEffect(() => {
     dispatch(showModal({
@@ -41,8 +39,6 @@ function Cooking() {
       secondLinkButtonText: "시작",
       game: "sushi",
     }));
-
-    playAudio();
   }, []);
 
   return (
