@@ -12,3 +12,6 @@ export const BLAND = "싱거워요!";
 
 export const PLUS_MONEY = "PLUS_MONEY";
 export const MINUS_MONEY = "MINUS_MONEY";
+
+export const SHOW_MODAL = "SHOW_MODAL";
+export const HIDE_MODAL = "HIDE_MODAL";
