@@ -8,7 +8,6 @@ import Welcome from "../Welcome";
 import Cooking from "../Cooking";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import Result from "../Result";
 import Fishing from "../Fishing";
 
 const Wrapper = styled.div`
@@ -23,11 +22,10 @@ function App() {
         <GlobalStyles />
         <GlobalFonts />
         <Switch>
-          <Route exact path="/" component={Welcome} />
           <DndProvider backend={HTML5Backend}>
-            <Route path="/cooking" component={Cooking} />
-            <Route path="/result" component={Result} />
+            <Route exact path="/" component={Welcome} />
             <Route path="/fishing" component={Fishing} />
+            <Route path="/cooking" component={Cooking} />
           </DndProvider>
         </Switch>
       </ThemeProvider>
