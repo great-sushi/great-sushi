@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
-import plate from "../../assets/image/plate.png";
-import rice from "../../assets/image/rice.png";
-import salmon from "../../assets/image/salmon.png";
-import tuna from "../../assets/image/tuna.png";
-import octopus from "../../assets/image/octopus.png";
-import eel from "../../assets/image/eel.png";
-import egg from "../../assets/image/egg.png";
-import shrimp from "../../assets/image/shrimp.png";
-import wasabiImage from "../../assets/image/wasabi.png";
+import plate from "../../../assets/image/plate.png";
+import rice from "../../../assets/image/rice.png";
+import salmon from "../../../assets/image/salmon.png";
+import tuna from "../../../assets/image/tuna.png";
+import octopus from "../../../assets/image/octopus.png";
+import eel from "../../../assets/image/eel.png";
+import egg from "../../../assets/image/egg.png";
+import shrimp from "../../../assets/image/shrimp.png";
+import wasabiImage from "../../../assets/image/wasabi.png";
 import { useDrag, DragPreviewImage, useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import RailZone from "../RailZone";
 import Gauge from "../Gauge";
-import useAudio from "../../hook/useAudio";
+import useAudio from "../../../hook/useAudio";
 import {
   clearPlate,
   updateRice,
   updateSashimi,
   updateWasabi,
   updateWasabiSize,
-} from "../../actions/cooking";
+} from "../../../actions/cooking";
 
 const CookingTable = styled.div`
   width: 100%;

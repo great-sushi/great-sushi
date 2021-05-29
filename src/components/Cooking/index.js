@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import Table from "../Table";
-import Timer from "../Timer";
-import Order from "../Order";
-import Evaluation from "../Evaluation";
-import Revenue from "../Revenue";
-import Modal from "../Modal";
+import Table from "./Table";
+import Timer from "../Shared/Timer";
+import Order from "./Order";
+import Evaluation from "./Evaluation";
+import Revenue from "./Revenue";
+import Modal from "../Shared/Modal";
 import { useSelector, useDispatch } from "react-redux";
-import Restaurant from "../Restaurant";
-import Option from "../Option";
+import Restaurant from "./Restaurant";
+import Option from "../Shared/Option";
 import { showModal } from "../../actions/modal";
 
 const Wrapper = styled.div`

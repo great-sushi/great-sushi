@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import octopus from "../../assets/image/octopus_fishing.png";
-import salmon from "../../assets/image/salmon_fishing.png";
-import tuna from "../../assets/image/tuna_fishing.png";
-import eel from "../../assets/image/eel_fishing.png";
-import shrimp from "../../assets/image/shrimp_fishing.png";
-import useAudio from "../../hook/useAudio";
-import { completeRequest } from "../../actions/fishing";
+import octopus from "../../../assets/image/octopus_fishing.png";
+import salmon from "../../../assets/image/salmon_fishing.png";
+import tuna from "../../../assets/image/tuna_fishing.png";
+import eel from "../../../assets/image/eel_fishing.png";
+import shrimp from "../../../assets/image/shrimp_fishing.png";
+import useAudio from "../../../hook/useAudio";
+import { completeRequest } from "../../../actions/fishing";
 
 const Wrapper = styled.div`
   border: 5px solid black;

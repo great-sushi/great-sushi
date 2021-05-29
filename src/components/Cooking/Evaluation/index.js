@@ -6,9 +6,9 @@ import {
   WRONG_SUHSI,
   SPICY,
   BLAND,
-} from "../../constants";
-import sheet from "../../assets/image/sheet.png";
-import useAudio from "../../hook/useAudio";
+} from "../../../constants";
+import sheet from "../../../assets/image/sheet.png";
+import useAudio from "../../../hook/useAudio";
 
 const Wrapper = styled.div`
   position: absolute;

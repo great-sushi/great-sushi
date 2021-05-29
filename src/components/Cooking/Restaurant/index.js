@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import customerImage from "../../assets/image/customer.png";
-import backgroundImage from "../../assets/image/background.jpg";
+import customerImage from "../../../assets/image/customer.png";
+import backgroundImage from "../../../assets/image/background.jpg";
 import Customer from "./Customer";
 import styled from "styled-components";
 

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router";
 import styled, { keyframes } from "styled-components";
-import useAudio from "../../hook/useAudio";
-import { showModal } from "../../actions/modal";
-import { updateWasabiSize } from "../../actions/cooking";
+import useAudio from "../../../hook/useAudio";
+import { showModal } from "../../../actions/modal";
+import { updateWasabiSize } from "../../../actions/cooking";
 
 const pulse = keyframes`
   from {

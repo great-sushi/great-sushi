@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Box from "./Box";
-import Timer from "../Timer";
+import Timer from "../Shared/Timer";
 import Net from "./Net";
-import Request from "../Request";
-import Modal from "../Modal";
-import Option from "../Option";
+import Request from "./Request";
+import Modal from "../Shared/Modal";
+import Option from "../Shared/Option";
 import { showModal } from "../../actions/modal";
 
 const Wrapper = styled.div`

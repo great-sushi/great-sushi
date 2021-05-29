@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import leftSheet from "../../assets/image/sheet_left.png";
-import { updateOrder } from "../../actions/cooking";
+import leftSheet from "../../../assets/image/sheet_left.png";
+import { updateOrder } from "../../../actions/cooking";
 
 const Wrapper = styled.div`
   position: absolute;
