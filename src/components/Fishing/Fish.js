@@ -7,12 +7,7 @@ import eelRight from "../../assets/image/eel_fishing.png";
 import octopus from "../../assets/image/octopus_fishing.png";
 import shrimpLeft from "../../assets/image/shrimp_fishing_left.png";
 import shrimpRight from "../../assets/image/shrimp_fishing.png";
-
-const getRandomInt = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-};
+import { getRandomInt } from "../../utils";
 
 class Fish {
   constructor(name, x, y, width, height, src) {
@@ -33,9 +28,9 @@ class Fish {
     }
   }
 
-  update(ctx) {
+  update(ctx, width, height) {
     if (this.initDirection === 0) {
-      if (this.x < ctx.canvas.width) {
+      if (this.x < width) {
         if (this.width !== 80) {
           this.x++;
         }
@@ -68,15 +63,15 @@ class Fish {
         this.initDirection = 1;
 
         if (this.width === 80) {
-          this.y = ctx.canvas.height * 0.9;
+          this.y = height * 0.9;
         } else if (this.width === 90) {
-          this.y = getRandomInt(ctx.canvas.height * 0.4, ctx.canvas.height * 0.7);
+          this.y = getRandomInt(height * 0.4, height * 0.7);
         } else {
-          this.y = getRandomInt(ctx.canvas.height * 0.2, ctx.canvas.height * 0.7);
+          this.y = getRandomInt(height * 0.2, height * 0.7);
         }
       }
     } else {
-      if (this.x > -ctx.canvas.width * 0.1) {
+      if (this.x > - width * 0.1) {
         if (this.x !== 80) {
           this.x--;
         }
@@ -108,11 +103,11 @@ class Fish {
         this.initDirection = 0;
 
         if (this.width === 80) {
-          this.y = ctx.canvas.height * 0.9;
+          this.y = height * 0.9;
         } else if (this.width === 90) {
-          this.y = getRandomInt(ctx.canvas.height * 0.4, ctx.canvas.height * 0.7);
+          this.y = getRandomInt(height * 0.4, height * 0.7);
         } else {
-          this.y = getRandomInt(ctx.canvas.height * 0.2, ctx.canvas.height * 0.7);
+          this.y = getRandomInt(height * 0.2, height * 0.7);
         }
       }
     }
