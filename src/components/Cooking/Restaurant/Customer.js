@@ -10,16 +10,16 @@ class Customer {
     this.additoryHeight = 200;
   }
 
-  draw(ctx) {
-    if (ctx.canvas.width > 1440) {
+  draw(ctx, width, height) {
+    if (width > 1440) {
       ctx.drawImage(
         this.image,
         this.column * this.frameWidth,
         this.row * this.frameHeight,
         this.frameWidth,
         this.frameHeight,
-        ctx.canvas.width / 2 - this.frameWidth / 2 - this.additoryWidth / 2,
-        ctx.canvas.height - this.frameHeight - this.additoryHeight,
+        width / 2 - this.frameWidth / 2 - this.additoryWidth / 2,
+        height - this.frameHeight - this.additoryHeight,
         this.frameWidth + this.additoryWidth,
         this.frameHeight + this.additoryHeight
       );
@@ -30,8 +30,8 @@ class Customer {
         this.row * this.frameHeight,
         this.frameWidth,
         this.frameHeight,
-        ctx.canvas.width / 2 - this.frameWidth / 2 - this.additoryWidth / 8,
-        ctx.canvas.height - this.frameHeight - this.additoryHeight / 4,
+        width / 2 - this.frameWidth / 2 - this.additoryWidth / 8,
+        height - this.frameHeight - this.additoryHeight / 4,
         this.frameWidth + this.additoryWidth / 4,
         this.frameHeight + this.additoryHeight / 4
       );
