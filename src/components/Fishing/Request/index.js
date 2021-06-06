@@ -8,6 +8,7 @@ import eel from "../../../assets/image/eel_fishing.png";
 import shrimp from "../../../assets/image/shrimp_fishing.png";
 import useAudio from "../../../hook/useAudio";
 import { completeRequest } from "../../../actions/fishing";
+import produce from "immer";
 
 const Wrapper = styled.div`
   border: 5px solid black;
@@ -54,85 +55,134 @@ const Content = styled.div`
   }
 `;
 
+const fishList = [
+  {
+    id: "tuna",
+    link: tuna,
+    name: "참치",
+  },
+  {
+    id: "salmon",
+    link: salmon,
+    name: "연어",
+  },
+  {
+    id: "octopus",
+    link: octopus,
+    name: "문어",
+  },
+  {
+    id: "shrimp",
+    link: shrimp,
+    name: "새우",
+  },
+  {
+    id: "eel",
+    link: eel,
+    name: "장어",
+  },
+];
+
 function Request() {
   const dispatch = useDispatch();
   const request = useSelector((state) => state.fishing.request);
   const fish = useSelector((state) => state.fishing.fish);
-  const [octopusCount, setOctopusCount] = useState(0);
-  const [salmonCount, setSalmonCount] = useState(0);
-  const [tunaCount, setTunaCount] = useState(0);
-  const [eelCount, setEelCount] = useState(0);
-  const [shrimpCount, setShrimpCount] = useState(0);
   const [, { repeatAudio }] = useAudio("splash");
+  const [fishCount, setFishCount] = useState({
+    octopus: 0,
+    salmon: 0,
+    tuna: 0,
+    eel: 0,
+    shrimp: 0,
+  });
+
+  const renderCaughtFishCount = () => {
+    return fishList.map((fish) => (
+        <div key={fish.id}>
+          <img src={fish.link} alt={fish.id} />
+          <p>{`${fish.name} ${fishCount[fish.id]} / ${request[fish.id]} 개`}</p>
+        </div>
+      ));
+  };
 
   useEffect(() => {
     if (fish.length === 0) {
-      setOctopusCount(0);
-      setSalmonCount(0);
-      setTunaCount(0);
-      setEelCount(0);
-      setShrimpCount(0);
+      setFishCount({
+        octopus: 0,
+        salmon: 0,
+        tuna: 0,
+        eel: 0,
+        shrimp: 0,
+      });
       return;
     };
 
-    switch (fish[fish.length -1].name) {
+    switch (fish[fish.length - 1].name) {
       case "octopus":
-        setOctopusCount((prev) => prev + 1);
+        setFishCount(
+          produce((draft) => {
+            draft.octopus += 1;
+          })
+        );
         break;
       case "salmon":
-        setSalmonCount((prev) => prev + 1);
+        setFishCount(
+          produce((draft) => {
+            draft.salmon += 1;
+          })
+        );
         break;
       case "tuna":
-        setTunaCount((prev) => prev + 1);
+        setFishCount(
+          produce((draft) => {
+            draft.tuna += 1;
+          })
+        );
         break;
       case "eel":
-        setEelCount((prev) => prev + 1);
+        setFishCount(
+          produce((draft) => {
+            draft.eel += 1;
+          })
+        );
         break;
       case "shrimp":
-        setShrimpCount((prev) => prev + 1);
+        setFishCount(
+          produce((draft) => {
+            draft.shrimp += 1;
+          })
+        );
         break;
       default:
+        setFishCount({
+          octopus: 0,
+          salmon: 0,
+          tuna: 0,
+          eel: 0,
+          shrimp: 0,
+        });
         break;
     }
 
     repeatAudio();
-  }, [fish]);
+  }, [fish.length]);
 
   useEffect(() => {
-    if (octopusCount >= request.octopus
-      && salmonCount >= request.salmon
-      && tunaCount >= request.tuna
-      && eelCount >= request.eel
-      && shrimpCount >= request.shrimp
-    ) {
-      dispatch(completeRequest());
-    }
-  }, [octopusCount, salmonCount, tunaCount, eelCount, shrimpCount]);
+    if (fishCount.octopus >= request.octopus
+      && fishCount.salmon >= request.salmon
+      && fishCount.tuna >= request.tuna
+      && fishCount.eel >= request.eel
+      && fishCount.shrimp >= request.shrimp
+      ) {
+        dispatch(completeRequest());
+      }
+  }, [fishCount]);
 
   return (
     <Wrapper>
       <h1>요청서</h1>
       <Content>
-        <div>
-          <img src={octopus} alt="octopus" />
-          <p>{`문어 ${octopusCount} / ${request.octopus} 개`}</p>
-        </div>
-        <div>
-          <img src={salmon} alt="salmon" />
-          <p>{`연어 ${salmonCount} / ${request.salmon} 개`}</p>
-        </div>
-        <div>
-          <img src={tuna} alt="tuna" />
-          <p>{`참치 ${tunaCount} / ${request.tuna} 개`}</p>
-        </div>
-        <div>
-          <img src={eel} alt="eel" />
-          <p>{`장어 ${eelCount} / ${request.eel} 개`}</p>
-        </div>
-        <div>
-          <img src={shrimp} alt="shrimp" />
-          <p>{`새우 ${shrimpCount} / ${request.shrimp} 개`}</p>
-        </div>
+        {renderCaughtFishCount()}
       </Content>
     </Wrapper>
   );
