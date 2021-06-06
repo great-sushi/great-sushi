@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Fish from "./Fish";
@@ -11,6 +11,7 @@ import octopus from "../../assets/image/octopus_fishing.png";
 import shrimp from "../../assets/image/shrimp_fishing.png";
 import hookImage from "../../assets/image/hook.png";
 import { updateCaughtFish, updateRequest } from "../../actions/fishing";
+import { getRandomInt } from "../../utils";
 
 const Wrapper = styled.div`
   canvas {
@@ -19,12 +20,6 @@ const Wrapper = styled.div`
     background-position: bottom;
   }
 `;
-
-const getRandomInt = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-};
 
 let fishes;
 
@@ -156,10 +151,12 @@ function Box() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    ctx.canvas.width = document.body.clientWidth * 0.7;
-    ctx.canvas.height = document.body.clientHeight * 0.7;
+    const dpr = window.devicePixelRatio;
 
-    createFish(ctx);
+    let width = window.innerWidth * 0.7;
+    let height = window.innerHeight * 0.7;
+
+    createFish(ctx, width, height);
 
     dispatch(updateRequest({
       tuna: getRandomInt(1, 5),
@@ -170,7 +167,7 @@ function Box() {
     }));
 
     const update = () => {
-      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       if (fishingLine && fishingLine.endY > 20) {
         drawFishingLine(ctx);
@@ -189,17 +186,27 @@ function Box() {
       }
 
       for (let i = 0; i < fishes.length; i++) {
-        fishes[i].update(ctx);
+        fishes[i].update(ctx, width, height);
       }
 
       animationRef.current = requestAnimationFrame(update);
     }
 
     const resize = () => {
-      ctx.canvas.width = document.body.clientWidth * 0.7;
-      ctx.canvas.height = document.body.clientHeight * 0.7;
+      width = window.innerWidth * 0.7;
+      height = window.innerHeight * 0.7;
+
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+
+      ctx.scale(dpr, dpr);
+
       window.addEventListener("resize", resize);
     };
+
     update();
     resize();
 
