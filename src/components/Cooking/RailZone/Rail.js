@@ -9,24 +9,24 @@ class Rail {
     this.speed = 1.5;
   }
 
-  draw(ctx) {
+  draw(ctx, height) {
     x -= this.speed;
 
-    ctx.setTransform(1, 0, 0, 1, x, 0);
+    ctx.setTransform(2, 0, 0, 2, x, 0);
     ctx.beginPath();
 
     for (let i = 0; i < 40; i++) {
       ctx.fillStyle = "#c0ab5f";
       ctx.moveTo(this.startPoint + 100 * i, 0);
       ctx.lineTo(this.lowPoint + 100 * i, 0);
-      ctx.quadraticCurveTo(this.controlPoint + 100 * i, 40, this.lowPoint + 100 * i, ctx.canvas.height * 0.8);
-      ctx.lineTo(this.startPoint + 100 * i, ctx.canvas.height * 0.8);
+      ctx.quadraticCurveTo(this.controlPoint + 100 * i, 40, this.lowPoint + 100 * i, height);
+      ctx.lineTo(this.startPoint + 100 * i, height);
       ctx.quadraticCurveTo(this.controlPointIn + 100 * i, 40, this.startPoint + 100 * i, 0);
       ctx.fill();
       ctx.stroke();
     }
 
-    if (x <= - 99) {
+    if (x <= - 199) {
       x = 0;
     }
   }
