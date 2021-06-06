@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# 위대한 초밥
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p style="text-align: center;">
+  <img src="./readme-assets/main.png" width="640" />
+</p>
 
-## Available Scripts
+## 목차
+- [기획 동기](#기획-동기)
+- [기술 스택](#기술-스택)
+- [프로젝트 설명](#프로젝트-설명)
+   - [낚시](#낚시)
+   - [초밥 만들기](#초밥-만들기)
+- [작업 기간](작업-기간)
 
-In the project directory, you can run:
+<br>
 
-### `yarn start`
+## 기획 동기
+어릴적 즐겨 했던 슈의 라면게임, 고향만두와 같은 플래쉬 게임을 Canvas로 만들어 보고 싶었습니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<br>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 기술 스택
+- React
+- Redux
+- styled-components
+- Canvas
+- immer
 
-### `yarn test`
+<br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 프로젝트 설명
 
-### `yarn build`
+### 낚시
+<p style="text-align: center;">
+  <img src="./readme-assets/fishing-game-guide.png" width="640" />
+</p>
+📌 게임시작 버튼을 누를 시, 낚시 게임 가이드를 확인할 수 있습니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<p style="text-align: center;">
+  <img src="./readme-assets/fishing-game.png" width="640" />
+</p>
+📌  1분 안에 우측 랜덤 요청서에 따라 재료를 준비해야합니다.
+<br>📌  마우스 움직임에 따라 낚시줄이 이동합니다.
+<br>📌  움직이는 물고기를 클릭하면 낚을 수 있습니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br>
 
-### `yarn eject`
+### 초밥 만들기
+<p style="text-align: center;">
+  <img src="./readme-assets/cooking-game-guide.png" width="640" />
+</p>
+<br>📌  낚시 게임에서 성공하면, 초밥 가게를 개점할 수 있습니다.
+<br>📌  초밥의 종류와 가격, 게임 방법을 가이드에서 확인할 수 있습니다.
+<br>📌  손님은 총 6종의 초밥중 하나를 주문하게 됩니다.
+<br>📌 고추냉이 양은 0 ~ 100% 범위 안에서 요청합니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<p style="text-align: center;">
+  <img src="./readme-assets/cooking-game.png" width="640" />
+</p>
+<br>📌  사용자는 초밥 만들기 순서를 지켜야 합니다. ( 밥 → 고추냉이 → 회 )
+<br>📌  순서를 지키지 않으면 접시에 드랍할 수 없습니다.
+<br>📌  손님의 주문대로 초밥을 만들지 않는다면 수익금이 깎입니다.
+<br>📌  고추냉이를 요청보다 많거나 적게 올리면, 해당 초밥 가격의 반이 수익금에서 깎입니다.
+<br>📌  요청과 다른 초밥을 만들면, 1000원이 수익금에서 깎이게 됩니다.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<br>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## 작업 기간
+### **1주차**
+✔️ **아이디어 브레인스토밍** : ( 5월3일-4일 )
+<br>✔️ **기획**: ( 5월5일 )
+<br>✔️ **Task, Mock up 작성**: ( 5월6일 )
+<br>✔️ **이미지 제작**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### **2주차**
+✔️ **구조와 기능 구현**: ( 5월7일-15일 )
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### **3주차**
+✔️ **스타일**: ( 5월16일-21일 )
