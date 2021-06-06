@@ -7,15 +7,10 @@ import eelRight from "../../assets/image/eel_fishing.png";
 import octopus from "../../assets/image/octopus_fishing.png";
 import shrimpLeft from "../../assets/image/shrimp_fishing_left.png";
 import shrimpRight from "../../assets/image/shrimp_fishing.png";
-
-const getRandomInt = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-};
+import { getRandomInt } from "../../utils";
 
 class Fish {
-  constructor(name, x, y, width, height, src) {
+  constructor(name, x, y, width, height, src, initDirection) {
     this.name = name;
     this.x = x;
     this.y = y;
@@ -24,7 +19,7 @@ class Fish {
     this.image = new Image();
     this.image.src = src;
     this.velocity = Math.random() - 0.5;
-    this.initDirection = 0;
+    this.initDirection = initDirection;
   }
 
   render(ctx) {
@@ -33,86 +28,86 @@ class Fish {
     }
   }
 
-  update(ctx) {
+  update(ctx, width, height) {
     if (this.initDirection === 0) {
-      if (this.x < ctx.canvas.width) {
+      if (this.x < width) {
         if (this.width !== 80) {
           this.x++;
         }
 
-        if (this.width === 100) {
+        if (this.name === "tuna") {
           this.image.src = tunaRight;
           ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
 
-        if (this.width === 120) {
+        if (this.name === "salmon") {
           this.image.src = salmonRight;
           ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
 
-        if (this.width === 90) {
+        if (this.name === "eel") {
           this.image.src = eelRight;
           ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
 
-        if (this.width === 80) {
+        if (this.name === "octopus") {
           this.image.src = octopus;
           ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
 
-        if (this.width === 50) {
+        if (this.name === "shrimp") {
           this.image.src = shrimpRight;
           ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
       } else {
         this.initDirection = 1;
 
-        if (this.width === 80) {
-          this.y = ctx.canvas.height * 0.9;
-        } else if (this.width === 90) {
-          this.y = getRandomInt(ctx.canvas.height * 0.4, ctx.canvas.height * 0.7);
+        if (this.name === "octopus") {
+          this.y = height * 0.9;
+        } else if (this.name === "eel") {
+          this.y = getRandomInt(height * 0.4, height * 0.7);
         } else {
-          this.y = getRandomInt(ctx.canvas.height * 0.2, ctx.canvas.height * 0.7);
+          this.y = getRandomInt(height * 0.2, height * 0.7);
         }
       }
     } else {
-      if (this.x > -ctx.canvas.width * 0.1) {
+      if (this.x > - width * 0.1) {
         if (this.x !== 80) {
           this.x--;
         }
-        if (this.width === 100) {
+        if (this.name === "tuna") {
           this.image.src = tunaLeft;
           ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
 
-        if (this.width === 120) {
+        if (this.name === "salmon") {
           this.image.src = salmonLeft;
           ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
 
-        if (this.width === 90) {
+        if (this.name === "eel") {
           this.image.src = eelLeft;
           ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
 
-        if (this.width === 80) {
+        if (this.name === "octopus") {
           this.image.src = octopus;
           ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
 
-        if (this.width === 50) {
+        if (this.name === "shrimp") {
           this.image.src = shrimpLeft;
           ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         }
       } else {
         this.initDirection = 0;
 
-        if (this.width === 80) {
-          this.y = ctx.canvas.height * 0.9;
-        } else if (this.width === 90) {
-          this.y = getRandomInt(ctx.canvas.height * 0.4, ctx.canvas.height * 0.7);
+        if (this.name === "octopus") {
+          this.y = height * 0.9;
+        } else if (this.name === "eel") {
+          this.y = getRandomInt(height * 0.4, height * 0.7);
         } else {
-          this.y = getRandomInt(ctx.canvas.height * 0.2, ctx.canvas.height * 0.7);
+          this.y = getRandomInt(height * 0.2, height * 0.7);
         }
       }
     }

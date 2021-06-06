@@ -1,4 +1,5 @@
 import produce from "immer";
+import { SHOW_MODAL, HIDE_MODAL } from "../constants";
 
 const initialState = {
   isVisible: false,
@@ -12,9 +13,9 @@ const initialState = {
 
 const modal = (state = initialState, action) => {
   switch (action.type) {
-    case "SHOW_MODAL":
+    case SHOW_MODAL:
       return produce(state, () => action.content);
-    case "HIDE_MODAL":
+    case HIDE_MODAL:
       return initialState;
     default:
       return state;

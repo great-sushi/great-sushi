@@ -1,4 +1,10 @@
 import produce from "immer";
+import {
+  UPDATE_REQUEST,
+  CATCH_FISH,
+  COMPLETE_REQUEST,
+  CLEAR_NET,
+} from "../constants";
 
 const initialState = {
   request: {
@@ -14,19 +20,19 @@ const initialState = {
 
 const fishing = (state = initialState, action) => {
   switch (action.type) {
-    case "UPDATE_REQUEST":
+    case UPDATE_REQUEST:
       return produce(state, (draft) => {
         draft.request = action.request;
       });
-    case "CATCH_FISH":
+    case CATCH_FISH:
       return produce(state, (draft) => {
-        draft.fish.push(action.fish);
+        draft.fish.push(action.caughtFish);
       });
-    case "COMPLETE_REQUEST":
+    case COMPLETE_REQUEST:
       return produce(state, (draft) => {
         draft.isCompleted = true;
       });
-    case "CLEAR_FISH":
+    case CLEAR_NET:
       return initialState;
     default:
       return state;

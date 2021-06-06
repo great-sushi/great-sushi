@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Fish from "./Fish";
@@ -10,6 +10,8 @@ import eel from "../../assets/image/eel_fishing.png";
 import octopus from "../../assets/image/octopus_fishing.png";
 import shrimp from "../../assets/image/shrimp_fishing.png";
 import hookImage from "../../assets/image/hook.png";
+import { updateCaughtFish, updateRequest } from "../../actions/fishing";
+import { getRandomInt } from "../../utils";
 
 const Wrapper = styled.div`
   canvas {
@@ -19,27 +21,21 @@ const Wrapper = styled.div`
   }
 `;
 
-const getRandomInt = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-};
-
 let fishes;
 
-const createFish = (ctx) => {
+const createFish = (ctx, width, height) => {
   for (let i = 0; i < 6; i++) {
-    fishes.push(new Fish("tuna", getRandomInt(0, ctx.canvas.width / 2), getRandomInt(ctx.canvas.height * 0.2, ctx.canvas.height * 0.7), 100, 30, tuna));
-    fishes.push(new Fish("salmon", getRandomInt(ctx.canvas.width / 2, ctx.canvas.width), getRandomInt(ctx.canvas.height * 0.2, ctx.canvas.height * 0.7), 120, 30, salmon));
-    fishes.push(new Fish("eel", getRandomInt(0, ctx.canvas.width), getRandomInt(ctx.canvas.height * 0.4, ctx.canvas.height * 0.7), 90, 30, eel));
+    fishes.push(new Fish("tuna", getRandomInt(0, width / 2), getRandomInt(height * 0.2, height * 0.7), 100, 30, tuna));
+    fishes.push(new Fish("salmon", getRandomInt(width / 2, width), getRandomInt(height * 0.2, height * 0.7), 120, 30, salmon));
+    fishes.push(new Fish("eel", getRandomInt(0, width), getRandomInt(height * 0.4, height * 0.7), 90, 30, eel));
   }
 
   for (let i = 0; i < 4; i++) {
-    fishes.push(new Fish("octopus", getRandomInt(-10, ctx.canvas.width), ctx.canvas.height * 0.9, 80, 40, octopus));
+    fishes.push(new Fish("octopus", getRandomInt(-10, width), height * 0.9, 80, 40, octopus));
   }
 
   for (let i = 0; i < 10; i++) {
-    fishes.push(new Fish("shrimp", getRandomInt(-10, ctx.canvas.width), getRandomInt(ctx.canvas.height * 0.2, ctx.canvas.height * 0.7), 50, 30, shrimp));
+    fishes.push(new Fish("shrimp", getRandomInt(-10, width), getRandomInt(height * 0.2, height * 0.7), 50, 30, shrimp));
   }
 
   for (let i = 0; i < fishes.length; i++) {
@@ -115,7 +111,7 @@ function Box() {
       isHookCreated = false;
       if (caughtFish) {
         fishes.splice(caughtFishIndex, 1);
-        dispatch({ type: "CATCH_FISH", fish: caughtFish });
+        dispatch(updateCaughtFish(caughtFish));
         caughtFish = null;
         caughtFishIndex = null;
       }
@@ -155,24 +151,23 @@ function Box() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    ctx.canvas.width = document.body.clientWidth * 0.7;
-    ctx.canvas.height = document.body.clientHeight * 0.7;
+    const dpr = window.devicePixelRatio;
 
-    createFish(ctx);
+    let width = window.innerWidth * 0.7;
+    let height = window.innerHeight * 0.7;
 
-    dispatch({
-      type: "UPDATE_REQUEST",
-      request: {
-        tuna: getRandomInt(1, 5),
-        salmon: getRandomInt(1, 5),
-        eel: getRandomInt(1, 5),
-        shrimp: getRandomInt(1, 5),
-        octopus: getRandomInt(1, 3),
-      }
-    });
+    createFish(ctx, width, height);
+
+    dispatch(updateRequest({
+      tuna: getRandomInt(1, 5),
+      salmon: getRandomInt(1, 5),
+      eel: getRandomInt(1, 5),
+      shrimp: getRandomInt(1, 5),
+      octopus: getRandomInt(1, 3),
+    }));
 
     const update = () => {
-      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       if (fishingLine && fishingLine.endY > 20) {
         drawFishingLine(ctx);
@@ -191,17 +186,27 @@ function Box() {
       }
 
       for (let i = 0; i < fishes.length; i++) {
-        fishes[i].update(ctx);
+        fishes[i].update(ctx, width, height);
       }
 
       animationRef.current = requestAnimationFrame(update);
     }
 
     const resize = () => {
-      ctx.canvas.width = document.body.clientWidth * 0.7;
-      ctx.canvas.height = document.body.clientHeight * 0.7;
+      width = window.innerWidth * 0.7;
+      height = window.innerHeight * 0.7;
+
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+
+      ctx.scale(dpr, dpr);
+
       window.addEventListener("resize", resize);
     };
+
     update();
     resize();
 
