@@ -10,7 +10,7 @@ import shrimpRight from "../../assets/image/shrimp_fishing.png";
 import { getRandomInt } from "../../utils";
 
 class Fish {
-  constructor(name, x, y, width, height, src) {
+  constructor(name, x, y, width, height, src, initDirection) {
     this.name = name;
     this.x = x;
     this.y = y;
@@ -19,7 +19,7 @@ class Fish {
     this.image = new Image();
     this.image.src = src;
     this.velocity = Math.random() - 0.5;
-    this.initDirection = 0;
+    this.initDirection = initDirection;
   }
 
   render(ctx) {
