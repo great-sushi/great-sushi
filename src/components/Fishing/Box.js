@@ -23,19 +23,19 @@ const Wrapper = styled.div`
 
 let fishes;
 
-const createFish = (ctx) => {
+const createFish = (ctx, width, height) => {
   for (let i = 0; i < 6; i++) {
-    fishes.push(new Fish("tuna", getRandomInt(0, ctx.canvas.width / 2), getRandomInt(ctx.canvas.height * 0.2, ctx.canvas.height * 0.7), 100, 30, tuna));
-    fishes.push(new Fish("salmon", getRandomInt(ctx.canvas.width / 2, ctx.canvas.width), getRandomInt(ctx.canvas.height * 0.2, ctx.canvas.height * 0.7), 120, 30, salmon));
-    fishes.push(new Fish("eel", getRandomInt(0, ctx.canvas.width), getRandomInt(ctx.canvas.height * 0.4, ctx.canvas.height * 0.7), 90, 30, eel));
+    fishes.push(new Fish("tuna", getRandomInt(0, width / 2), getRandomInt(height * 0.2, height * 0.7), 100, 30, tuna));
+    fishes.push(new Fish("salmon", getRandomInt(width / 2, width), getRandomInt(height * 0.2, height * 0.7), 120, 30, salmon));
+    fishes.push(new Fish("eel", getRandomInt(0, width), getRandomInt(height * 0.4, height * 0.7), 90, 30, eel));
   }
 
   for (let i = 0; i < 4; i++) {
-    fishes.push(new Fish("octopus", getRandomInt(-10, ctx.canvas.width), ctx.canvas.height * 0.9, 80, 40, octopus));
+    fishes.push(new Fish("octopus", getRandomInt(-10, width), height * 0.9, 80, 40, octopus));
   }
 
   for (let i = 0; i < 10; i++) {
-    fishes.push(new Fish("shrimp", getRandomInt(-10, ctx.canvas.width), getRandomInt(ctx.canvas.height * 0.2, ctx.canvas.height * 0.7), 50, 30, shrimp));
+    fishes.push(new Fish("shrimp", getRandomInt(-10, width), getRandomInt(height * 0.2, height * 0.7), 50, 30, shrimp));
   }
 
   for (let i = 0; i < fishes.length; i++) {
