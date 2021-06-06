@@ -120,21 +120,107 @@ const Request = styled.div`
 const Menu = styled.div`
   width: 80%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-wrap: wrap;
 
   div {
+    flex: 1 0 30%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin: 10px 0;
+    margin: 8px 0;
   }
 
   img {
     margin: 5px;
   }
 `;
+
+const FISHES = [
+  {
+    id: "octopus",
+    name: "문어",
+    link: octopus,
+  },
+  {
+    id: "salmon",
+    name: "연어",
+    link: salmon,
+  },
+  {
+    id: "tuna",
+    name: "참치",
+    link: tuna,
+  },
+  {
+    id: "eel",
+    name: "장어",
+    link: eel,
+  },
+  {
+    id: "shrimp",
+    name: "새우",
+    link: shrimp,
+  },
+];
+
+const SUSHIES = [
+  {
+    id: "octopus",
+    name: "문어",
+    link: octopusSashimi,
+    price: "600",
+  },
+  {
+    id: "salmon",
+    name: "연어",
+    link: salmonSashimi,
+    price: "800",
+  },
+  {
+    id: "tuna",
+    name: "참치",
+    link: tunaSashimi,
+    price: "1,000",
+  },
+  {
+    id: "eel",
+    name: "장어",
+    link: eelSashimi,
+    price: "1,200",
+  },
+  {
+    id: "shrimp",
+    name: "새우",
+    link: shrimpSashimi,
+    price: "700",
+  },
+  {
+    id: "egg",
+    name: "계란",
+    link: egg,
+    price: "500",
+  },
+];
+
+const renderFishKind = () => {
+  return FISHES.map((fish) => (
+    <div>
+      <img src={fish.link} alt={fish.id} />
+      <span>{fish.name}</span>
+    </div>
+  ));
+};
+
+const renderSushiMenu = () => {
+  return SUSHIES.map((sushi) => (
+    <div>
+      <img src={sushi.link} alt={sushi.id} />
+      <span>{sushi.name}</span>
+      <span>{`${sushi.price}원`}</span>
+    </div>
+  ));
+};
 
 function Modal() {
   const dispatch = useDispatch();
@@ -154,67 +240,15 @@ function Modal() {
           </p>
           {modal.game === "fishing"
           &&
-            (<Request>
-              <div>
-                <img src={octopus} alt="octopus" />
-                <span>문어</span>
-              </div>
-              <div>
-                <img src={salmon} alt="salmon" />
-                <span>연어</span>
-              </div>
-              <div>
-                <img src={tuna} alt="tuna" />
-                <span>참치</span>
-              </div>
-              <div>
-                <img src={eel} alt="eel" />
-                <span>장어</span>
-              </div>
-              <div>
-                <img src={shrimp} alt="shrimp" />
-                <span>새우</span>
-              </div>
-            </Request>)
+            <Request>
+              {renderFishKind()}
+            </Request>
           }
           {modal.game === "sushi"
           &&
-          <>
-          <Menu>
-            <div>
-              <img src={octopusSashimi} alt="octopus" />
-              <span>문어</span>
-              <span>600원</span>
-            </div>
-            <div>
-              <img src={salmonSashimi} alt="salmon" />
-              <span>연어</span>
-              <span>800원</span>
-            </div>
-            <div>
-              <img src={tunaSashimi} alt="tuna" />
-              <span>참치</span>
-              <span>1,000원</span>
-            </div>
-          </Menu>
-          <Menu>
-            <div>
-              <img src={eelSashimi} alt="eel" />
-              <span>장어</span>
-              <span>1,200원</span>
-            </div>
-            <div>
-              <img src={shrimpSashimi} alt="shrimp" />
-              <span>새우</span>
-              <span>700원</span>
-            </div>
-            <div>
-              <img src={egg} alt="egg" />
-              <span>계란</span>
-              <span>500원</span>
-            </div>
-          </Menu>
-          </>
+            <Menu>
+              {renderSushiMenu()}
+            </Menu>
           }
           <LinkButtonWrapper>
             <LinkButton
