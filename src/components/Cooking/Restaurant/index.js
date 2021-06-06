@@ -4,6 +4,7 @@ import customerImage from "../../../assets/image/customer.png";
 import backgroundImage from "../../../assets/image/background.jpg";
 import Customer from "./Customer";
 import styled from "styled-components";
+import { getRandomInt } from "../../../utils";
 
 const Wrapper = styled.div`
   canvas {
@@ -11,12 +12,6 @@ const Wrapper = styled.div`
     background-size: cover;
   }
 `;
-
-const getRandomInt = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
 
 const rows = [0, 1];
 const columns = [0, 3, 6, 9];
@@ -57,21 +52,31 @@ function Restaurant() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    ctx.canvas.width = window.innerWidth;
-    ctx.canvas.height = window.innerHeight * 0.55;
+    const dpr = window.devicePixelRatio;
+
+    let width = window.innerWidth;
+    let height = window.innerHeight * 0.55;
 
     const customer = new Customer(customerImage, column, row);
 
     const update = () => {
-      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      customer.draw(ctx);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      customer.draw(ctx, width, height);
 
       animationRef.current = requestAnimationFrame(update);
     }
 
     const resize = () => {
-      ctx.canvas.width = window.innerWidth;
-      ctx.canvas.height = window.innerHeight * 0.55;
+      width = window.innerWidth;
+      height = window.innerHeight * 0.55;
+
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+
+      ctx.scale(dpr, dpr);
 
       window.addEventListener("resize", resize);
     };

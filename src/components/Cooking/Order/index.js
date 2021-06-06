@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import leftSheet from "../../../assets/image/sheet_left.png";
 import { updateOrder } from "../../../actions/cooking";
+import { getRandomInt } from "../../../utils";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -65,15 +66,6 @@ const SASHIMIS = [
   },
 ];
 
-const randomWasabiSize = () => {
-  return Math.floor(Math.random() * 11) * 10;
-};
-
-const randomSashimi = () => {
-  const randomIndex = Math.floor(Math.random() * SASHIMIS.length);
-  return SASHIMIS[randomIndex];
-};
-
 function Order() {
   const dispatch = useDispatch();
   const { sashimiOrder, wasabiOrder } = useSelector((state) => state.order);
@@ -81,8 +73,9 @@ function Order() {
 
   useEffect(() => {
     if (sashimi.id.length === 0) {
-      const sashimi = randomSashimi();
-      const wasabi = randomWasabiSize();
+      const randomIndex = getRandomInt(0, SASHIMIS.length - 1);
+      const sashimi = SASHIMIS[randomIndex];
+      const wasabi = getRandomInt(0, 10) * 10;
 
       dispatch(updateOrder({ sashimi, wasabi }));
     }
