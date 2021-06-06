@@ -31,6 +31,15 @@ const Wrapper = styled.div`
   }
 `;
 
+const Title = styled.h1`
+  font-family: RixYeoljeongdo_Regular;
+`;
+
+const Text = styled.p`
+  font-size: 40px;
+  font-family: RixYeoljeongdo_Regular;
+`;
+
 function Revenue() {
   const dispatch = useDispatch();
   const { sashimiOrder, wasabiOrder } = useSelector((state) => state.order);
@@ -75,8 +84,8 @@ function Revenue() {
 
   return (
     <Wrapper>
-      <h1>수익금</h1>
-      <p>{revenue}</p>
+      <Title>수익금</Title>
+      <Text>{revenue}</Text>
     </Wrapper>
   );
 }
