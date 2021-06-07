@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Fish from "./Fish";
@@ -12,6 +12,7 @@ import shrimp from "../../assets/image/shrimp_fishing.png";
 import hookImage from "../../assets/image/hook.png";
 import { updateCaughtFish, updateRequest } from "../../actions/fishing";
 import { getRandomInt } from "../../utils";
+import useCanvas from "../../hooks/useCanvas";
 
 const Wrapper = styled.div`
   canvas {
@@ -23,23 +24,19 @@ const Wrapper = styled.div`
 
 let fishes;
 
-const createFish = (ctx, width, height) => {
+const createFish = (width, height) => {
   for (let i = 0; i < 6; i++) {
-    fishes.push(new Fish("tuna", getRandomInt(0, width / 2), getRandomInt(height * 0.2, height * 0.7), 100, 30, tuna));
-    fishes.push(new Fish("salmon", getRandomInt(width / 2, width), getRandomInt(height * 0.2, height * 0.7), 120, 30, salmon));
-    fishes.push(new Fish("eel", getRandomInt(0, width), getRandomInt(height * 0.4, height * 0.7), 90, 30, eel));
+    fishes.push(new Fish("tuna", getRandomInt(0, width / 2), getRandomInt(height * 0.2, height * 0.7), 100, 30, tuna, getRandomInt(0, 1)));
+    fishes.push(new Fish("salmon", getRandomInt(width / 2, width), getRandomInt(height * 0.2, height * 0.7), 120, 30, salmon, getRandomInt(0, 1)));
+    fishes.push(new Fish("eel", getRandomInt(0, width), getRandomInt(height * 0.4, height * 0.7), 90, 30, eel, getRandomInt(0, 1)));
   }
 
   for (let i = 0; i < 4; i++) {
-    fishes.push(new Fish("octopus", getRandomInt(-10, width), height * 0.9, 80, 40, octopus));
+    fishes.push(new Fish("octopus", getRandomInt(-10, width), height * 0.9, 80, 40, octopus, getRandomInt(0, 1)));
   }
 
   for (let i = 0; i < 10; i++) {
-    fishes.push(new Fish("shrimp", getRandomInt(-10, width), getRandomInt(height * 0.2, height * 0.7), 50, 30, shrimp));
-  }
-
-  for (let i = 0; i < fishes.length; i++) {
-    fishes[i].render(ctx);
+    fishes.push(new Fish("shrimp", getRandomInt(-10, width), getRandomInt(height * 0.2, height * 0.7), 50, 30, shrimp, getRandomInt(0, 1)));
   }
 };
 
@@ -97,8 +94,6 @@ const detectClick = () => {
 };
 
 function Box() {
-  const canvasRef = useRef(null);
-  const animationRef = useRef(null);
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
   fishes = [];
@@ -146,17 +141,34 @@ function Box() {
     intervalId = setInterval(() => {
       decreaseHookPosition(fishingLine.endX, fishingLine.endY, fishingLine.startX, fishingLine.startY);
     }, 100);
-  }
+  };
+
+  const draw = (ctx, height, width) => {
+    if (fishingLine && fishingLine.endY > 20) {
+      drawFishingLine(ctx);
+    }
+
+    if (!isHookCreated) {
+      clearInterval(intervalId);
+    }
+
+    if (isHookCreated) {
+      detectClick();
+      if (caughtFish) {
+        catchFish(ctx);
+        hook.render(ctx);
+      }
+    }
+
+    for (let i = 0; i < fishes.length; i++) {
+      fishes[i].update(ctx, width, height);
+    }
+  };
+
+  const canvasRef = useCanvas(0.7, 0.7, draw, [modal.isVisible]);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    const dpr = window.devicePixelRatio;
-
-    let width = window.innerWidth * 0.7;
-    let height = window.innerHeight * 0.7;
-
-    createFish(ctx, width, height);
+    createFish(window.innerWidth * 0.7, window.innerHeight * 0.7);
 
     dispatch(updateRequest({
       tuna: getRandomInt(1, 5),
@@ -165,55 +177,6 @@ function Box() {
       shrimp: getRandomInt(1, 5),
       octopus: getRandomInt(1, 3),
     }));
-
-    const update = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      if (fishingLine && fishingLine.endY > 20) {
-        drawFishingLine(ctx);
-      }
-
-      if (!isHookCreated) {
-        clearInterval(intervalId);
-      }
-
-      if (isHookCreated) {
-        detectClick();
-        if (caughtFish) {
-          catchFish(ctx);
-          hook.render(ctx);
-        }
-      }
-
-      for (let i = 0; i < fishes.length; i++) {
-        fishes[i].update(ctx, width, height);
-      }
-
-      animationRef.current = requestAnimationFrame(update);
-    }
-
-    const resize = () => {
-      width = window.innerWidth * 0.7;
-      height = window.innerHeight * 0.7;
-
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-
-      ctx.scale(dpr, dpr);
-
-      window.addEventListener("resize", resize);
-    };
-
-    update();
-    resize();
-
-    return () => {
-      cancelAnimationFrame(animationRef.current);
-      window.removeEventListener("resize", resize);
-    };
   }, [modal.isVisible]);
 
   return (
