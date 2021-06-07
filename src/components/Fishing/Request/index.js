@@ -6,7 +6,7 @@ import salmon from "../../../assets/image/salmon_fishing.png";
 import tuna from "../../../assets/image/tuna_fishing.png";
 import eel from "../../../assets/image/eel_fishing.png";
 import shrimp from "../../../assets/image/shrimp_fishing.png";
-import useAudio from "../../../hook/useAudio";
+import useAudio from "../../../hooks/useAudio";
 import { completeRequest } from "../../../actions/fishing";
 import produce from "immer";
 

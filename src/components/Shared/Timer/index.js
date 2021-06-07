@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router";
 import styled, { keyframes } from "styled-components";
-import useAudio from "../../../hook/useAudio";
+import useAudio from "../../../hooks/useAudio";
 import { showModal } from "../../../actions/modal";
 import { updateWasabiSize } from "../../../actions/cooking";
 

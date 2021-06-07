@@ -8,7 +8,7 @@ import {
   BLAND,
 } from "../../../constants";
 import sheet from "../../../assets/image/sheet.png";
-import useAudio from "../../../hook/useAudio";
+import useAudio from "../../../hooks/useAudio";
 
 const Wrapper = styled.div`
   position: absolute;
