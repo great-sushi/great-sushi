@@ -168,15 +168,17 @@ function Box() {
   const canvasRef = useCanvas(0.7, 0.7, draw, [modal.isVisible]);
 
   useEffect(() => {
-    createFish(window.innerWidth * 0.7, window.innerHeight * 0.7);
+    if (!modal.isVisible) {
+      createFish(window.innerWidth * 0.7, window.innerHeight * 0.7);
 
-    dispatch(updateRequest({
-      tuna: getRandomInt(1, 5),
-      salmon: getRandomInt(1, 5),
-      eel: getRandomInt(1, 5),
-      shrimp: getRandomInt(1, 5),
-      octopus: getRandomInt(1, 3),
-    }));
+      dispatch(updateRequest({
+        tuna: getRandomInt(1, 5),
+        salmon: getRandomInt(1, 5),
+        eel: getRandomInt(1, 5),
+        shrimp: getRandomInt(1, 5),
+        octopus: getRandomInt(1, 3),
+      }));
+    }
   }, [modal.isVisible]);
 
   return (
