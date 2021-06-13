@@ -5,7 +5,6 @@ const initialState = {
   sashimiOrder: {
     id: "",
     name: "",
-    link: "",
   },
   wasabiOrder: 0,
 };
