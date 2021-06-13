@@ -95,7 +95,8 @@ const ingredientList = [
 
 const renderIngredientList = () => {
   return ingredientList.map(ingredient => (
-    <Ingredients key={ingredient.id}
+    <Ingredients
+      key={ingredient.id}
       ingredient={ingredient}
     />
   ));
@@ -105,6 +106,7 @@ function Table() {
   const dispatch = useDispatch();
   const { rice, sashimi, wasabi } = useSelector(state => state.sushi);
   const wasabiOrder = useSelector(state => state.order.wasabiOrder);
+  const modal = useSelector(state => state.modal);
   const [percentage, setPercentage] = useState(0);
 
   const updatePercentage = () => {
@@ -133,6 +135,10 @@ function Table() {
 
     return () => clearTimeout(timeoutID);
   }, [sashimi.id]);
+
+  useEffect(() => {
+    dispatch(clearPlate());
+  }, [modal.isVisible]);
 
   return (
     <CookingTable>
