@@ -36,7 +36,7 @@ const WasabiContainer = styled.div`
 `;
 
 const Wasabi = styled.img`
-width: 80%;
+  width: 80%;
   padding: 8px;
   cursor: pointer;
 `;
@@ -88,7 +88,7 @@ function Gauge({
   percentage,
   updatePercentage,
   wasabiOrder,
-  rice
+  rice,
 }) {
   return (
     <GaugeContainer>
