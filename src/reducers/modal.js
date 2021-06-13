@@ -9,7 +9,7 @@ const initialState = {
   firstLinkButtonText: "",
   secondLinkButtonText: "",
   game: "",
-}
+};
 
 const modal = (state = initialState, action) => {
   switch (action.type) {
