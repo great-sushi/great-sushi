@@ -205,7 +205,7 @@ const SUSHIES = [
 
 const renderFishKind = () => {
   return FISHES.map((fish) => (
-    <div>
+    <div key={fish.id}>
       <img src={fish.link} alt={fish.id} />
       <span>{fish.name}</span>
     </div>
@@ -214,7 +214,7 @@ const renderFishKind = () => {
 
 const renderSushiMenu = () => {
   return SUSHIES.map((sushi) => (
-    <div>
+    <div key={sushi.id}>
       <img src={sushi.link} alt={sushi.id} />
       <span>{sushi.name}</span>
       <span>{`${sushi.price}원`}</span>
