@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { showModal } from "../../../actions/modal";
+import { SUCCESS_TEXT, EXIT, RETRY } from "../../../constants";
 
 const Wrapper = styled.div`
   display: flex;
@@ -72,11 +73,11 @@ function Revenue() {
     if (revenue >= 10000) {
       dispatch(showModal({
         isVisible: true,
-        contentText: "성공하셨습니다!",
+        contentText: SUCCESS_TEXT,
         firstPath: "/",
         secondPath: "/fishing",
-        firstLinkButtonText: "나가기",
-        secondLinkButtonText: "다시하기",
+        firstLinkButtonText: EXIT,
+        secondLinkButtonText: RETRY,
       }));
     }
 

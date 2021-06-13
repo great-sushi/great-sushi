@@ -10,6 +10,11 @@ import { useSelector, useDispatch } from "react-redux";
 import Restaurant from "./Restaurant";
 import Option from "../Shared/Option";
 import { showModal } from "../../actions/modal";
+import {
+  COOKING_GUIDE_TEXT,
+  EXIT,
+  START,
+} from "../../constants";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -32,11 +37,11 @@ function Cooking() {
   useEffect(() => {
     dispatch(showModal({
       isVisible: true,
-      contentText: "1분 안에 10,000원 이상을 벌어야 합니다. 마우스로 재료를 순서대로 드래그 해서 접시에 올려주세요. 주문대로 만들지 않으면 돈을 잃게 됩니다. 그럼 개점해볼까요?",
+      contentText: COOKING_GUIDE_TEXT,
       firstPath: "/",
       secondPath: "/cooking",
-      firstLinkButtonText: "나가기",
-      secondLinkButtonText: "시작",
+      firstLinkButtonText: EXIT,
+      secondLinkButtonText: START,
       game: "sushi",
     }));
   }, []);

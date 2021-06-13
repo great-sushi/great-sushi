@@ -5,6 +5,13 @@ import styled, { keyframes } from "styled-components";
 import useAudio from "../../../hooks/useAudio";
 import { showModal } from "../../../actions/modal";
 import { updateWasabiSize } from "../../../actions/cooking";
+import {
+  FISHING_SUCCESS_TEXT,
+  EXIT,
+  OPEN,
+  FAILURE_TEXT,
+  RETRY,
+} from "../../../constants";
 
 const pulse = keyframes`
   from {
@@ -77,29 +84,25 @@ function Timer() {
       }
     }, 1000);
 
-    if (seconds < 6) {
-      playAudio();
-    }
-
     if (seconds === 0) {
       toggleAudio();
       if (isCompleted) {
         dispatch(showModal({
           isVisible: true,
-          contentText: "성공하셨습니다! 그럼 개점해볼까요?",
+          contentText: FISHING_SUCCESS_TEXT,
           firstPath: "/",
           secondPath: "/cooking",
-          firstLinkButtonText: "나가기",
-          secondLinkButtonText: "개점",
+          firstLinkButtonText: EXIT,
+          secondLinkButtonText: OPEN,
         }));
       } else {
         dispatch(showModal({
           isVisible: true,
-          contentText: "실패하셨습니다!",
+          contentText: FAILURE_TEXT,
           firstPath: "/",
           secondPath: location.pathname,
-          firstLinkButtonText: "나가기",
-          secondLinkButtonText: "재도전",
+          firstLinkButtonText: EXIT,
+          secondLinkButtonText: RETRY,
         }));
 
         if (location.pathname === "/cooking") {
@@ -107,18 +110,18 @@ function Timer() {
         }
       }
     } else {
-      if (isCompleted) {
-        if (seconds < 6) {
-          toggleAudio();
-        }
+      if (seconds < 6) {
+        playAudio();
+      }
 
+      if (isCompleted) {
         dispatch(showModal({
           isVisible: true,
-          contentText: "성공하셨습니다! 그럼 개점해볼까요?",
+          contentText: FISHING_SUCCESS_TEXT,
           firstPath: "/",
           secondPath: "/cooking",
-          firstLinkButtonText: "나가기",
-          secondLinkButtonText: "개점",
+          firstLinkButtonText: EXIT,
+          secondLinkButtonText: OPEN,
         }));
       }
     }
@@ -129,7 +132,9 @@ function Timer() {
   return (
     <Wrapper className={seconds < 6 ? "danger" : ""}>
       <h1>남은 시간</h1>
-      <p className={seconds < 6 ? "pulse" : ""}>{seconds === 60 ? "1:00" : seconds < 10 ? `0:0${seconds}` : `0:${seconds}`}</p>
+      <p className={seconds < 6 ? "pulse" : ""}>
+        {seconds === 60 ? "1:00" : seconds < 10 ? `0:0${seconds}` : `0:${seconds}`}
+      </p>
     </Wrapper>
   );
 }

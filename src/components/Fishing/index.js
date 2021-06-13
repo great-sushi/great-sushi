@@ -8,6 +8,7 @@ import Request from "./Request";
 import Modal from "../Shared/Modal";
 import Option from "../Shared/Option";
 import { showModal } from "../../actions/modal";
+import { FISHING_GUIDE_TEXT, EXIT, START } from "../../constants";
 
 const Wrapper = styled.div`
   display: flex;
@@ -34,11 +35,11 @@ function Fishing() {
     if (!modal.isVisible) {
       dispatch(showModal({
         isVisible: true,
-        contentText: "1분 안에 요청서에 맞게 마우스로 클릭하여 문어, 참치, 연어, 장어, 새우를 잡아주세요. 실패하면 가게 영업을 할 수 없습니다.",
+        contentText: FISHING_GUIDE_TEXT,
         firstPath: "/",
         secondPath: "/fishing",
-        firstLinkButtonText: "나가기",
-        secondLinkButtonText: "시작",
+        firstLinkButtonText: EXIT,
+        secondLinkButtonText: START,
         game: "fishing",
       }));
     }
