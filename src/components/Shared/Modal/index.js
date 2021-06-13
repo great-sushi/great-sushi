@@ -15,7 +15,6 @@ import eelSashimi from "../../../assets/image/eel.png";
 import shrimpSashimi from "../../../assets/image/shrimp.png";
 import egg from "../../../assets/image/egg.png";
 import { hideModal } from "../../../actions/modal";
-import { clearPlate } from "../../../actions/cooking";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -228,7 +227,6 @@ function Modal() {
 
   const closeModal = () => {
     dispatch(hideModal());
-    dispatch(clearPlate());
   };
 
   return createPortal(
