@@ -11,7 +11,7 @@ function RailZone() {
   const rail = new Rail(startPoint, lowPoint, controlPoint, controlPointIn);
   const draw = (ctx, height) => {
     rail.draw(ctx, height);
-  }
+  };
   const canvasRef = useCanvas(1, 0.2, draw);
 
   return (
