@@ -4,7 +4,6 @@ import styled, { keyframes } from "styled-components";
 import sushi from "../../assets/image/sushi.png";
 import useAudio from "../../hooks/useAudio";
 
-
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -73,28 +72,6 @@ const srcs = [sushi];
 function Welcome() {
   const [isPlaying, { toggleAudio, restartAudio }] = useAudio("bgm");
 
-  const [isLoading, setIsLoading] = useState(true);
-  const cacheImages = async (srcs) => {
-    const promises = srcs.map((src) => {
-      return new Promise((resolve, reject) => {
-        const image = new Image();
-        image.src = src;
-        image.onload = resolve();
-        image.onerror = reject();
-      });
-    });
-
-    await Promise.all(promises);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2500);
-  };
-
-  useEffect(() => {
-    cacheImages(srcs);
-  }, []);
-
   useEffect(() => {
     if (isPlaying) {
       toggleAudio();
@@ -105,9 +82,7 @@ function Welcome() {
 
   return (
     <Wrapper>
-      {isLoading
-       ? <div>loading...</div>
-       : (
+
          <>
           <SushiImage src={srcs[0]} alt="sushi" onLoad={() => console.log("load")}/>
           <Title>위대한 초밥</Title>
@@ -115,8 +90,6 @@ function Welcome() {
             게임시작
           </Button>
          </>
-       )
-      }
     </Wrapper>
   );
 }
