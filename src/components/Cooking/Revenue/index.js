@@ -48,7 +48,10 @@ function Revenue() {
   const modal = useSelector((state) => state.modal);
 
   useEffect(() => {
-    if (rice.id.length !== 0 && sashimiOrder.id === sashimi.id && wasabiOrder === wasabi.size) {
+    if (rice.id.length !== 0
+        && sashimiOrder.id === sashimi.id
+        && wasabiOrder === wasabi.size
+      ) {
       setRevenue((prev) => prev + sashimi.price);
       return;
     }
