@@ -22,7 +22,6 @@ const Wrapper = styled.div`
 
 const Title = styled.div`
   font-size: 100px;
-  font-family: "RixYeoljeongdo_Regular";
   padding: 2rem;
 `;
 
@@ -40,8 +39,6 @@ const Button = styled(Link)`
   border-radius: 0.5rem;
   color: black;
   text-decoration: none;
-  font-family: RixYeoljeongdo_Regular;
-
   cursor: pointer;
 `;
 

@@ -44,13 +44,8 @@ const Wrapper = styled.div`
     background-color: #e84118;
   }
 
-  h1 {
-    font-family: RixYeoljeongdo_Regular;
-  }
-
   p {
     font-size: 40px;
-    font-family: RixYeoljeongdo_Regular;
   }
 
   .pulse {

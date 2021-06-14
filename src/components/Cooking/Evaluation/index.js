@@ -29,7 +29,6 @@ const Wrapper = styled.div`
 
 const Content = styled.p`
   font-size: 30px;
-  font-family: RixYeoljeongdo_Regular;
   padding: 0 20px 20px 20px;
   text-align: center;
   line-height: 1.3;

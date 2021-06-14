@@ -22,23 +22,13 @@ const Wrapper = styled.div`
     cursor: default;
   }
 
-  h1 {
-    font-family: RixYeoljeongdo_Regular;
-  }
-
   p {
     font-size: 40px;
-    font-family: RixYeoljeongdo_Regular;
   }
-`;
-
-const Title = styled.h1`
-  font-family: RixYeoljeongdo_Regular;
 `;
 
 const Text = styled.p`
   font-size: 40px;
-  font-family: RixYeoljeongdo_Regular;
 `;
 
 function Revenue() {
@@ -88,7 +78,7 @@ function Revenue() {
 
   return (
     <Wrapper>
-      <Title>수익금</Title>
+      <h1>수익금</h1>
       <Text>{revenue}</Text>
     </Wrapper>
   );
