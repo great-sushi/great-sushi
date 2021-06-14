@@ -4,6 +4,7 @@ import styled from "styled-components";
 import leftSheet from "../../../assets/image/sheet_left.png";
 import { updateOrder } from "../../../actions/cooking";
 import { getRandomInt } from "../../../utils";
+import { MENUS } from "../../../constants/image";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -28,7 +29,6 @@ const Wrapper = styled.div`
 
   p {
     font-size: 30px;
-    font-family: RixYeoljeongdo_Regular;
     padding: 0 20px 20px 20px;
     text-align: center;
     line-height: 1.3;
@@ -39,33 +39,6 @@ const Wrapper = styled.div`
   }
 `;
 
-const SASHIMIS = [
-  {
-    id: "tuna",
-    name: "참치",
-  },
-  {
-    id: "salmon",
-    name: "연어",
-  },
-  {
-    id: "octopus",
-    name: "문어",
-  },
-  {
-    id: "eel",
-    name: "장어",
-  },
-  {
-    id: "shrimp",
-    name: "새우",
-  },
-  {
-    id: "egg",
-    name: "계란",
-  },
-];
-
 function Order() {
   const dispatch = useDispatch();
   const { sashimiOrder, wasabiOrder } = useSelector((state) => state.order);
@@ -73,8 +46,8 @@ function Order() {
 
   useEffect(() => {
     if (sashimi.id.length === 0) {
-      const randomIndex = getRandomInt(0, SASHIMIS.length - 1);
-      const sashimi = SASHIMIS[randomIndex];
+      const randomIndex = getRandomInt(0, MENUS.length - 1);
+      const sashimi = MENUS[randomIndex];
       const wasabi = getRandomInt(0, 10) * 10;
 
       dispatch(updateOrder({ sashimi, wasabi }));

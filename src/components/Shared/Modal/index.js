@@ -3,18 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import octopus from "../../../assets/image/octopus_fishing.png";
-import salmon from "../../../assets/image/salmon_fishing.png";
-import tuna from "../../../assets/image/tuna_fishing.png";
-import eel from "../../../assets/image/eel_fishing.png";
-import shrimp from "../../../assets/image/shrimp_fishing.png";
-import octopusSashimi from "../../../assets/image/octopus.png";
-import salmonSashimi from "../../../assets/image/salmon.png";
-import tunaSashimi from "../../../assets/image/tuna.png";
-import eelSashimi from "../../../assets/image/eel.png";
-import shrimpSashimi from "../../../assets/image/shrimp.png";
-import egg from "../../../assets/image/egg.png";
 import { hideModal } from "../../../actions/modal";
+import { FISHES, MENUS } from "../../../constants/image";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -52,7 +42,6 @@ const Edge = styled.div`
 `;
 
 const Content = styled.div`
-  font-family: "RixYeoljeongdo_Regular";
   width: 500px;
   height: 400px;
   border: 5px solid black;
@@ -135,73 +124,6 @@ const Menu = styled.div`
   }
 `;
 
-const FISHES = [
-  {
-    id: "octopus",
-    name: "문어",
-    link: octopus,
-  },
-  {
-    id: "salmon",
-    name: "연어",
-    link: salmon,
-  },
-  {
-    id: "tuna",
-    name: "참치",
-    link: tuna,
-  },
-  {
-    id: "eel",
-    name: "장어",
-    link: eel,
-  },
-  {
-    id: "shrimp",
-    name: "새우",
-    link: shrimp,
-  },
-];
-
-const SUSHIES = [
-  {
-    id: "octopus",
-    name: "문어",
-    link: octopusSashimi,
-    price: "600",
-  },
-  {
-    id: "salmon",
-    name: "연어",
-    link: salmonSashimi,
-    price: "800",
-  },
-  {
-    id: "tuna",
-    name: "참치",
-    link: tunaSashimi,
-    price: "1,000",
-  },
-  {
-    id: "eel",
-    name: "장어",
-    link: eelSashimi,
-    price: "1,200",
-  },
-  {
-    id: "shrimp",
-    name: "새우",
-    link: shrimpSashimi,
-    price: "700",
-  },
-  {
-    id: "egg",
-    name: "계란",
-    link: egg,
-    price: "500",
-  },
-];
-
 const renderFishKind = () => {
   return FISHES.map((fish) => (
     <div key={fish.id}>
@@ -212,7 +134,7 @@ const renderFishKind = () => {
 };
 
 const renderSushiMenu = () => {
-  return SUSHIES.map((sushi) => (
+  return MENUS.map((sushi) => (
     <div key={sushi.id}>
       <img src={sushi.link} alt={sushi.id} />
       <span>{sushi.name}</span>

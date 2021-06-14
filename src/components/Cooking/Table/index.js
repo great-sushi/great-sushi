@@ -10,13 +10,7 @@ import {
 import wasabiImage from "../../../assets/image/wasabi.png";
 import Ingredients from "./Ingredients";
 import DropZone from "./DropZone";
-import rice from "../../../assets/image/rice.png";
-import salmon from "../../../assets/image/salmon.png";
-import tuna from "../../../assets/image/tuna.png";
-import octopus from "../../../assets/image/octopus.png";
-import eel from "../../../assets/image/eel.png";
-import egg from "../../../assets/image/egg.png";
-import shrimp from "../../../assets/image/shrimp.png";
+import { INGREDIENTS } from "../../../constants/image";
 
 const CookingTable = styled.div`
   width: 100%;
@@ -48,53 +42,8 @@ const IngredientsWrapper = styled.div`
   flex-direction: column;
 `;
 
-const ingredientList = [
-  {
-    id: "tuna",
-    kind: "sashimi",
-    link: tuna,
-    price: 1000,
-  },
-  {
-    id: "salmon",
-    kind: "sashimi",
-    link: salmon,
-    price: 800,
-  },
-  {
-    id: "octopus",
-    kind: "sashimi",
-    link: octopus,
-    price: 600,
-  },
-  {
-    id: "shrimp",
-    kind: "sashimi",
-    link: shrimp,
-    price: 700,
-  },
-  {
-    id: "eel",
-    kind: "sashimi",
-    link: eel,
-    price: 1200,
-  },
-  {
-    id: "egg",
-    kind: "sashimi",
-    link: egg,
-    price: 500,
-  },
-  {
-    id: "rice",
-    kind: "rice",
-    link: rice,
-    price: null,
-  },
-];
-
 const renderIngredientList = () => {
-  return ingredientList.map(ingredient => (
+  return INGREDIENTS.map(ingredient => (
     <Ingredients
       key={ingredient.id}
       ingredient={ingredient}

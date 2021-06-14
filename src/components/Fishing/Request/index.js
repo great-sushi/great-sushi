@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import octopus from "../../../assets/image/octopus_fishing.png";
-import salmon from "../../../assets/image/salmon_fishing.png";
-import tuna from "../../../assets/image/tuna_fishing.png";
-import eel from "../../../assets/image/eel_fishing.png";
-import shrimp from "../../../assets/image/shrimp_fishing.png";
 import useAudio from "../../../hooks/useAudio";
 import { completeRequest } from "../../../actions/fishing";
 import produce from "immer";
+import { FISHES } from "../../../constants/image";
 
 const Wrapper = styled.div`
   border: 5px solid black;
@@ -29,7 +25,6 @@ const Wrapper = styled.div`
   }
 
   h1 {
-    font-family: "RixYeoljeongdo_Regular";
     font-size: 30px;
     padding: 10px;
   }
@@ -49,39 +44,10 @@ const Content = styled.div`
 
   p {
     display: inline-block;
-    font-family: "RixYeoljeongdo_Regular";
     font-size: 15px;
     padding: 5px;
   }
 `;
-
-const fishList = [
-  {
-    id: "tuna",
-    link: tuna,
-    name: "참치",
-  },
-  {
-    id: "salmon",
-    link: salmon,
-    name: "연어",
-  },
-  {
-    id: "octopus",
-    link: octopus,
-    name: "문어",
-  },
-  {
-    id: "shrimp",
-    link: shrimp,
-    name: "새우",
-  },
-  {
-    id: "eel",
-    link: eel,
-    name: "장어",
-  },
-];
 
 function Request() {
   const dispatch = useDispatch();
@@ -97,7 +63,7 @@ function Request() {
   });
 
   const renderCaughtFishCount = () => {
-    return fishList.map((fish) => (
+    return FISHES.map((fish) => (
         <div key={fish.id}>
           <img src={fish.link} alt={fish.id} />
           <p>{`${fish.name} ${fishCount[fish.id]} / ${request[fish.id]} 개`}</p>
