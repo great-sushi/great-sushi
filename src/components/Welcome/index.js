@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import sushi from "../../assets/image/sushi.png";
-import useAudio from "../../hooks/useAudio";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -42,51 +41,16 @@ const Button = styled(Link)`
   cursor: pointer;
 `;
 
-const rotation = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
-`;
-
-const LoadingImage = styled.img`
-  width: 150px;
-  height: 75px;
-  animation: ${rotation} 2s infinite linear;
-`;
-
-const Loading = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
-
-const srcs = [sushi];
-
 function Welcome() {
-  const [isPlaying, { toggleAudio, restartAudio }] = useAudio("bgm");
-
-  useEffect(() => {
-    if (isPlaying) {
-      toggleAudio();
-    }
-
-    restartAudio();
-  }, []);
-
   return (
     <Wrapper>
-
-         <>
-          <SushiImage src={srcs[0]} alt="sushi" onLoad={() => console.log("load")}/>
-          <Title>위대한 초밥</Title>
-          <Button to="/fishing">
-            게임시작
-          </Button>
-         </>
+      <>
+        <SushiImage src={sushi} alt="sushi" />
+        <Title>위대한 초밥</Title>
+        <Button to="/fishing">
+          게임시작
+        </Button>
+      </>
     </Wrapper>
   );
 }
