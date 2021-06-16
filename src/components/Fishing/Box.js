@@ -23,6 +23,12 @@ const Wrapper = styled.div`
 `;
 
 let fishes;
+let fishingLine;
+let isHookCreated = false;
+let intervalId;
+let caughtFish;
+let caughtFishIndex;
+let hook;
 
 const createFish = (width, height) => {
   for (let i = 0; i < 6; i++) {
@@ -39,13 +45,6 @@ const createFish = (width, height) => {
     fishes.push(new Fish("shrimp", getRandomInt(-10, width), getRandomInt(height * 0.2, height * 0.7), 50, 30, shrimp, getRandomInt(0, 1)));
   }
 };
-
-let fishingLine;
-let isHookCreated = false;
-let intervalId;
-let caughtFish;
-let caughtFishIndex;
-let hook;
 
 const createFishingLine = (e) => {
   if (!isHookCreated) {
