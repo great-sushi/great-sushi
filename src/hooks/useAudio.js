@@ -51,17 +51,13 @@ function useAudio(name, option) {
 
   const toggleAudio = () => {
     setIsPlaying((prev) => !prev);
-  }
-
-  const stopAudio = () => {
-    audio.pause();
   };
 
   const restartAudio = () => {
     audio.currentTime = 0;
-  }
+  };
 
-  return [isPlaying, { playAudio, toggleAudio, restartAudio, repeatAudio, stopAudio }];
+  return [isPlaying, { playAudio, toggleAudio, restartAudio, repeatAudio }];
 }
 
 export default useAudio;
