@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { showModal } from "../../../actions/modal";
+import { SUCCESS_TEXT, EXIT, RETRY } from "../../../constants";
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,23 +22,13 @@ const Wrapper = styled.div`
     cursor: default;
   }
 
-  h1 {
-    font-family: RixYeoljeongdo_Regular;
-  }
-
   p {
     font-size: 40px;
-    font-family: RixYeoljeongdo_Regular;
   }
-`;
-
-const Title = styled.h1`
-  font-family: RixYeoljeongdo_Regular;
 `;
 
 const Text = styled.p`
   font-size: 40px;
-  font-family: RixYeoljeongdo_Regular;
 `;
 
 function Revenue() {
@@ -48,7 +39,10 @@ function Revenue() {
   const modal = useSelector((state) => state.modal);
 
   useEffect(() => {
-    if (rice.id.length !== 0 && sashimiOrder.id === sashimi.id && wasabiOrder === wasabi.size) {
+    if (rice.id.length !== 0
+        && sashimiOrder.id === sashimi.id
+        && wasabiOrder === wasabi.size
+      ) {
       setRevenue((prev) => prev + sashimi.price);
       return;
     }
@@ -69,11 +63,11 @@ function Revenue() {
     if (revenue >= 10000) {
       dispatch(showModal({
         isVisible: true,
-        contentText: "성공하셨습니다!",
+        contentText: SUCCESS_TEXT,
         firstPath: "/",
         secondPath: "/fishing",
-        firstLinkButtonText: "나가기",
-        secondLinkButtonText: "다시하기",
+        firstLinkButtonText: EXIT,
+        secondLinkButtonText: RETRY,
       }));
     }
 
@@ -84,7 +78,7 @@ function Revenue() {
 
   return (
     <Wrapper>
-      <Title>수익금</Title>
+      <h1>수익금</h1>
       <Text>{revenue}</Text>
     </Wrapper>
   );

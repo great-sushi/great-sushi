@@ -11,17 +11,21 @@ const initialState = {
   rice: {
     id: "",
     kind: "",
+    link: "",
+    price: null,
   },
   sashimi: {
     id: "",
     kind: "",
+    link: "",
+    price: 0,
   },
   wasabi : {
     id: "",
     kind: "",
     link: "",
     size: 0,
-  }
+  },
 };
 
 const sushi = (state = initialState, action) => {

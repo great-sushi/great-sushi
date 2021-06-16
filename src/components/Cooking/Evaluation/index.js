@@ -8,7 +8,7 @@ import {
   BLAND,
 } from "../../../constants";
 import sheet from "../../../assets/image/sheet.png";
-import useAudio from "../../../hook/useAudio";
+import useAudio from "../../../hooks/useAudio";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -29,7 +29,6 @@ const Wrapper = styled.div`
 
 const Content = styled.p`
   font-size: 30px;
-  font-family: RixYeoljeongdo_Regular;
   padding: 0 20px 20px 20px;
   text-align: center;
   line-height: 1.3;

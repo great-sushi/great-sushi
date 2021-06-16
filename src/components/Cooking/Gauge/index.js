@@ -11,7 +11,6 @@ const Bar = styled.div`
 
 const Percentage = styled.h1`
   font-size: 30px;
-  font-family: RixYeoljeongdo_Regular;
 `;
 
 const GaugeContainer = styled.div`
@@ -36,7 +35,7 @@ const WasabiContainer = styled.div`
 `;
 
 const Wasabi = styled.img`
-width: 80%;
+  width: 80%;
   padding: 8px;
   cursor: pointer;
 `;
@@ -63,7 +62,6 @@ const Guide = styled.div`
 `;
 
 const Text = styled.p`
-  font-family: "RixYeoljeongdo_Regular";
   font-size: 30px;
   padding: 10px;
 
@@ -88,7 +86,7 @@ function Gauge({
   percentage,
   updatePercentage,
   wasabiOrder,
-  rice
+  rice,
 }) {
   return (
     <GaugeContainer>

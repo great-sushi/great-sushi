@@ -23,45 +23,7 @@ const GlobalStyles = createGlobalStyle`
     vertical-align: baseline;
   }
 
-  article, aside, details, figcaption, figure,
-  footer, header, hgroup, menu, nav, section {
-    display: block;
-  }
-
-  body {
-    line-height: 1;
-  }
-
-  ol,
-  ul,
-  ul li{
-    list-style: none;
-  }
-
-  blockquote, q {
-    quotes: none;
-  }
-
-  blockquote:before,
-  blockquote:after,
-  q:before,
-  q:after {
-    content: "";
-    content: none;
-  }
-
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
-  }
-
-  input,
-  textarea,
-  button,
-  section,
-  main,
-  div,
-  article {
+  div {
     box-sizing: border-box;
   }
 
@@ -74,7 +36,9 @@ const GlobalStyles = createGlobalStyle`
     width: 100%;
     height: auto;
     background: #e8d4ca;
+    line-height: 1;
     font-size: 16px;
+    font-family: RixYeoljeongdo_Regular;
   }
 
   h2,
@@ -84,15 +48,6 @@ const GlobalStyles = createGlobalStyle`
   h6 {
     font-size: ${({ theme }) => theme.fontSize.bigger};
     color: ${({ theme }) => theme.color.white};
-  }
-
-  .hidden {
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    position: absolute;
-    overflow: hidden;
-    clip-path: polygon(0 0, 0 0, 0 0);
   }
 `;
 
