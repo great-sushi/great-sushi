@@ -1,4 +1,4 @@
-# 🍣 **위대한 초밥 Great Sushi**
+# 🍣 위대한 초밥 Great Sushi
 
 <p style="text-align: center;">
   <img src="./readme-assets/main.png" width="640" />
@@ -8,7 +8,7 @@
 
 <br>
 
-## 🚘 **목차**
+## 🚘 목차
 - ✏️ [기획 동기](#기획-동기)
 - ⚙️ [기술 스택](#기술-스택)
 - 🪄 [사용법](#사용법)
@@ -20,12 +20,12 @@
 
 <br>
 
-## ✏️ **기획 동기**
+## ✏️ 기획 동기
 어릴적 즐겨 했던 슈의 라면게임, 고향만두와 같은 플래쉬 게임을 Canvas로 만들어 보고 싶었습니다.
 
 <br>
 
-## ⚙️ **기술 스택**
+## ⚙️ 기술 스택
 - React
 - Redux
 - styled-components
@@ -35,7 +35,7 @@
 
 <br>
 
-## 🪄 **사용법**
+## 🪄 사용법
 ```
 git clone https://github.com/great-sushi/great-sushi.git
 npm install
@@ -47,9 +47,9 @@ npm start
 
 <br>
 
-## 🎮 **프로젝트 설명**
+## 🎮 프로젝트 설명
 
-### 🎣 **낚시**
+### 🎣 낚시
 <p style="text-align: center;">
   <img src="./readme-assets/fishing-game-guide.png" width="640" />
 </p>
@@ -62,7 +62,7 @@ npm start
 <br>📌  마우스 움직임에 따라 낚시줄이 이동합니다.
 <br>📌  움직이는 물고기를 클릭하면 낚을 수 있습니다.
 
-### <br>👩‍🍳 **초밥 만들기**
+### <br>👩‍🍳 초밥 만들기
 <p style="text-align: center;">
   <img src="./readme-assets/cooking-game-guide.png" width="640" />
 </p>
@@ -83,7 +83,7 @@ npm start
 
 <br>
 
-## 🗓 **작업 기간**
+## 🗓 작업 기간
 ### **1주차**
 ✔️ **아이디어 브레인스토밍** : ( 5월3일-4일 )
 <br>✔️ **기획**: ( 5월5일 )
@@ -98,7 +98,7 @@ npm start
 
 <br>
 
-## 🧩 **배움**
+## 🧩 배움
 ### **Canvas anti-aliasing (캔버스 계단 현상 방지)**
 
 <br>
