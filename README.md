@@ -1,4 +1,4 @@
-# 🍣 **위대한 초밥 Great Sushi**
+# 🍣 위대한 초밥 Great Sushi
 
 <p style="text-align: center;">
   <img src="./readme-assets/main.png" width="640" />
@@ -8,7 +8,7 @@
 
 <br>
 
-## 🚘 **목차**
+## 🚘 목차
 - ✏️ [기획 동기](#기획-동기)
 - ⚙️ [기술 스택](#기술-스택)
 - 🪄 [사용법](#사용법)
