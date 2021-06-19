@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import Box from "./Box";
+import Sea from "./Sea";
 import Timer from "../Shared/Timer";
 import Net from "./Net";
 import Request from "./Request";
@@ -51,7 +51,7 @@ function Fishing() {
       <Wrapper>
         {modal.isVisible
         && <Modal />}
-        <Box />
+        <Sea />
         <Menu>
           <Timer />
           <Request />
