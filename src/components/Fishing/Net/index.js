@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import netImage from "../../assets/image/net.png";
-import { clearNet } from "../../actions/fishing";
-import { getRandomInt } from "../../utils";
-import useCanvas from "../../hooks/useCanvas";
+
+import { clearNet } from "../../../actions/fishing";
+import netImage from "../../../assets/image/net.png";
+import useCanvas from "../../../hooks/useCanvas";
+import { getRandomInt } from "../../../utils";
 
 const Wrapper = styled.div`
   canvas {

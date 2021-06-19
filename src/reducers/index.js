@@ -1,14 +1,13 @@
 import { combineReducers } from "redux";
-import sushi from "./sushi";
-import order from "./order";
-import revenue from "./revenue";
+
 import fishing from "./fishing";
 import modal from "./modal";
+import order from "./order";
+import sushi from "./sushi";
 
 const reducers = combineReducers({
   sushi,
   order,
-  revenue,
   fishing,
   modal,
 });

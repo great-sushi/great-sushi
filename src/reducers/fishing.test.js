@@ -1,10 +1,10 @@
-import fishing from "./fishing";
 import {
   UPDATE_REQUEST,
   CATCH_FISH,
   COMPLETE_REQUEST,
   CLEAR_NET,
-} from "../constants";
+} from "../constants/actionTypes";
+import fishing from "./fishing";
 
 describe("reducers", () => {
   describe("fishing", () => {

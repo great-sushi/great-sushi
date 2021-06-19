@@ -1,46 +1,25 @@
 const calcRem = (size) => `${size / 16}rem`;
 
 const color = {
-  black: "#1a1d23",
-  blue: "#0f4cd9",
+  red: "#e84118",
+  blue: "#3742fa",
+  brown: "#af8264",
   white: "#ffffff",
-  darkgrey: "#313439",
-  grey: "#484a4f",
-  lightgrey: "#ddddde",
+  grey: "#576574",
+  lightgrey: "#c8d6e5",
 };
 
 const fontSize = {
-  small: calcRem(8),
-  base: calcRem(16),
-  middle: calcRem(24),
+  small: calcRem(14),
+  middle: calcRem(20),
   big: calcRem(32),
   bigger: calcRem(40),
-  biggest: calcRem(48),
-};
-
-const margin = {
-  small: calcRem(8),
-  base: calcRem(16),
-  middle: calcRem(24),
-  big: calcRem(32),
-  bigger: calcRem(40),
-  biggest: calcRem(48),
-};
-
-const padding = {
-  small: calcRem(8),
-  base: calcRem(16),
-  middle: calcRem(24),
-  big: calcRem(32),
-  bigger: calcRem(40),
-  biggest: calcRem(48),
+  biggest: calcRem(100),
 };
 
 const theme = {
   color,
   fontSize,
-  margin,
-  padding,
 };
 
 export default theme;

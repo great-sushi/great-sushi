@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
-import Bgm from "../assets/audio/bgm.mp3";
+
+import Coughing from "../assets/audio/coughing.mp3";
 import Countdown from "../assets/audio/countdown.mp3"
 import Drop from "../assets/audio/drop.mp3";
 import Splash from "../assets/audio/splash.mp3";
-import Coughing from "../assets/audio/coughing.mp3";
 
-const bgm = new Audio(Bgm);
 const countdown = new Audio(Countdown);
 const drop = new Audio(Drop);
 const splash = new Audio(Splash);
 const coughing = new Audio(Coughing);
 
 const gameAudio = {
-  bgm,
   countdown,
   drop,
   splash,

@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import leftSheet from "../../../assets/image/sheet_left.png";
+
 import { updateOrder } from "../../../actions/cooking";
+import leftSheet from "../../../assets/image/sheet_left.png";
+import { MENUS } from "../../../constants/imageSetting";
 import { getRandomInt } from "../../../utils";
-import { MENUS } from "../../../constants/image";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -26,17 +28,13 @@ const Wrapper = styled.div`
     -webkit-app-region: no-drag;
     cursor: default;
   }
+`;
 
-  p {
-    font-size: 30px;
-    padding: 0 20px 20px 20px;
-    text-align: center;
-    line-height: 1.3;
-  }
-
-  img {
-    width: 40%
-  }
+const Text = styled.p`
+  font-size: ${({ theme }) => theme.fontSize.big};
+  padding: 0 20px 20px 20px;
+  text-align: center;
+  line-height: 1.3;
 `;
 
 function Order() {
@@ -56,7 +54,7 @@ function Order() {
 
   return (
     <Wrapper>
-      <p>{`${sashimiOrder.name} 초밥 와사비 ${wasabiOrder}% 로 주세요`}</p>
+      <Text>{`${sashimiOrder.name} 초밥 와사비 ${wasabiOrder}% 로 주세요`}</Text>
     </Wrapper>
   );
 }

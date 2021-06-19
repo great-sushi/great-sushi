@@ -1,14 +1,14 @@
-import sushi from "./sushi";
 import rice from "../assets/image/rice.png";
-import wasabi from "../assets/image/wasabi.png";
 import tuna from "../assets/image/tuna.png";
+import wasabi from "../assets/image/wasabi.png";
 import {
   ADD_RICE,
   ADD_WASABI,
   ADD_WASABI_SIZE,
   ADD_SASHIMI,
   RESET_PLATE,
-} from "../constants";
+} from "../constants/actionTypes";
+import sushi from "./sushi";
 
 describe("reducers", () => {
   describe("sushi", () => {

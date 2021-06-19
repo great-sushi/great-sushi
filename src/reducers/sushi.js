@@ -1,11 +1,12 @@
 import produce from "immer";
+
 import {
   ADD_RICE,
   ADD_SASHIMI,
   ADD_WASABI,
   RESET_PLATE,
   ADD_WASABI_SIZE,
-} from "../constants";
+} from "../constants/actionTypes";
 
 const initialState = {
   rice: {

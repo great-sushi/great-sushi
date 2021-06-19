@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+
 import { useDispatch, useSelector } from "react-redux";
-import RailZone from "../RailZone";
-import Gauge from "../Gauge";
+import styled from "styled-components";
+
 import {
   clearPlate,
   updateWasabi,
 } from "../../../actions/cooking";
 import wasabiImage from "../../../assets/image/wasabi.png";
-import Ingredients from "./Ingredients";
+import { INGREDIENTS } from "../../../constants/imageSetting";
+import Gauge from "../Gauge";
+import RailZone from "../RailZone";
 import DropZone from "./DropZone";
-import { INGREDIENTS } from "../../../constants/image";
+import Ingredients from "./Ingredients";
 
 const CookingTable = styled.div`
   width: 100%;
@@ -21,13 +23,13 @@ const CookingTable = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  background-color: #af8264;
+  background-color: ${({ theme }) => theme.color.brown};
 `;
 
 const IngredientsContainer = styled.div`
   width: 100%;
   border-radius: 8px;
-  background-color: #576574;
+  background-color: ${({ theme }) => theme.color.grey};
   display: flex;
   justify-content: center;
   padding: 8px;
@@ -53,9 +55,9 @@ const renderIngredientList = () => {
 
 function Table() {
   const dispatch = useDispatch();
-  const { rice, sashimi, wasabi } = useSelector(state => state.sushi);
-  const wasabiOrder = useSelector(state => state.order.wasabiOrder);
-  const modal = useSelector(state => state.modal);
+  const { rice, sashimi, wasabi } = useSelector((state) => state.sushi);
+  const wasabiOrder = useSelector((state) => state.order.wasabiOrder);
+  const modal = useSelector((state) => state.modal);
   const [percentage, setPercentage] = useState(0);
 
   const updatePercentage = () => {

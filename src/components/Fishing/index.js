@@ -1,14 +1,16 @@
 import React, { useEffect } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import Box from "./Box";
+
+import { showModal } from "../../actions/modal";
+import { FISHING_GUIDE_TEXT, EXIT, START } from "../../constants/modal";
+import Modal from "../Shared/Modal";
+import Option from "../Shared/Option";
 import Timer from "../Shared/Timer";
 import Net from "./Net";
 import Request from "./Request";
-import Modal from "../Shared/Modal";
-import Option from "../Shared/Option";
-import { showModal } from "../../actions/modal";
-import { FISHING_GUIDE_TEXT, EXIT, START } from "../../constants";
+import Sea from "./Sea";
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,7 +18,7 @@ const Wrapper = styled.div`
   justify-content: space-evenly;
   width: 100%;
   height: 100%;
-  background-color: #c8d6e5;
+  background-color: ${({ theme }) => theme.color.lightgrey};
 `;
 
 const Menu = styled.div`
@@ -49,9 +51,8 @@ function Fishing() {
     <>
       <Option />
       <Wrapper>
-        {modal.isVisible
-        && <Modal />}
-        <Box />
+        {modal.isVisible && <Modal />}
+        <Sea />
         <Menu>
           <Timer />
           <Request />

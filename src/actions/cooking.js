@@ -5,7 +5,7 @@ import {
   ADD_SASHIMI,
   RESET_PLATE,
   ADD_WASABI_SIZE,
-} from "../constants";
+} from "../constants/actionTypes";
 
 export const clearPlate = () => ({
   type: RESET_PLATE,

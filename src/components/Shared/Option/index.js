@@ -1,14 +1,17 @@
 import React, { useState, useCallback } from "react";
+
 import styled from "styled-components";
+
+import bgm from "../../../assets/audio/bgm.mp3";
 import audioOffImage from "../../../assets/image/audio_off.png";
 import audioOnImage from "../../../assets/image/audio_on.png";
-import bgm from "../../../assets/audio/bgm.mp3";
 
 const Wrapper = styled.div`
   width: auto;
   height: auto;
   position: fixed;
   top: 0;
+  left: 0;
 `;
 
 function Option() {

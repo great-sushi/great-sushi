@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import useAudio from "../../../hooks/useAudio";
-import { completeRequest } from "../../../actions/fishing";
+
 import produce from "immer";
-import { FISHES } from "../../../constants/image";
+import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
+
+import { completeRequest } from "../../../actions/fishing";
+import { FISHES } from "../../../constants/imageSetting";
+import useAudio from "../../../hooks/useAudio";
 
 const Wrapper = styled.div`
   border: 5px solid black;
   width: 200px;
   height: auto;
-  background-color: white;
+  background-color: ${({ theme }) => theme.color.white};
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -25,7 +27,7 @@ const Wrapper = styled.div`
   }
 
   h1 {
-    font-size: 30px;
+    font-size: ${({ theme }) => theme.fontSize.big};
     padding: 10px;
   }
 `;
@@ -44,7 +46,7 @@ const Content = styled.div`
 
   p {
     display: inline-block;
-    font-size: 15px;
+    font-size: ${({ theme }) => theme.fontSize.small};
     padding: 5px;
   }
 `;
@@ -64,11 +66,11 @@ function Request() {
 
   const renderCaughtFishCount = () => {
     return FISHES.map((fish) => (
-        <div key={fish.id}>
-          <img src={fish.link} alt={fish.id} />
-          <p>{`${fish.name} ${fishCount[fish.id]} / ${request[fish.id]} 개`}</p>
-        </div>
-      ));
+      <div key={fish.id}>
+        <img src={fish.link} alt={fish.id} />
+        <p>{`${fish.name} ${fishCount[fish.id]} / ${request[fish.id]} 개`}</p>
+      </div>
+    ));
   };
 
   useEffect(() => {
@@ -81,7 +83,7 @@ function Request() {
         shrimp: 0,
       });
       return;
-    };
+    }
 
     switch (fish[fish.length - 1].name) {
       case "octopus":

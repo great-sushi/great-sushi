@@ -1,8 +1,10 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+
 import { showModal } from "../../../actions/modal";
-import { SUCCESS_TEXT, EXIT, RETRY } from "../../../constants";
+import { SUCCESS_TEXT, EXIT, RETRY } from "../../../constants/modal";
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,7 +14,7 @@ const Wrapper = styled.div`
   border-radius: 8px;
   width: 200px;
   height: 100px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.color.white};
   border: 5px solid black;
 
   *, *::after, *::before {
@@ -21,14 +23,10 @@ const Wrapper = styled.div`
     -webkit-app-region: no-drag;
     cursor: default;
   }
-
-  p {
-    font-size: 40px;
-  }
 `;
 
 const Text = styled.p`
-  font-size: 40px;
+  font-size: ${({ theme }) => theme.fontSize.bigger};
 `;
 
 function Revenue() {
@@ -51,9 +49,11 @@ function Revenue() {
       setRevenue((prev) => prev - 1000);
       return;
     }
+
     if (wasabiOrder < wasabi.size) {
       setRevenue((prev) => prev - sashimi.price / 2);
     }
+
     if (rice.id.length && wasabiOrder > wasabi.size) {
       setRevenue((prev) => prev - sashimi.price / 2);
     }

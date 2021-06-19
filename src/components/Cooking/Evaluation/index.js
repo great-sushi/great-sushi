@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+
 import { useSelector } from "react-redux";
+import styled from "styled-components";
+
+import sheet from "../../../assets/image/sheet.png";
 import {
   GOOD,
   WRONG_SUHSI,
   SPICY,
   BLAND,
-} from "../../../constants";
-import sheet from "../../../assets/image/sheet.png";
+} from "../../../constants/cooking";
 import useAudio from "../../../hooks/useAudio";
 
 const Wrapper = styled.div`
@@ -28,7 +30,7 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled.p`
-  font-size: 30px;
+  font-size: ${({ theme }) => theme.fontSize.big};
   padding: 0 20px 20px 20px;
   text-align: center;
   line-height: 1.3;

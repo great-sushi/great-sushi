@@ -1,35 +1,35 @@
-import audio_off from "../assets/image/audio_off.png";
-import audio_on from "../assets/image/audio_on.png";
+import audioOff from "../assets/image/audio_off.png";
+import audioOn from "../assets/image/audio_on.png";
 import background from "../assets/image/background.jpg";
 import customer from "../assets/image/customer.png";
-import eel_fishing_left from "../assets/image/eel_fishing_left.png";
-import eel_fishing from "../assets/image/eel_fishing.png";
 import eel from "../assets/image/eel.png";
+import eelFishingRight from "../assets/image/eel_fishing.png";
+import eelFishingLeft from "../assets/image/eel_fishing_left.png";
 import egg from "../assets/image/egg.png";
 import hook from "../assets/image/hook.png";
 import net from "../assets/image/net.png";
 import ocean from "../assets/image/ocean.jpg";
-import octopus_fishing from "../assets/image/octopus_fishing.png";
 import octopus from "../assets/image/octopus.png";
+import octopusFishing from "../assets/image/octopus_fishing.png";
 import plate from "../assets/image/plate.png";
 import rice from "../assets/image/rice.png";
-import salmon_fishing_left from "../assets/image/salmon_fishing_left.png";
-import salmon_fishing from "../assets/image/salmon_fishing.png";
 import salmon from "../assets/image/salmon.png";
-import sheet_left from "../assets/image/sheet_left.png";
-import sheet from "../assets/image/sheet.png";
-import shrimp_fishing_left from "../assets/image/shrimp_fishing_left.png";
-import shrimp_fishing from "../assets/image/shrimp_fishing.png";
+import salmonFishingRight from "../assets/image/salmon_fishing.png";
+import salmonFishingLeft from "../assets/image/salmon_fishing_left.png";
+import sheetRight from "../assets/image/sheet.png";
+import sheetLeft from "../assets/image/sheet_left.png";
 import shrimp from "../assets/image/shrimp.png";
-import tuna_fishing_left from "../assets/image/tuna_fishing_left.png";
-import tuna_fishing from "../assets/image/tuna_fishing.png";
-import tuna from "../assets/image/tuna.png";
-import wasabi from "../assets/image/wasabi.png";
+import shrimpFishingRight from "../assets/image/shrimp_fishing.png";
+import shrimpFishingLeft from "../assets/image/shrimp_fishing_left.png";
 import sushi from "../assets/image/sushi.png";
+import tuna from "../assets/image/tuna.png";
+import tunaFishingRight from "../assets/image/tuna_fishing.png";
+import tunaFishingLeft from "../assets/image/tuna_fishing_left.png";
+import wasabi from "../assets/image/wasabi.png";
 
-export const IMAGES = [audio_off, audio_on, background, customer, eel_fishing_left, eel_fishing,
-  eel, egg, hook, net, ocean, octopus_fishing, octopus, plate, rice, salmon_fishing_left, salmon_fishing,
-  salmon, sheet_left, sheet, shrimp_fishing_left, shrimp_fishing, shrimp, tuna_fishing_left, tuna_fishing,
+export const IMAGES = [audioOff, audioOn, background, customer, eelFishingLeft, eelFishingRight,
+  eel, egg, hook, net, ocean, octopusFishing, octopus, plate, rice, salmonFishingLeft, salmonFishingRight,
+  salmon, sheetLeft, sheetRight, shrimpFishingLeft, shrimpFishingRight, shrimp, tunaFishingLeft, tunaFishingRight,
   tuna, wasabi, sushi,
 ];
 
@@ -120,27 +120,43 @@ export const INGREDIENTS = [
 export const FISHES = [
   {
     id: "tuna",
-    link: tuna_fishing,
+    link: tunaFishingRight,
     name: "참치",
   },
   {
     id: "salmon",
-    link: salmon_fishing,
+    link: salmonFishingRight,
     name: "연어",
   },
   {
     id: "octopus",
-    link: octopus_fishing,
+    link: octopusFishing,
     name: "문어",
   },
   {
     id: "shrimp",
-    link: shrimp_fishing,
+    link: shrimpFishingRight,
     name: "새우",
   },
   {
     id: "eel",
-    link: eel_fishing,
+    link: eelFishingRight,
     name: "장어",
   },
 ];
+
+export const FISH_IMAGE = {
+  LEFT: {
+    tuna: tunaFishingLeft,
+    salmon: salmonFishingLeft,
+    eel: eelFishingLeft,
+    shrimp: shrimpFishingLeft,
+  },
+  RIGHT: {
+    tuna: tunaFishingRight,
+    salmon: salmonFishingRight,
+    eel: eelFishingRight,
+    shrimp: shrimpFishingRight,
+  },
+  octopus: octopusFishing,
+};

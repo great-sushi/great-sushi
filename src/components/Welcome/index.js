@@ -1,6 +1,8 @@
 import React from "react";
+
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+
 import sushi from "../../assets/image/sushi.png";
 
 const Wrapper = styled.div`
@@ -20,7 +22,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 100px;
+  font-size: ${({ theme }) => theme.fontSize.biggest};
   padding: 2rem;
 `;
 
@@ -33,7 +35,7 @@ const SushiImage = styled.img`
 const Button = styled(Link)`
   margin: 1rem;
   padding: 1rem;
-  background-color: #ffff;
+  background-color: ${({ theme }) => theme.color.white};
   border: 1px solid black;
   border-radius: 0.5rem;
   color: black;
@@ -44,13 +46,11 @@ const Button = styled(Link)`
 function Welcome() {
   return (
     <Wrapper>
-      <>
-        <SushiImage src={sushi} alt="sushi" />
-        <Title>위대한 초밥</Title>
-        <Button to="/fishing">
-          게임시작
-        </Button>
-      </>
+      <SushiImage src={sushi} alt="sushi" />
+      <Title>위대한 초밥</Title>
+      <Button to="/fishing">
+        게임시작
+      </Button>
     </Wrapper>
   );
 }

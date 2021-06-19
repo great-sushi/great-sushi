@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router";
 import styled, { keyframes } from "styled-components";
-import useAudio from "../../../hooks/useAudio";
-import { showModal } from "../../../actions/modal";
+
 import { updateWasabiSize } from "../../../actions/cooking";
+import { showModal } from "../../../actions/modal";
 import {
   FISHING_SUCCESS_TEXT,
   EXIT,
   OPEN,
   FAILURE_TEXT,
   RETRY,
-} from "../../../constants";
+} from "../../../constants/modal";
+import useAudio from "../../../hooks/useAudio";
 
 const pulse = keyframes`
   from {
@@ -30,7 +32,7 @@ const Wrapper = styled.div`
   border-radius: 8px;
   width: 200px;
   height: 100px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.color.white};
   border: 5px solid black;
 
   *, *::after, *::before {
@@ -41,11 +43,11 @@ const Wrapper = styled.div`
   }
 
   &.danger {
-    background-color: #e84118;
+    background-color: ${({ theme }) => theme.color.red};
   }
 
   p {
-    font-size: 40px;
+    font-size: ${({ theme }) => theme.fontSize.bigger};
   }
 
   .pulse {
@@ -69,7 +71,7 @@ function Timer() {
       restartAudio();
       setSeconds(60);
       return;
-    };
+    }
 
     const intervalId = setInterval(() => {
       if (seconds === 0) {

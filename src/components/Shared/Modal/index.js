@@ -1,10 +1,12 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+
 import { createPortal } from "react-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+
 import { hideModal } from "../../../actions/modal";
-import { FISHES, MENUS } from "../../../constants/image";
+import { FISHES, MENUS } from "../../../constants/imageSetting";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -55,7 +57,7 @@ const Content = styled.div`
   p {
     width: 80%;
     padding: 10px;
-    font-size: 20px;
+    font-size: ${({ theme }) => theme.fontSize.middle};
     text-align: center;
     line-height: 1.3;
   }
@@ -64,18 +66,18 @@ const Content = styled.div`
 const LinkButton = styled(Link)`
   width: 110px;
   height: auto;
-  padding: ${({ theme }) => theme.padding.small};
+  padding: 0.5rem;
   border: 3px solid ${({ theme }) => theme.color.white};
   display: inline-block;
-  font-size: 20px;
+  font-size: ${({ theme }) => theme.fontSize.middle};
   text-align: center;
   color: ${({ theme }) => theme.color.white};
   border-radius: 8px;
   margin: 5px;
 
   &:hover {
-    background: #3742fa;
-    border-color: #3742fa;
+    background: ${({ theme }) => theme.color.blue};
+    border-color: ${({ theme }) => theme.color.blue};
     transition: 0.3s all;
   }
 `;
@@ -159,16 +161,18 @@ function Modal() {
             {modal.contentText}
           </p>
           {modal.game === "fishing"
-          &&
-            <Request>
-              {renderFishKind()}
-            </Request>
+            && (
+              <Request>
+                {renderFishKind()}
+              </Request>
+            )
           }
           {modal.game === "sushi"
-          &&
-            <Menu>
-              {renderSushiMenu()}
-            </Menu>
+            && (
+              <Menu>
+                {renderSushiMenu()}
+              </Menu>
+            )
           }
           <LinkButtonWrapper>
             <LinkButton
