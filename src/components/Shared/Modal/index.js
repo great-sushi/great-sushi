@@ -66,7 +66,7 @@ const Content = styled.div`
 const LinkButton = styled(Link)`
   width: 110px;
   height: auto;
-  padding: ${({ theme }) => theme.padding.small};
+  padding: 0.5rem;
   border: 3px solid ${({ theme }) => theme.color.white};
   display: inline-block;
   font-size: ${({ theme }) => theme.fontSize.middle};

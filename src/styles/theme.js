@@ -17,29 +17,9 @@ const fontSize = {
   biggest: calcRem(100),
 };
 
-const margin = {
-  small: calcRem(8),
-  base: calcRem(16),
-  middle: calcRem(24),
-  big: calcRem(32),
-  bigger: calcRem(40),
-  biggest: calcRem(48),
-};
-
-const padding = {
-  small: calcRem(8),
-  base: calcRem(16),
-  middle: calcRem(24),
-  big: calcRem(32),
-  bigger: calcRem(40),
-  biggest: calcRem(48),
-};
-
 const theme = {
   color,
   fontSize,
-  margin,
-  padding,
 };
 
 export default theme;
