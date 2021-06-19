@@ -9,7 +9,7 @@ import Cooking from "../Cooking";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Fishing from "../Fishing";
-import { IMAGES } from "../../constants/image";
+import { IMAGES } from "../../constants/imageSetting";
 
 const Wrapper = styled.div`
   width: 100vw;

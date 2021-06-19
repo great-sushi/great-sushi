@@ -10,7 +10,7 @@ import {
 import wasabiImage from "../../../assets/image/wasabi.png";
 import Ingredients from "./Ingredients";
 import DropZone from "./DropZone";
-import { INGREDIENTS } from "../../../constants/image";
+import { INGREDIENTS } from "../../../constants/imageSetting";
 
 const CookingTable = styled.div`
   width: 100%;

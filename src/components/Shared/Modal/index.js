@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { hideModal } from "../../../actions/modal";
-import { FISHES, MENUS } from "../../../constants/image";
+import { FISHES, MENUS } from "../../../constants/imageSetting";
 
 const Wrapper = styled.div`
   width: 100vw;

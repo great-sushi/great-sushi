@@ -4,7 +4,7 @@ import styled from "styled-components";
 import leftSheet from "../../../assets/image/sheet_left.png";
 import { updateOrder } from "../../../actions/cooking";
 import { getRandomInt } from "../../../utils";
-import { MENUS } from "../../../constants/image";
+import { MENUS } from "../../../constants/imageSetting";
 
 const Wrapper = styled.div`
   position: absolute;

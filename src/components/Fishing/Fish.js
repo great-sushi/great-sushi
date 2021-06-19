@@ -1,13 +1,5 @@
-import tunaLeft from "../../assets/image/tuna_fishing_left.png";
-import tunaRight from "../../assets/image/tuna_fishing.png";
-import salmonLeft from "../../assets/image/salmon_fishing_left.png";
-import salmonRight from "../../assets/image/salmon_fishing.png";
-import eelLeft from "../../assets/image/eel_fishing_left.png";
-import eelRight from "../../assets/image/eel_fishing.png";
-import octopus from "../../assets/image/octopus_fishing.png";
-import shrimpLeft from "../../assets/image/shrimp_fishing_left.png";
-import shrimpRight from "../../assets/image/shrimp_fishing.png";
 import { getRandomInt } from "../../utils";
+import { FISH_IMAGE } from "../../constants/imageSetting";
 
 class Fish {
   constructor(name, x, y, width, height, src, initDirection) {
@@ -18,7 +10,7 @@ class Fish {
     this.height = height;
     this.image = new Image();
     this.image.src = src;
-    this.velocity = Math.random() - 0.5;
+    this.velocity = 1;
     this.initDirection = initDirection;
   }
 
@@ -31,34 +23,15 @@ class Fish {
   update(ctx, width, height) {
     if (this.initDirection === 0) {
       if (this.x < width) {
-        if (this.width !== 80) {
-          this.x++;
-        }
-
-        if (this.name === "tuna") {
-          this.image.src = tunaRight;
-          ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        }
-
-        if (this.name === "salmon") {
-          this.image.src = salmonRight;
-          ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        }
-
-        if (this.name === "eel") {
-          this.image.src = eelRight;
-          ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        }
-
         if (this.name === "octopus") {
-          this.image.src = octopus;
-          ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+          this.image.src = FISH_IMAGE.octopus;
+          this.x += 0.1;
+        } else {
+          this.image.src = FISH_IMAGE.RIGHT[this.name];
+          this.x += this.velocity;
         }
 
-        if (this.name === "shrimp") {
-          this.image.src = shrimpRight;
-          ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        }
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
       } else {
         this.initDirection = 1;
 
@@ -72,33 +45,15 @@ class Fish {
       }
     } else {
       if (this.x > - width * 0.1) {
-        if (this.x !== 80) {
-          this.x--;
-        }
-        if (this.name === "tuna") {
-          this.image.src = tunaLeft;
-          ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        }
-
-        if (this.name === "salmon") {
-          this.image.src = salmonLeft;
-          ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        }
-
-        if (this.name === "eel") {
-          this.image.src = eelLeft;
-          ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        }
-
         if (this.name === "octopus") {
-          this.image.src = octopus;
-          ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+          this.image.src = FISH_IMAGE.octopus;
+          this.x -= 0.1;
+        } else {
+          this.image.src = FISH_IMAGE.LEFT[this.name];
+          this.x -= this.velocity;
         }
 
-        if (this.name === "shrimp") {
-          this.image.src = shrimpLeft;
-          ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        }
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
       } else {
         this.initDirection = 0;
 
@@ -110,12 +65,6 @@ class Fish {
           this.y = getRandomInt(height * 0.2, height * 0.7);
         }
       }
-    }
-
-    if (this.width !== 80) {
-      this.x += this.velocity;
-    } else {
-      this.x += 0.1;
     }
   }
 }

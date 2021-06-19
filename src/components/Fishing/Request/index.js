@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import useAudio from "../../../hooks/useAudio";
 import { completeRequest } from "../../../actions/fishing";
 import produce from "immer";
-import { FISHES } from "../../../constants/image";
+import { FISHES } from "../../../constants/imageSetting";
 
 const Wrapper = styled.div`
   border: 5px solid black;
