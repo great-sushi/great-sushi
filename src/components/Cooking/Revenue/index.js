@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { showModal } from "../../../actions/modal";
-import { SUCCESS_TEXT, EXIT, RETRY } from "../../../constants";
+import { SUCCESS_TEXT, EXIT, RETRY } from "../../../constants/modal";
 
 const Wrapper = styled.div`
   display: flex;

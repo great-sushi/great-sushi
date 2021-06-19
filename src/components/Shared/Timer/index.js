@@ -11,7 +11,7 @@ import {
   OPEN,
   FAILURE_TEXT,
   RETRY,
-} from "../../../constants";
+} from "../../../constants/modal";
 
 const pulse = keyframes`
   from {

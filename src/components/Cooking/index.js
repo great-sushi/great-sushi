@@ -14,7 +14,7 @@ import {
   COOKING_GUIDE_TEXT,
   EXIT,
   START,
-} from "../../constants";
+} from "../../constants/modal";
 
 const Wrapper = styled.div`
   width: 100%;

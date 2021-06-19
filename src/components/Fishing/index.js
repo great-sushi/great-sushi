@@ -8,7 +8,7 @@ import Request from "./Request";
 import Modal from "../Shared/Modal";
 import Option from "../Shared/Option";
 import { showModal } from "../../actions/modal";
-import { FISHING_GUIDE_TEXT, EXIT, START } from "../../constants";
+import { FISHING_GUIDE_TEXT, EXIT, START } from "../../constants/modal";
 
 const Wrapper = styled.div`
   display: flex;
