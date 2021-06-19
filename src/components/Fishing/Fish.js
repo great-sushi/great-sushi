@@ -1,5 +1,5 @@
-import { getRandomInt } from "../../utils";
 import { FISH_IMAGE } from "../../constants/imageSetting";
+import { getRandomInt } from "../../utils";
 
 class Fish {
   constructor(name, x, y, width, height, src, initDirection) {

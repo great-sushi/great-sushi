@@ -1,4 +1,5 @@
 import produce from "immer";
+
 import {
   UPDATE_REQUEST,
   CATCH_FISH,

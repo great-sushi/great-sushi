@@ -1,4 +1,5 @@
 import produce from "immer";
+
 import { SHOW_MODAL, HIDE_MODAL } from "../constants/actionTypes";
 
 const initialState = {

@@ -1,20 +1,22 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
-import Table from "./Table";
-import Timer from "../Shared/Timer";
-import Order from "./Order";
-import Evaluation from "./Evaluation";
-import Revenue from "./Revenue";
-import Modal from "../Shared/Modal";
+
 import { useSelector, useDispatch } from "react-redux";
-import Restaurant from "./Restaurant";
-import Option from "../Shared/Option";
+import styled from "styled-components";
+
 import { showModal } from "../../actions/modal";
 import {
   COOKING_GUIDE_TEXT,
   EXIT,
   START,
 } from "../../constants/modal";
+import Modal from "../Shared/Modal";
+import Option from "../Shared/Option";
+import Timer from "../Shared/Timer";
+import Evaluation from "./Evaluation";
+import Order from "./Order";
+import Restaurant from "./Restaurant";
+import Revenue from "./Revenue";
+import Table from "./Table";
 
 const Wrapper = styled.div`
   width: 100%;

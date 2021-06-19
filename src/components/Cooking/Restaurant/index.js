@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
+
 import { useSelector } from "react-redux";
-import customerImage from "../../../assets/image/customer.png";
-import backgroundImage from "../../../assets/image/background.jpg";
-import Customer from "./Customer";
 import styled from "styled-components";
-import { getRandomInt } from "../../../utils";
+
+import backgroundImage from "../../../assets/image/background.jpg";
+import customerImage from "../../../assets/image/customer.png";
 import useCanvas from "../../../hooks/useCanvas";
+import { getRandomInt } from "../../../utils";
+import Customer from "./Customer";
 
 const Wrapper = styled.div`
   canvas {
@@ -14,8 +16,8 @@ const Wrapper = styled.div`
   }
 `;
 
-const rows = [0, 1];
-const columns = [0, 3, 6, 9];
+const ROWS = [0, 1];
+const COLUMNS = [0, 3, 6, 9];
 
 function Restaurant() {
   const { sashimiOrder, wasabiOrder } = useSelector((state) => state.order);
@@ -25,17 +27,14 @@ function Restaurant() {
   const [column, setColumn] = useState(0);
 
   const customer = new Customer(customerImage, column, row);
-
-  const draw = (ctx, height, width) => {
-    customer.draw(ctx, width, height);
-  };
+  const draw = (ctx, height, width) => customer.draw(ctx, width, height);
 
   const canvasRef = useCanvas(1, 0.55, draw, [column, row]);
 
   useEffect(() => {
     if (rice.id.length === 0) {
-      setRow(() => rows[getRandomInt(0, 1)]);
-      setColumn(() => columns[getRandomInt(0, 3)]);
+      setRow(() => ROWS[getRandomInt(0, 1)]);
+      setColumn(() => COLUMNS[getRandomInt(0, 3)]);
       return;
     }
 
@@ -66,4 +65,4 @@ function Restaurant() {
   );
 }
 
-export default Restaurant;
+export default React.memo(Restaurant);

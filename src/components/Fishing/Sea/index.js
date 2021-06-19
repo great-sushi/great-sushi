@@ -1,18 +1,20 @@
 import React, { useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+
+import { updateCaughtFish, updateRequest } from "../../../actions/fishing";
+import eel from "../../../assets/image/eel_fishing.png";
+import hookImage from "../../../assets/image/hook.png";
+import ocean from "../../../assets/image/ocean.jpg";
+import octopus from "../../../assets/image/octopus_fishing.png";
+import salmon from "../../../assets/image/salmon_fishing.png";
+import shrimp from "../../../assets/image/shrimp_fishing.png";
+import tuna from "../../../assets/image/tuna_fishing.png";
+import useCanvas from "../../../hooks/useCanvas";
+import { getRandomInt } from "../../../utils";
 import Fish from "../Fish";
 import Hook from "../Hook";
-import tuna from "../../../assets/image/tuna_fishing.png";
-import salmon from "../../../assets/image/salmon_fishing.png";
-import ocean from "../../../assets/image/ocean.jpg";
-import eel from "../../../assets/image/eel_fishing.png";
-import octopus from "../../../assets/image/octopus_fishing.png";
-import shrimp from "../../../assets/image/shrimp_fishing.png";
-import hookImage from "../../../assets/image/hook.png";
-import { updateCaughtFish, updateRequest } from "../../../actions/fishing";
-import { getRandomInt } from "../../../utils";
-import useCanvas from "../../../hooks/useCanvas";
 
 const Wrapper = styled.div`
   canvas {

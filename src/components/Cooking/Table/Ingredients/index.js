@@ -1,11 +1,13 @@
 import React from "react";
-import styled from "styled-components";
+
+import PropTypes from "prop-types";
 import { useDrag, DragPreviewImage } from "react-dnd";
+import styled from "styled-components";
 
 const Item = styled.div`
   width: 120px;
   cursor: grab;
-  background-color: white;
+  background-color: ${({ theme }) => theme.color.white};
   border-radius: 10px;
   margin: 4px;
   display: flex;
@@ -47,6 +49,10 @@ const Ingredients = ({ ingredient }) => {
       />
     </Item>
   );
+};
+
+Ingredients.propTypes = {
+  ingredient: PropTypes.object.isRequired,
 };
 
 export default Ingredients;

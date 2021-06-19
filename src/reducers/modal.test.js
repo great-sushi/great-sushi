@@ -1,14 +1,13 @@
-import modal from "./modal";
-import {
-  COOKING_GUIDE_TEXT,
-  EXIT,
-  START,
-} from "../constants";
-
 import {
   SHOW_MODAL,
   HIDE_MODAL,
 } from "../constants/actionTypes";
+import {
+  COOKING_GUIDE_TEXT,
+  EXIT,
+  START,
+} from "../constants/modal";
+import modal from "./modal";
 
 describe("reducers", () => {
   describe("modal", () => {

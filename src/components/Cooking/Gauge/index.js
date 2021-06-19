@@ -1,5 +1,8 @@
 import React from "react";
+
+import PropTypes from "prop-types";
 import styled, { keyframes } from "styled-components";
+
 import wasabiImage from "../../../assets/image/wasabi.png";
 
 const Bar = styled.div`
@@ -10,7 +13,7 @@ const Bar = styled.div`
 `;
 
 const Percentage = styled.h1`
-  font-size: 30px;
+  font-size: ${({ theme }) => theme.fontSize.big};
 `;
 
 const GaugeContainer = styled.div`
@@ -62,7 +65,7 @@ const Guide = styled.div`
 `;
 
 const Text = styled.p`
-  font-size: 30px;
+  font-size: ${({ theme }) => theme.fontSize.big};
   padding: 10px;
 
   &.pulse {
@@ -73,7 +76,7 @@ const Text = styled.p`
 const Item = styled.div`
   width: 120px;
   cursor: grab;
-  background-color: white;
+  background-color: ${({ theme }) => theme.color.white};
   border-radius: 10px;
   margin: 4px;
   display: flex;
@@ -116,5 +119,12 @@ function Gauge({
     </GaugeContainer>
   );
 }
+
+Gauge.propTypes = {
+  percentage: PropTypes.number.isRequired,
+  updatePercentage: PropTypes.func.isRequired,
+  wasabiOrder: PropTypes.number.isRequired,
+  rice: PropTypes.object.isRequired,
+};
 
 export default React.memo(Gauge);

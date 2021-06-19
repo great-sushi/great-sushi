@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
+
+import PropTypes from "prop-types";
 import { useDrop } from "react-dnd";
-import useAudio from "../../../../hooks/useAudio";
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
+
 import {
   updateRice,
   updateSashimi,
   updateWasabiSize,
 } from "../../../../actions/cooking";
-import StackedIngredient from "./StackedIngredient";
 import plate from "../../../../assets/image/plate.png";
+import useAudio from "../../../../hooks/useAudio";
+import StackedIngredient from "./StackedIngredient";
 
 const SushiContainer = styled.div`
   width: 350px;
@@ -83,5 +86,12 @@ function DropZone({ percentage, rice, sashimi, wasabi }) {
     </SushiContainer>
   );
 }
+
+DropZone.propTypes = {
+  percentage: PropTypes.number.isRequired,
+  rice: PropTypes.object.isRequired,
+  sashimi: PropTypes.object.isRequired,
+  wasabi: PropTypes.object.isRequired,
+};
 
 export default DropZone;

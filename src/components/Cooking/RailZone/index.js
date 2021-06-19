@@ -1,6 +1,7 @@
 import React from "react";
-import Rail from "./Rail";
+
 import useCanvas from "../../../hooks/useCanvas";
+import Rail from "./Rail";
 
 let startPoint = 0;
 let lowPoint= 100;

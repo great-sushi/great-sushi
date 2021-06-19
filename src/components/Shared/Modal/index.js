@@ -1,8 +1,10 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+
 import { createPortal } from "react-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+
 import { hideModal } from "../../../actions/modal";
 import { FISHES, MENUS } from "../../../constants/imageSetting";
 
@@ -55,7 +57,7 @@ const Content = styled.div`
   p {
     width: 80%;
     padding: 10px;
-    font-size: 20px;
+    font-size: ${({ theme }) => theme.fontSize.middle};
     text-align: center;
     line-height: 1.3;
   }
@@ -67,15 +69,15 @@ const LinkButton = styled(Link)`
   padding: ${({ theme }) => theme.padding.small};
   border: 3px solid ${({ theme }) => theme.color.white};
   display: inline-block;
-  font-size: 20px;
+  font-size: ${({ theme }) => theme.fontSize.middle};
   text-align: center;
   color: ${({ theme }) => theme.color.white};
   border-radius: 8px;
   margin: 5px;
 
   &:hover {
-    background: #3742fa;
-    border-color: #3742fa;
+    background: ${({ theme }) => theme.color.blue};
+    border-color: ${({ theme }) => theme.color.blue};
     transition: 0.3s all;
   }
 `;

@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import leftSheet from "../../../assets/image/sheet_left.png";
+
 import { updateOrder } from "../../../actions/cooking";
-import { getRandomInt } from "../../../utils";
+import leftSheet from "../../../assets/image/sheet_left.png";
 import { MENUS } from "../../../constants/imageSetting";
+import { getRandomInt } from "../../../utils";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -26,17 +28,10 @@ const Wrapper = styled.div`
     -webkit-app-region: no-drag;
     cursor: default;
   }
-
-  p {
-    font-size: 30px;
-    padding: 0 20px 20px 20px;
-    text-align: center;
-    line-height: 1.3;
-  }
 `;
 
 const Text = styled.p`
-  font-size: 30px;
+  font-size: ${({ theme }) => theme.fontSize.big};
   padding: 0 20px 20px 20px;
   text-align: center;
   line-height: 1.3;
