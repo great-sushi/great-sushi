@@ -47,9 +47,11 @@ function Restaurant() {
       setColumn(prev => prev + 2);
       return;
     }
+
     if (wasabiOrder < wasabi.size) {
       setColumn(prev => prev + 2);
     }
+
     if (rice.id.length && wasabiOrder > wasabi.size) {
       setColumn(prev => prev + 2);
     }
