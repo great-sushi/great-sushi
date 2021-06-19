@@ -8,7 +8,7 @@ import {
   ADD_WASABI_SIZE,
   ADD_SASHIMI,
   RESET_PLATE,
-} from "../constants";
+} from "../constants/actionTypes";
 
 describe("reducers", () => {
   describe("sushi", () => {

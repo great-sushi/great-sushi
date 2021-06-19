@@ -3,9 +3,12 @@ import {
   COOKING_GUIDE_TEXT,
   EXIT,
   START,
+} from "../constants";
+
+import {
   SHOW_MODAL,
   HIDE_MODAL,
-} from "../constants";
+} from "../constants/actionTypes";
 
 describe("reducers", () => {
   describe("modal", () => {

@@ -1,5 +1,5 @@
 import order from "./order";
-import { ADD_ORDER } from "../constants";
+import { ADD_ORDER } from "../constants/actionTypes";
 
 describe("reducers", () => {
   describe("order", () => {

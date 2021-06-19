@@ -3,7 +3,7 @@ import {
   CATCH_FISH,
   UPDATE_REQUEST,
   COMPLETE_REQUEST,
-} from "../constants";
+} from "../constants/actionTypes";
 
 export const clearNet = () => ({
   type: CLEAR_NET,

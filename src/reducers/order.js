@@ -1,5 +1,5 @@
 import produce from "immer";
-import { ADD_ORDER } from "../constants";
+import { ADD_ORDER } from "../constants/actionTypes";
 
 const initialState = {
   sashimiOrder: {

@@ -5,7 +5,7 @@ import {
   ADD_WASABI,
   RESET_PLATE,
   ADD_WASABI_SIZE,
-} from "../constants";
+} from "../constants/actionTypes";
 
 const initialState = {
   rice: {

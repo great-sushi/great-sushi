@@ -4,7 +4,7 @@ import {
   CATCH_FISH,
   COMPLETE_REQUEST,
   CLEAR_NET,
-} from "../constants";
+} from "../constants/actionTypes";
 
 describe("reducers", () => {
   describe("fishing", () => {
