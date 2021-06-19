@@ -49,4 +49,4 @@ const Ingredients = ({ ingredient }) => {
   );
 };
 
-export default React.memo(Ingredients);
+export default Ingredients;

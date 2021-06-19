@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDrop } from "react-dnd";
-import useAudio from "../../../hooks/useAudio";
+import useAudio from "../../../../hooks/useAudio";
 import { useDispatch } from "react-redux";
 import {
   updateRice,
   updateSashimi,
   updateWasabiSize,
-} from "../../../actions/cooking";
+} from "../../../../actions/cooking";
 import StackedIngredient from "./StackedIngredient";
-import plate from "../../../assets/image/plate.png";
+import plate from "../../../../assets/image/plate.png";
 
 const SushiContainer = styled.div`
   width: 350px;
