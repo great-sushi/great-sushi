@@ -40,15 +40,6 @@ const GlobalStyles = createGlobalStyle`
     font-size: 16px;
     font-family: RixYeoljeongdo_Regular;
   }
-
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-size: ${({ theme }) => theme.fontSize.bigger};
-    color: ${({ theme }) => theme.color.white};
-  }
 `;
 
 export default GlobalStyles;
