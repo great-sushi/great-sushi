@@ -55,9 +55,9 @@ const renderIngredientList = () => {
 
 function Table() {
   const dispatch = useDispatch();
-  const { rice, sashimi, wasabi } = useSelector(state => state.sushi);
-  const wasabiOrder = useSelector(state => state.order.wasabiOrder);
-  const modal = useSelector(state => state.modal);
+  const { rice, sashimi, wasabi } = useSelector((state) => state.sushi);
+  const wasabiOrder = useSelector((state) => state.order.wasabiOrder);
+  const modal = useSelector((state) => state.modal);
   const [percentage, setPercentage] = useState(0);
 
   const updatePercentage = () => {
