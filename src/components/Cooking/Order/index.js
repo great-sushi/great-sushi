@@ -33,10 +33,13 @@ const Wrapper = styled.div`
     text-align: center;
     line-height: 1.3;
   }
+`;
 
-  img {
-    width: 40%
-  }
+const Text = styled.p`
+  font-size: 30px;
+  padding: 0 20px 20px 20px;
+  text-align: center;
+  line-height: 1.3;
 `;
 
 function Order() {
@@ -56,7 +59,7 @@ function Order() {
 
   return (
     <Wrapper>
-      <p>{`${sashimiOrder.name} 초밥 와사비 ${wasabiOrder}% 로 주세요`}</p>
+      <Text>{`${sashimiOrder.name} 초밥 와사비 ${wasabiOrder}% 로 주세요`}</Text>
     </Wrapper>
   );
 }
