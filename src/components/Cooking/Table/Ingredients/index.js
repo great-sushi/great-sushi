@@ -24,7 +24,7 @@ const Image = styled.img`
   padding: 8px;
 `;
 
-const Ingredients = ({ ingredient }) => {
+function Ingredients({ ingredient }) {
   const [, drag, preview] = useDrag({
     type: "SushiIngredients",
     item: {
@@ -49,7 +49,7 @@ const Ingredients = ({ ingredient }) => {
       />
     </Item>
   );
-};
+}
 
 Ingredients.propTypes = {
   ingredient: PropTypes.object.isRequired,
