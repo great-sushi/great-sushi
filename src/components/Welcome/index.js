@@ -44,13 +44,11 @@ const Button = styled(Link)`
 function Welcome() {
   return (
     <Wrapper>
-      <>
-        <SushiImage src={sushi} alt="sushi" />
-        <Title>위대한 초밥</Title>
-        <Button to="/fishing">
-          게임시작
-        </Button>
-      </>
+      <SushiImage src={sushi} alt="sushi" />
+      <Title>위대한 초밥</Title>
+      <Button to="/fishing">
+        게임시작
+      </Button>
     </Wrapper>
   );
 }
