@@ -9,9 +9,7 @@ let controlPointIn = -50;
 
 function RailZone() {
   const rail = new Rail(startPoint, lowPoint, controlPoint, controlPointIn);
-  const draw = (ctx, height) => {
-    rail.draw(ctx, height);
-  };
+  const draw = (ctx, height) => rail.draw(ctx, height);
   const canvasRef = useCanvas(1, 0.2, draw);
 
   return (
@@ -22,4 +20,4 @@ function RailZone() {
   );
 }
 
-export default React.memo(RailZone);
+export default RailZone;
