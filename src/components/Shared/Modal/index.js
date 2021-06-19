@@ -161,16 +161,18 @@ function Modal() {
             {modal.contentText}
           </p>
           {modal.game === "fishing"
-          &&
-            <Request>
-              {renderFishKind()}
-            </Request>
+            && (
+              <Request>
+                {renderFishKind()}
+              </Request>
+            )
           }
           {modal.game === "sushi"
-          &&
-            <Menu>
-              {renderSushiMenu()}
-            </Menu>
+            && (
+              <Menu>
+                {renderSushiMenu()}
+              </Menu>
+            )
           }
           <LinkButtonWrapper>
             <LinkButton

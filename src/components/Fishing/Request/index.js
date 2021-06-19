@@ -66,11 +66,11 @@ function Request() {
 
   const renderCaughtFishCount = () => {
     return FISHES.map((fish) => (
-        <div key={fish.id}>
-          <img src={fish.link} alt={fish.id} />
-          <p>{`${fish.name} ${fishCount[fish.id]} / ${request[fish.id]} 개`}</p>
-        </div>
-      ));
+      <div key={fish.id}>
+        <img src={fish.link} alt={fish.id} />
+        <p>{`${fish.name} ${fishCount[fish.id]} / ${request[fish.id]} 개`}</p>
+      </div>
+    ));
   };
 
   useEffect(() => {

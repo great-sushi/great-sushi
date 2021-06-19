@@ -51,8 +51,7 @@ function Fishing() {
     <>
       <Option />
       <Wrapper>
-        {modal.isVisible
-        && <Modal />}
+        {modal.isVisible && <Modal />}
         <Sea />
         <Menu>
           <Timer />

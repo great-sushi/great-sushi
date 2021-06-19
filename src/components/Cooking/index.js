@@ -52,10 +52,9 @@ function Cooking() {
     <Wrapper>
       <Option />
       <Restaurant />
-      {modal.isVisible
-      && <Modal />}
-      {!sashimi.id && <Order />}
+      {modal.isVisible && <Modal />}
       {sashimi.id && <Evaluation />}
+      {!sashimi.id && <Order />}
       <Side>
         <Timer />
         <Revenue />

@@ -49,9 +49,11 @@ function Revenue() {
       setRevenue((prev) => prev - 1000);
       return;
     }
+
     if (wasabiOrder < wasabi.size) {
       setRevenue((prev) => prev - sashimi.price / 2);
     }
+
     if (rice.id.length && wasabiOrder > wasabi.size) {
       setRevenue((prev) => prev - sashimi.price / 2);
     }

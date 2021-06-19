@@ -47,6 +47,7 @@ const pulse = keyframes`
   from {
     transform: scale(1.5);
   }
+
   to {
     transform: scale(1);
   }
@@ -108,13 +109,14 @@ function Gauge({
           />
         </Item>
         {rice.id && wasabiOrder !== 0
-        && (
-          <Guide>
-            <Text className="pulse">
-              ←클릭!
-            </Text>
-          </Guide>
-        )}
+          && (
+            <Guide>
+              <Text className="pulse">
+                ←클릭!
+              </Text>
+            </Guide>
+          )
+        }
       </WasabiContainer>
     </GaugeContainer>
   );
