@@ -21,10 +21,6 @@ const Wrapper = styled.div`
     -webkit-app-region: no-drag;
     cursor: default;
   }
-
-  p {
-    font-size: 40px;
-  }
 `;
 
 const Text = styled.p`
