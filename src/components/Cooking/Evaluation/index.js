@@ -6,7 +6,7 @@ import {
   WRONG_SUHSI,
   SPICY,
   BLAND,
-} from "../../../constants";
+} from "../../../constants/cooking";
 import sheet from "../../../assets/image/sheet.png";
 import useAudio from "../../../hooks/useAudio";
 
