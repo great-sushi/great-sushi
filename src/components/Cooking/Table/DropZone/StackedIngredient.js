@@ -38,7 +38,7 @@ function StackedIngredient({ ingredient, percentage }) {
 
 StackedIngredient.propTypes = {
   ingredient: PropTypes.object.isRequired,
-  percentage: PropTypes.number.isRequired,
+  percentage: PropTypes.number,
 };
 
 export default StackedIngredient;
