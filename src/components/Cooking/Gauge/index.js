@@ -1,9 +1,10 @@
 import React from "react";
 
 import PropTypes from "prop-types";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
-import wasabiImage from "../../../assets/image/wasabi.png";
+import GaugeWasabi from "../GaugeWasabi";
+import GaugeGuide from "../GaugeGuide";
 
 const Bar = styled.div`
   width: 400px;
@@ -37,55 +38,6 @@ const WasabiContainer = styled.div`
   height: auto;
 `;
 
-const Wasabi = styled.img`
-  width: 80%;
-  padding: 8px;
-  cursor: pointer;
-`;
-
-const pulse = keyframes`
-  from {
-    transform: scale(1.5);
-  }
-
-  to {
-    transform: scale(1);
-  }
-`;
-
-const Guide = styled.div`
-  width: 50%;
-  height: 100%;
-
-  *, *::after, *::before {
-    -webkit-user-select: none;
-    -webkit-user-drag: none;
-    -webkit-app-region: no-drag;
-    cursor: default;
-  }
-`;
-
-const Text = styled.p`
-  font-size: ${({ theme }) => theme.fontSize.big};
-  padding: 10px;
-
-  &.pulse {
-    animation: ${pulse} 0.5s ease-out infinite;
-  }
-`;
-
-const Item = styled.div`
-  width: 120px;
-  cursor: grab;
-  background-color: ${({ theme }) => theme.color.white};
-  border-radius: 10px;
-  margin: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid black;
-`;
-
 function Gauge({
   percentage,
   updatePercentage,
@@ -99,23 +51,11 @@ function Gauge({
       </Percentage>
       <Bar percentage={percentage} />
       <WasabiContainer>
-        <Item>
-          <Wasabi
-            className="wasabi"
-            src={wasabiImage}
-            alt="wasabi"
-            onClick={updatePercentage}
-            draggable="false"
-          />
-        </Item>
+        <GaugeWasabi
+          handleClick={updatePercentage}
+        />
         {rice.id && wasabiOrder !== 0
-          && (
-            <Guide>
-              <Text className="pulse">
-                ←클릭!
-              </Text>
-            </Guide>
-          )
+          && <GaugeGuide text="←클릭!" />
         }
       </WasabiContainer>
     </GaugeContainer>
