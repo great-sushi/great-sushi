@@ -1,14 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
-import Coughing from "../assets/audio/coughing.mp3";
-import Countdown from "../assets/audio/countdown.mp3"
-import Drop from "../assets/audio/drop.mp3";
-import Splash from "../assets/audio/splash.mp3";
-
-const countdown = new Audio(Countdown);
-const drop = new Audio(Drop);
-const splash = new Audio(Splash);
-const coughing = new Audio(Coughing);
+import coughing from "../assets/audio/coughing.mp3";
+import countdown from "../assets/audio/countdown.mp3"
+import drop from "../assets/audio/drop.mp3";
+import splash from "../assets/audio/splash.mp3";
 
 const gameAudio = {
   countdown,
@@ -17,25 +12,19 @@ const gameAudio = {
   coughing,
 };
 
-Object.keys(gameAudio).forEach(key => {
-  gameAudio[key].preload = "auto";
-});
-
-function useAudio(name, option) {
+function useAudio(name) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [audio] = useState(gameAudio[name]);
+  const audio = useRef();
 
-  if (option) {
-    Object.keys(option).forEach(i => {
-      audio[i] = option[i];
-    });
-  }
+  useEffect(() => {
+    audio.current = new Audio(gameAudio[name]);
+  }, [name]);
 
   useEffect(() => {
     if (isPlaying) {
-      audio.play();
+      audio.current.play();
     } else {
-      audio.pause();
+      audio.current.pause();
     }
   }, [isPlaying]);
 
@@ -44,7 +33,7 @@ function useAudio(name, option) {
   };
 
   const repeatAudio = () => {
-    audio.play();
+    audio.current.play();
   };
 
   const toggleAudio = () => {
@@ -52,7 +41,7 @@ function useAudio(name, option) {
   };
 
   const restartAudio = () => {
-    audio.currentTime = 0;
+    audio.current.currentTime = 0;
   };
 
   return [isPlaying, { playAudio, toggleAudio, restartAudio, repeatAudio }];
