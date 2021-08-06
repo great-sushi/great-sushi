@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
-import { updateOrder } from "../../../actions/cooking";
 import leftSheet from "../../../assets/image/sheet_left.png";
-import { MENUS } from "../../../constants/imageSetting";
-import { getRandomInt } from "../../../utils";
+import useOrder from "../../../hooks/useOrder";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -30,7 +28,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const Text = styled.p`
+const OrderText = styled.p`
   font-size: ${({ theme }) => theme.fontSize.big};
   padding: 0 20px 20px 20px;
   text-align: center;
@@ -38,23 +36,14 @@ const Text = styled.p`
 `;
 
 function Order() {
-  const dispatch = useDispatch();
   const { sashimiOrder, wasabiOrder } = useSelector((state) => state.order);
-  const { sashimi } = useSelector((state) => state.sushi);
-
-  useEffect(() => {
-    if (sashimi.id.length === 0) {
-      const randomIndex = getRandomInt(0, MENUS.length - 1);
-      const sashimi = MENUS[randomIndex];
-      const wasabi = getRandomInt(0, 10) * 10;
-
-      dispatch(updateOrder({ sashimi, wasabi }));
-    }
-  }, [sashimi.id]);
+  useOrder();
 
   return (
     <Wrapper>
-      <Text>{`${sashimiOrder.name} 초밥 와사비 ${wasabiOrder}% 로 주세요`}</Text>
+      <OrderText>
+        {`${sashimiOrder.name} 초밥 와사비 ${wasabiOrder}% 로 주세요`}
+      </OrderText>
     </Wrapper>
   );
 }

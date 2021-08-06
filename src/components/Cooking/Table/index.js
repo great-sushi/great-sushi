@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
-import {
-  clearPlate,
-  updateWasabi,
-} from "../../../actions/cooking";
-import wasabiImage from "../../../assets/image/wasabi.png";
 import { INGREDIENTS } from "../../../constants/imageSetting";
+import useClearPlate from "../../../hooks/useClearPlate";
+import usePercentage from "../../../hooks/usePercentage";
 import Gauge from "../Gauge";
 import RailZone from "../RailZone";
 import DropZone from "./DropZone";
@@ -54,55 +51,24 @@ const renderIngredientList = () => {
 };
 
 function Table() {
-  const dispatch = useDispatch();
   const { rice, sashimi, wasabi } = useSelector((state) => state.sushi);
   const wasabiOrder = useSelector((state) => state.order.wasabiOrder);
   const modal = useSelector((state) => state.modal);
-  const [percentage, setPercentage] = useState(0);
-
-  const updatePercentage = () => {
-    if (!rice.id) return;
-
-    if (percentage < 100) {
-      if (percentage === 0) {
-        dispatch(updateWasabi({
-          id: "wasabi",
-          kind: "wasabi",
-          link: wasabiImage,
-        }));
-      }
-
-      setPercentage((prev) => prev + 10);
-    }
-  };
-
-  useEffect(() => {
-    const timeoutID = setTimeout(() => {
-      if (sashimi.id) {
-        dispatch(clearPlate());
-        setPercentage(0);
-      }
-    }, 800);
-
-    return () => clearTimeout(timeoutID);
-  }, [sashimi.id]);
-
-  useEffect(() => {
-    dispatch(clearPlate());
-  }, [modal.isVisible]);
+  const updatePercentage = usePercentage(rice, wasabi);
+  useClearPlate(sashimi, modal);
 
   return (
     <CookingTable>
       <RailZone />
       <DropZone
-        percentage={percentage}
+        percentage={wasabi.size}
         rice={rice}
         sashimi={sashimi}
         wasabi={wasabi}
       />
       <IngredientsWrapper>
         <Gauge
-          percentage={percentage}
+          percentage={wasabi.size}
           updatePercentage={updatePercentage}
           wasabiOrder={wasabiOrder}
           rice={rice}

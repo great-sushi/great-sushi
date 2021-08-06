@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 import sheet from "../../../assets/image/sheet.png";
-import {
-  GOOD,
-  WRONG_SUHSI,
-  SPICY,
-  BLAND,
-} from "../../../constants/cooking";
-import useAudio from "../../../hooks/useAudio";
+import useEvaluation from "../../../hooks/useEvaluation";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -37,40 +31,9 @@ const Content = styled.p`
 `;
 
 function Evaluation() {
-  const { sashimiOrder, wasabiOrder } = useSelector((state) => state.order);
-  const { rice, sashimi, wasabi } = useSelector((state) => state.sushi);
-
-  const [evaluation, setEvaluation] = useState("");
-  const [, { playAudio, toggleAudio }] = useAudio("coughing");
-
-  useEffect(() => {
-    if (rice.id.length === 0) {
-      setEvaluation("");
-      toggleAudio();
-      return;
-    }
-
-    if (sashimiOrder.id === sashimi.id
-        && wasabiOrder === wasabi.size
-      ) {
-      setEvaluation(GOOD);
-      return;
-    }
-
-    if (sashimiOrder.id !== sashimi.id) {
-      setEvaluation(WRONG_SUHSI);
-      return;
-    }
-
-    if (wasabiOrder < wasabi.size) {
-      setEvaluation(SPICY);
-      playAudio();
-    }
-
-    if (wasabiOrder > wasabi.size) {
-      setEvaluation(BLAND);
-    }
-  }, []);
+  const order = useSelector((state) => state.order);
+  const sushi = useSelector((state) => state.sushi);
+  const evaluation = useEvaluation(order, sushi);
 
   return (
     <Wrapper>
