@@ -68,10 +68,10 @@ function DropZone({ percentage, rice, sashimi, wasabi }) {
       <StackedIngredient
         ingredient={sashimi}
       />
-       <StackedIngredient
-         ingredient={wasabi}
-         percentage={percentage}
-       />
+      <StackedIngredient
+        ingredient={wasabi}
+        percentage={percentage}
+      />
       <Plate
         src={plate}
         alt="plate"
