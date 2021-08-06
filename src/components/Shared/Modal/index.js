@@ -148,10 +148,7 @@ const renderSushiMenu = () => {
 function Modal() {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
-
-  const closeModal = () => {
-    dispatch(hideModal());
-  };
+  const closeModal = () => dispatch(hideModal());
 
   return createPortal(
     <Wrapper>
