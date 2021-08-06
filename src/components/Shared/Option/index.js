@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 
 import styled from "styled-components";
 
@@ -16,23 +16,21 @@ const Wrapper = styled.div`
 
 function Option() {
   const [isMuted, setIsMuted] = useState(false);
-  const toggleBgm = useCallback(() => {
-    setIsMuted(!isMuted);
-  }, [isMuted]);
+  const toggleBgm = () => setIsMuted(!isMuted);
 
   return (
     <Wrapper>
       {bgm &&
-      <>
-        <audio loop autoPlay={true} muted={isMuted}>
-          <source src={bgm} type="audio/mpeg" />
-        </audio>
-        <img
-          src={isMuted ? audioOnImage : audioOffImage}
-          alt="audio"
-          onClick={toggleBgm}
-        />
-      </>
+        <>
+          <audio loop autoPlay={true} muted={isMuted}>
+            <source src={bgm} type="audio/mpeg" />
+          </audio>
+          <img
+            src={isMuted ? audioOnImage : audioOffImage}
+            alt="audio"
+            onClick={toggleBgm}
+          />
+        </>
       }
     </Wrapper>
   );

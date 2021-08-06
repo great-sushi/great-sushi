@@ -1,28 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import { useSelector, useDispatch } from "react-redux";
-import { useLocation } from "react-router";
 import styled, { keyframes } from "styled-components";
-
-import { updateWasabiSize } from "../../../actions/cooking";
-import { showModal } from "../../../actions/modal";
-import {
-  FISHING_SUCCESS_TEXT,
-  EXIT,
-  OPEN,
-  FAILURE_TEXT,
-  RETRY,
-} from "../../../constants/modal";
-import useAudio from "../../../hooks/useAudio";
-
-const pulse = keyframes`
-  from {
-    transform: scale(2);
-  }
-  to {
-    transform: scale(1);
-  }
-`;
+import useTimer from "../../../hooks/useTimer";
 
 const Wrapper = styled.div`
   display: flex;
@@ -45,93 +24,34 @@ const Wrapper = styled.div`
   &.danger {
     background-color: ${({ theme }) => theme.color.red};
   }
+`;
 
-  p {
-    font-size: ${({ theme }) => theme.fontSize.bigger};
+const pulse = keyframes`
+  from {
+    transform: scale(2);
   }
+  to {
+    transform: scale(1);
+  }
+`;
 
-  .pulse {
+const TimerText = styled.p`
+  font-size: ${({ theme }) => theme.fontSize.bigger};
+
+  &.pulse {
     animation: ${pulse} 1s ease-out infinite;
   }
 `;
 
 function Timer() {
-  const [seconds, setSeconds] = useState(60);
-  const dispatch = useDispatch();
-  const modal = useSelector((state) => state.modal);
-  const isCompleted = useSelector((state) => state.fishing.isCompleted);
-  const [isPlaying, { playAudio, toggleAudio, restartAudio }] = useAudio("countdown");
-  const location = useLocation();
-
-  useEffect(() => {
-    if (modal.isVisible) {
-      if (isPlaying) {
-        toggleAudio();
-      }
-      restartAudio();
-      setSeconds(60);
-      return;
-    }
-
-    const intervalId = setInterval(() => {
-      if (seconds === 0) {
-        clearInterval(intervalId);
-      } else {
-        setSeconds(seconds - 1);
-      }
-    }, 1000);
-
-    if (seconds === 0) {
-      toggleAudio();
-      if (isCompleted) {
-        dispatch(showModal({
-          isVisible: true,
-          contentText: FISHING_SUCCESS_TEXT,
-          firstPath: "/",
-          secondPath: "/cooking",
-          firstLinkButtonText: EXIT,
-          secondLinkButtonText: OPEN,
-        }));
-      } else {
-        dispatch(showModal({
-          isVisible: true,
-          contentText: FAILURE_TEXT,
-          firstPath: "/",
-          secondPath: location.pathname,
-          firstLinkButtonText: EXIT,
-          secondLinkButtonText: RETRY,
-        }));
-
-        if (location.pathname === "/cooking") {
-          dispatch(updateWasabiSize(0));
-        }
-      }
-    } else {
-      if (seconds < 6) {
-        playAudio();
-      }
-
-      if (isCompleted) {
-        dispatch(showModal({
-          isVisible: true,
-          contentText: FISHING_SUCCESS_TEXT,
-          firstPath: "/",
-          secondPath: "/cooking",
-          firstLinkButtonText: EXIT,
-          secondLinkButtonText: OPEN,
-        }));
-      }
-    }
-
-    return () => clearInterval(intervalId);
-  }, [modal.isVisible, seconds]);
+  const seconds = useTimer();
 
   return (
     <Wrapper className={seconds < 6 ? "danger" : ""}>
       <h1>남은 시간</h1>
-      <p className={seconds < 6 ? "pulse" : ""}>
+      <TimerText className={seconds < 6 ? "pulse" : ""}>
         {seconds === 60 ? "1:00" : seconds < 10 ? `0:0${seconds}` : `0:${seconds}`}
-      </p>
+      </TimerText>
     </Wrapper>
   );
 }

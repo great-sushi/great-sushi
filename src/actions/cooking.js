@@ -31,7 +31,6 @@ export const updateWasabi = (item) => ({
   item,
 });
 
-export const updateWasabiSize = (size) => ({
+export const updateWasabiSize = () => ({
   type: ADD_WASABI_SIZE,
-  size,
 });

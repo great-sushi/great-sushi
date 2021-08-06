@@ -9,9 +9,15 @@ class Rail {
     this.speed = 1.5;
   }
 
-  draw(ctx, height) {
+  moveRail() {
     x -= this.speed;
 
+    if (x <= -199) {
+      x = 0;
+    }
+  }
+
+  draw(ctx, height) {
     ctx.setTransform(2, 0, 0, 2, x, 0);
     ctx.beginPath();
 
@@ -26,9 +32,7 @@ class Rail {
       ctx.stroke();
     }
 
-    if (x <= - 199) {
-      x = 0;
-    }
+    this.moveRail();
   }
 }
 
