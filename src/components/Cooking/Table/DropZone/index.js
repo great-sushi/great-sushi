@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import PropTypes from "prop-types";
 import { useDrop } from "react-dnd";
@@ -8,7 +8,6 @@ import styled from "styled-components";
 import {
   updateRice,
   updateSashimi,
-  updateWasabiSize,
 } from "../../../../actions/cooking";
 import plate from "../../../../assets/image/plate.png";
 import useAudio from "../../../../hooks/useAudio";
@@ -50,7 +49,6 @@ function DropZone({ percentage, rice, sashimi, wasabi }) {
     accept: "SushiIngredients",
     drop: (item) => {
       repeatAudio();
-
       if (!rice.id && item.id === "rice") {
         dispatch(updateRice(item));
       }
@@ -62,10 +60,6 @@ function DropZone({ percentage, rice, sashimi, wasabi }) {
     }
   });
 
-  useEffect(() => {
-    dispatch(updateWasabiSize(percentage));
-  }, [percentage]);
-
   return (
     <SushiContainer ref={drop} >
       <StackedIngredient
@@ -74,10 +68,10 @@ function DropZone({ percentage, rice, sashimi, wasabi }) {
       <StackedIngredient
         ingredient={sashimi}
       />
-      <StackedIngredient
-        ingredient={wasabi}
-        percentage={percentage}
-      />
+       <StackedIngredient
+         ingredient={wasabi}
+         percentage={percentage}
+       />
       <Plate
         src={plate}
         alt="plate"

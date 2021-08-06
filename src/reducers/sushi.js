@@ -45,7 +45,7 @@ const sushi = (state = initialState, action) => {
       });
     case ADD_WASABI_SIZE:
       return produce(state, (draft) => {
-        draft.wasabi.size = action.size;
+        draft.wasabi.size += 10;
       });
     case RESET_PLATE:
       return initialState;
