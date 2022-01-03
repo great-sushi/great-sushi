@@ -43,7 +43,7 @@ npm start
 ```
 - `Repository` 를 `clone` 해주세요.
 - `npm install` 로 패키지를 설치해주세요.
-- 터미널엣 `npm start` 로 실행하면, `http://localhost:3000`에서 위대한초밥을 확인할 수 있습니다.
+- 터미널에서 `npm start` 로 실행하면, `http://localhost:3000`에서 위대한초밥을 확인할 수 있습니다.
 
 <br>
 
