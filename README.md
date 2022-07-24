@@ -4,7 +4,7 @@
   <img src="./readme-assets/main.png" width="640" />
 </p>
 
-> 배포 사이트 [https://greatsushi.fun](https://greatsushi.fun)
+> 배포 사이트 [https://great-sushi.fun](https://great-sushi.fun)
 
 <br>
 
